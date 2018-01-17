@@ -67,3 +67,6 @@ kubectl create -f /etc/kubernetes/addon/dashboard.yml
 # heapster
 kubectl create -f /etc/kubernetes/addon/heapster.yml 
 ```
+
+## open chrome
+https://172.16.11.248:6443/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy
