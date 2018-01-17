@@ -14,12 +14,14 @@
 ## 准备HTTP_SERVER
 http://172.16.11.235/k8s
 确保http服务器上有以下文件：
+```bash
 etcd-v3.2.11.tgz
 flannel-v0.9.1.tgz
 hyperkube-v1.9.0.tgz
 kubectl-v1.9.0.tgz
 registry-2.6.2.tgz
 registry-data-v1.9.0.tgz
+```
 
 BAIDU
 链接：https://pan.baidu.com/s/1qZi2jWo 密码：gekx
