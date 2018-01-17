@@ -21,6 +21,8 @@ kubectl-v1.9.0.tgz
 registry-2.6.2.tgz
 registry-data-v1.9.0.tgz
 
+BAIDU
+链接：https://pan.baidu.com/s/1qZi2jWo 密码：gekx
 
 
 # 安装
