@@ -1,0 +1,4 @@
+- hosts: coreos_bj_remote
+  gather_facts: False
+  roles:
+    - defunctzombie.coreos-bootstrap

@@ -1,0 +1,3 @@
+- hosts: coreos_bj_remote
+  roles:
+    - wod.coreos-install

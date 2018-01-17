@@ -1,0 +1,4 @@
+- hosts: coreos_bj_remote
+  tasks:
+  - name: reboot
+    raw: reboot
