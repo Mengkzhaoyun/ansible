@@ -2,8 +2,11 @@
 
 <img alt="Schema" src="docs/schema.png">
 
-在线视频
+在线视频[靓模版]
 http://v.youku.com/v_show/id_XMzMzMDAzMjg0NA==.html
+
+在线视频[语音旁白]
+https://www.youtube.com/watch?v=84XvO2UAx9U&index=1&t=26s&list=PLUWlqkQl49xTY0-2JBYyrtqHaUgAToF3I
 
 
 # 准备
