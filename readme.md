@@ -2,7 +2,8 @@
 
 <img alt="Schema" src="docs/schema.png">
 
-安装过程视频
+在线视频
+http://v.youku.com/v_show/id_XMzMzMDAzMjg0NA==.html
 
 
 # 准备
