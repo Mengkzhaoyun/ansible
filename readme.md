@@ -100,3 +100,4 @@ kubectl create -f /etc/kubernetes/addons/rbac-admin.yml
 
 # Brower
 https://172.16.11.248:6443/ui
+admin abc2018
