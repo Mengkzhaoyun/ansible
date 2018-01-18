@@ -4,14 +4,14 @@
 
 # 准备
 
-## 1.修改配置文件
+## 1).修改配置文件
 修改机器名和IP
 ./hosts
 
 修改k8s集群配置
 ./coreos/group_vars/coreos
 
-## 准备HTTP_SERVER
+## 2). 准备HTTP_SERVER
 http://172.16.11.235/k8s
 确保http服务器上有以下文件：
 ```bash
@@ -24,12 +24,12 @@ registry-data-v1.9.0.tgz
 ```
 
 BAIDU
-链接：https://pan.baidu.com/s/1qZi2jWo 密码：gekx
+链接：https://pan.baidu.com/s/1bqWrH51 密码：56lc
 
 
 # 安装
 
-## 1.run ansible from docker
+## 1).run ansible from docker
 ```cmd
 docker run `
 --name ansible `
@@ -38,7 +38,7 @@ docker run `
 -d hub.c.163.com/mengkzhaoyun/public:ansible-2.3.0-centos7 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 ```
 
-## 2.in ansible docker bash
+## 2).in ansible docker bash
 ```bash
 # 进入容器
 docker exec -it ansible bash
@@ -50,7 +50,7 @@ ap b.install.yml
 ap c.test.yml
 ```
 
-## 3.check
+## 3).check
 ```bash
 # check rkt
 rkt list
@@ -78,7 +78,7 @@ kube-scheduler-172.16.11.248            1/1       Running   0          6m
 
 ```
 
-## 4.addons
+## 4).addons
 Copy Addons To The Master Server
 ```bash
 # coredns
