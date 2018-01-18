@@ -40,6 +40,10 @@ docker run `
 
 ## 2.in ansible docker bash
 ```bash
+# 进入容器
+docker exec -it ansible bash
+
+# 执行命令在coreos上安装k8s集群
 cd coreos
 ap a.bootstrap.yml
 ap b.install.yml
@@ -74,7 +78,8 @@ kube-scheduler-172.16.11.248            1/1       Running   0          6m
 
 ```
 
-## 4.addon
+## 4.addons
+Copy Addons To The Master Server
 ```bash
 # coredns
 kubectl create -f /etc/kubernetes/addons/coredns.yml 
@@ -90,4 +95,4 @@ kubectl create -f /etc/kubernetes/addons/rbac-admin.yml
 ```
 
 # Brower
-https://172.16.11.248:6443/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy
+https://172.16.11.248:6443/ui
