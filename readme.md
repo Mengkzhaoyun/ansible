@@ -2,6 +2,9 @@
 
 <img alt="Schema" src="docs/schema.png">
 
+安装过程视频
+
+
 # 准备
 
 ## 1).修改配置文件
