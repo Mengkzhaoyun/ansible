@@ -1,6 +1,6 @@
 # Deploy
 
-<img alt="Schema" src="docs/schema.png">
+<img alt="Schema" src="docs/imgs/schema.png">
 
 Online Vedio<br>
 https://www.bilibili.com/video/av18457856/<br>
@@ -101,6 +101,7 @@ kubectl create -f /etc/kubernetes/addons/rbac-admin.yml
 ```
 
 # Brower
+<img alt="Schema" src="docs/imgs/dashboard.png">
 https://172.16.11.248:6443/ui<br>
 admin <br>
 abc2018
