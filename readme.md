@@ -1,24 +1,24 @@
-# 部署架构图
+# Deploy
 
 <img alt="Schema" src="docs/schema.png">
 
-在线视频<br>
+Online Vedio<br>
 https://www.bilibili.com/video/av18457856/<br>
 https://www.youtube.com/watch?v=84XvO2UAx9U&index=1&t=26s&list=PLUWlqkQl49xTY0-2JBYyrtqHaUgAToF3I
 
 
-# 准备
+# Prepare
 
-## 1).修改配置文件
-修改机器名和IP<br>
+## 1). Config
+Modify Machine Name&IP<br>
 ./hosts
 
-修改k8s集群配置<br>
+Modify k8s Cluster Config<br>
 ./coreos/group_vars/coreos
 
-## 2). 准备HTTP_SERVER
+## 2). HTTP_SERVER
 http://172.16.11.235/k8s<br>
-确保http服务器上有以下文件：
+Check the server contians these files：
 ```bash
 etcd-v3.2.11.tgz
 flannel-v0.9.1.tgz
@@ -28,11 +28,12 @@ registry-2.6.2.tgz
 registry-data-v1.9.0.tgz
 ```
 
-BAIDU<br>
-链接：https://pan.baidu.com/s/1bqWrH51 密码：56lc
+BAIDU DISK<br>
+Link：https://pan.baidu.com/s/1bqWrH51 <br>
+Password：56lc
 
 
-# 安装
+# Install
 
 ## 1).run ansible from docker
 ```cmd
@@ -45,10 +46,10 @@ docker run `
 
 ## 2).in ansible docker bash
 ```bash
-# 进入容器
+# enter contianer run ansible scripts
 docker exec -it ansible bash
 
-# 执行命令在coreos上安装k8s集群
+# exec commands to install k8s 
 cd coreos
 ap a.bootstrap.yml
 ap b.install.yml
