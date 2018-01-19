@@ -2,25 +2,22 @@
 
 <img alt="Schema" src="docs/schema.png">
 
-在线视频[安静版]
-http://v.youku.com/v_show/id_XMzMzMDAzMjg0NA==.html
-
-在线视频[语音旁白]
-https://www.bilibili.com/video/av18457856/
+在线视频<br>
+https://www.bilibili.com/video/av18457856/<br>
 https://www.youtube.com/watch?v=84XvO2UAx9U&index=1&t=26s&list=PLUWlqkQl49xTY0-2JBYyrtqHaUgAToF3I
 
 
 # 准备
 
 ## 1).修改配置文件
-修改机器名和IP
+修改机器名和IP<br>
 ./hosts
 
-修改k8s集群配置
+修改k8s集群配置<br>
 ./coreos/group_vars/coreos
 
 ## 2). 准备HTTP_SERVER
-http://172.16.11.235/k8s
+http://172.16.11.235/k8s<br>
 确保http服务器上有以下文件：
 ```bash
 etcd-v3.2.11.tgz
@@ -31,7 +28,7 @@ registry-2.6.2.tgz
 registry-data-v1.9.0.tgz
 ```
 
-BAIDU
+BAIDU<br>
 链接：https://pan.baidu.com/s/1bqWrH51 密码：56lc
 
 
@@ -103,5 +100,6 @@ kubectl create -f /etc/kubernetes/addons/rbac-admin.yml
 ```
 
 # Brower
-https://172.16.11.248:6443/ui
-admin abc2018
+https://172.16.11.248:6443/ui<br>
+admin <br>
+abc2018
