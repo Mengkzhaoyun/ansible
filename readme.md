@@ -44,7 +44,7 @@ docker run `
 -d hub.c.163.com/mengkzhaoyun/public:ansible-2.3.0-centos7 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 ```
 
-## 2).in ansible docker bash
+## 2).enter in ansible cotainer
 ```bash
 # enter contianer run ansible scripts
 docker exec -it ansible bash
