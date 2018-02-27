@@ -18,25 +18,23 @@ REGISTRY_SOURCE_LOCAL: "{{ HOSTS_REGISTRY }}:5000/k8s/"
 K8S_IMAGES: {
     "KUBELET":{
         "NAME":"hyperkube",
-        "VERSION":"v1.9.0"
+        "VERSION":"v1.9.3"
     },
     "PAUSE":{
-        "NAME":"pause-amd64",
+        "NAME":"pause",
         "VERSION":"3.1"
     }
 }
 
-GAC_IMAGES: ["PAUSE"]
-
-# http download
+# rkt images
 RKT_ACI_REGISTRY: "registry-2.6.2"
-RKT_ACI_ETCD: "etcd-v3.2.11"
+RKT_ACI_ETCD: "etcd-v3.3.1"
 RKT_ACI_FLANNEL: "flannel-v0.9.1"
 RKT_ACI_KUBELET: "{{ K8S_IMAGES['KUBELET']['NAME'] }}-{{ K8S_IMAGES['KUBELET']['VERSION'] }}"
 
 # ctl tools
-DEP_KUBECTL: "kubectl-v1.9.0"
-REGISTRY_DATA: "registry-data-v1.9.0"
+DEP_KUBECTL: "kubectl-v1.9.3"
+RKT_ACI_REGISTRY_DATA: "registry-data-v1.9.3"
 
 # k8s adv option.
 
@@ -48,3 +46,12 @@ SERVICE_PORT_RANGE: 0-32767
 K8S_SERVICE_IP: 10.3.0.1
 DNS_SERVICE_IP: 10.3.0.10
 ADVERTISE_IP: "{{ ansible_default_ipv4['address'] }}"
+
+FLANNEL_ETCD_PREFIX: /spacesystech.com/network2
+
+# ubuntu
+DEP_LIBLTDL7: libltdl7_2.4.6-0.1_amd64
+DEP_IPTABLE: iptables_1.6.0-2ubuntu3_amd64
+DEP_DOCKER: docker-engine_1.13.1-0~ubuntu-xenial_amd64
+DEP_RKT: rkt_1.29.0-1_amd64
+DEP_ETCDCTL: etcdctl-v3.3.1-linux-amd64

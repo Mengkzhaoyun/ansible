@@ -1,0 +1,10 @@
+---
+# install docker & rkt
+- name: Run downloads.sh
+  environment:
+    HTTP_SERVER: '{{ HTTP_SERVER }}'
+    DEP_ETCDCTL: '{{ DEP_ETCDCTL }}'
+    ACI_ETCD: '{{ RKT_ACI_ETCD }}'
+    ACI_FLANNEL: '{{ RKT_ACI_FLANNEL }}'
+    ACI_KUBELET: '{{ RKT_ACI_KUBELET }}'
+  script: downloads.sh

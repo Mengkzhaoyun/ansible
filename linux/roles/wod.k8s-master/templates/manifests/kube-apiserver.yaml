@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  containers:
+  - name: kube-apiserver
+    image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES['KUBELET']['NAME'] }}:{{ K8S_IMAGES['KUBELET']['VERSION'] }}
+    command:
+    - /hyperkube
+    - apiserver
+    - --bind-address=0.0.0.0
+    - --etcd-servers={{ ETCD_ENDPOINTS }}
+    - --allow-privileged=true
+    - --service-cluster-ip-range={{ SERVICE_IP_RANGE }}
+    - --service-node-port-range={{ SERVICE_PORT_RANGE }}
+    - --secure-port={{ K8S_PORT }}
+    - --advertise-address={{ ADVERTISE_IP }}
+    - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota
+    - --authorization-mode=RBAC
+    - --tls-cert-file=/etc/kubernetes/ssl/apiserver.pem
+    - --tls-private-key-file=/etc/kubernetes/ssl/apiserver.key
+    - --client-ca-file=/etc/kubernetes/ssl/ca.pem
+    - --service-account-key-file=/etc/kubernetes/ssl/apiserver.key
+    - --basic-auth-file=/etc/kubernetes/ssl/admin.csv
+    - --anonymous-auth=false
+    - --runtime-config=extensions/v1beta1=true,extensions/v1beta1/networkpolicies=true,rbac.authorization.k8s.io/v1beta1=true
+    ports:
+    - containerPort: {{ K8S_PORT }}
+      hostPort: {{ K8S_PORT }}
+      name: https
+    - containerPort: 8080
+      hostPort: 8080
+      name: local
+    volumeMounts:
+    - mountPath: /etc/kubernetes/ssl
+      name: ssl-certs-kubernetes
+      readOnly: true
+    - mountPath: /etc/ssl/certs
+      name: ssl-certs-host
+      readOnly: true
+  volumes:
+  - hostPath:
+      path: /etc/kubernetes/ssl
+    name: ssl-certs-kubernetes
+  - hostPath:
+      path: /usr/share/ca-certificates
+    name: ssl-certs-host

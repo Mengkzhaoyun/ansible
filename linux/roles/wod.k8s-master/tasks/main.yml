@@ -1,0 +1,86 @@
+- name: mkdir -p /etc/kubernetes/config
+  raw: mkdir -p /etc/kubernetes/config
+
+- name: check need config/kubelet.yaml
+  raw: stat /etc/kubernetes/config/kubelet.yaml
+  register: need_config_kubelet
+  ignore_errors: True  
+  when: K8S_CLUSTER[inventory_hostname] == "master"
+
+- name: copy config/kubelet.yaml
+  copy: src=config/kubelet.yaml dest=/etc/kubernetes/config/kubelet.yaml
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_config_kubelet | failed
+
+- name: check need scripts/kubelet.sh
+  raw: stat /etc/kubernetes/scripts/kubelet.sh
+  register: need_scripts_kubelet
+  ignore_errors: True  
+  when: K8S_CLUSTER[inventory_hostname] == "master"
+
+- name: copy scripts/kubelet.sh
+  copy: src=scripts/kubelet.sh dest=/etc/kubernetes/scripts/kubelet.sh mode=0755
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_scripts_kubelet | failed  
+
+- name: check need ssl/admin.csv
+  raw: stat /etc/kubernetes/ssl/admin.csv
+  register: need_ssl_admin
+  ignore_errors: True
+  when: K8S_CLUSTER[inventory_hostname] == "master"
+
+- name: template ssl/admin.csv
+  template: src=ssl/admin.csv dest=/etc/kubernetes/ssl/admin.csv
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_ssl_admin | failed
+
+- name: check need manifests/kube-apiserver.yaml
+  raw: stat /etc/kubernetes/manifests/kube-apiserver.yaml
+  register: need_manifests_apiserver
+  ignore_errors: True
+  when: K8S_CLUSTER[inventory_hostname] == "master"
+
+- name: template manifests/kube-apiserver.yaml
+  template: src=manifests/kube-apiserver.yaml dest=/etc/kubernetes/manifests/kube-apiserver.yaml
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_manifests_apiserver | failed  
+
+- name: check need manifests/kube-controller-manager.yaml
+  raw: stat /etc/kubernetes/manifests/kube-controller-manager.yaml
+  register: need_manifests_controller
+  ignore_errors: True
+  when: K8S_CLUSTER[inventory_hostname] == "master"
+
+- name: template manifests/kube-controller-manager.yaml
+  template: src=manifests/kube-controller-manager.yaml dest=/etc/kubernetes/manifests/kube-controller-manager.yaml
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_manifests_controller | failed    
+
+- name: check need manifests/kube-proxy.yaml
+  raw: stat /etc/kubernetes/manifests/kube-proxy.yaml
+  register: need_manifests_proxy
+  ignore_errors: True
+  when: K8S_CLUSTER[inventory_hostname] == "master"
+
+- name: template manifests/kube-proxy.yaml
+  template: src=manifests/kube-proxy.yaml dest=/etc/kubernetes/manifests/kube-proxy.yaml
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_manifests_proxy | failed    
+
+- name: check need manifests/kube-scheduler.yaml
+  raw: stat /etc/kubernetes/manifests/kube-scheduler.yaml
+  register: need_manifests_scheduler
+  ignore_errors: True
+  when: K8S_CLUSTER[inventory_hostname] == "master"
+
+- name: template manifests/kube-scheduler.yaml
+  template: src=manifests/kube-scheduler.yaml dest=/etc/kubernetes/manifests/kube-scheduler.yaml
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_manifests_scheduler | failed
+
+- name: check need services/kubelet.service
+  raw: stat /etc/systemd/system/kubelet.service
+  register: need_services_kubelet
+  ignore_errors: True
+  when: K8S_CLUSTER[inventory_hostname] == "master"
+
+- name: template services/kubelet.service
+  template: src=services/kubelet.service dest=/etc/systemd/system/kubelet.service
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_services_kubelet | failed  
+
+- name: start services kubelet.service
+  raw: systemctl daemon-reload && systemctl enable kubelet.service && systemctl start kubelet.service
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_services_kubelet | failed

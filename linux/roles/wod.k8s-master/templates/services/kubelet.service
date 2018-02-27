@@ -1,0 +1,39 @@
+[Unit]
+Description=kubelet
+Documentation=https://kubernetes.io
+After=docker.service
+[Service]
+Environment="PATH=/opt/bin/:/usr/bin/:/usr/sbin:$PATH"
+Environment="KUBELET_IMAGE=/etc/kubernetes/downloads/{{ RKT_ACI_KUBELET }}.aci"
+Environment="RKT_GLOBAL_ARGS=--insecure-options=image" 
+Environment="RKT_RUN_ARGS=--volume modprobe,kind=host,source=/sbin/modprobe \
+  --mount volume=modprobe,target=/usr/sbin/modprobe \
+  --volume lib-modules,kind=host,source=/lib/modules \
+  --mount volume=lib-modules,target=/lib/modules \
+  --uuid-file-save=/var/run/kubelet-pod.uuid \
+  --volume var-log,kind=host,source=/var/log \
+  --mount volume=var-log,target=/var/log \
+  --volume dns,kind=host,source=/etc/resolv.conf \
+  --mount volume=dns,target=/etc/resolv.conf"
+
+ExecStartPre=/bin/mkdir -p /etc/kubernetes/manifests
+ExecStartPre=/bin/mkdir -p /var/log/containers
+ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid
+
+ExecStart=/etc/kubernetes/scripts/kubelet.sh \
+  --kubeconfig=/etc/kubernetes/config/kubelet.yaml \
+  --register-node=true \
+  --allow-privileged=true \
+  --pod-manifest-path=/etc/kubernetes/manifests \
+  --hostname-override={{ ADVERTISE_IP }} \
+  --cluster-dns={{ DNS_SERVICE_IP }} \
+  --cluster-domain=cluster.local \
+  --fail-swap-on=false \
+  --pod-infra-container-image={{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES['PAUSE']['NAME'] }}:{{ K8S_IMAGES['PAUSE']['VERSION'] }}
+
+ExecStop=-/usr/bin/rkt stop --uuid-file=/var/run/kubelet-pod.uuid
+
+Restart=always
+RestartSec=10
+[Install]
+WantedBy=multi-user.target

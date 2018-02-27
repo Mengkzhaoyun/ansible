@@ -1,0 +1,9 @@
+- hosts: all
+  roles:
+  - wod.ubuntu-deps
+  - wod.timezone
+  - wod.downloads
+  - wod.etcd
+  - wod.flannel
+  - wod.docker
+  - wod.registry

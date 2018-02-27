@@ -1,0 +1,33 @@
+- name: mkdir /etc/systemd/system/docker.service.d
+  raw: mkdir -p /etc/systemd/system/docker.service.d
+
+- name: check need docker.service.d/40-flannel.conf
+  raw: stat /etc/systemd/system/docker.service.d/40-flannel.conf
+  register: need_services_docker_flannel
+  ignore_errors: True    
+
+- name: copy docker.service.d/40-flannel.conf
+  copy: src=40-flannel.conf dest=/etc/systemd/system/docker.service.d/40-flannel.conf mode=0644
+  when: need_services_docker_flannel | failed  
+
+- name: check need docker.service.d/50-insecure-registry.conf
+  raw: stat /etc/systemd/system/docker.service.d/50-insecure-registry.conf
+  register: need_services_docker_registry
+  ignore_errors: True  
+
+- name: template docker.service.d/50-insecure-registry.conf
+  template: src=50-insecure-registry.conf dest=/etc/systemd/system/docker.service.d/50-insecure-registry.conf mode=0644
+  when: need_services_docker_registry | failed    
+
+- name: check need docker.service
+  raw: stat /etc/systemd/system/docker.service
+  register: need_services_docker
+  ignore_errors: True  
+
+- name: template docker.service
+  template: src=docker.service dest=/etc/systemd/system/docker.service mode=0644
+  when: need_services_docker | failed  
+
+- name: start docker.service
+  raw: systemctl stop docker && systemctl daemon-reload  && systemctl start docker
+  when: need_services_docker | failed    

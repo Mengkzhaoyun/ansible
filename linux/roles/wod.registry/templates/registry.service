@@ -1,0 +1,28 @@
+[Unit]
+Description=registry (Docker Hub)
+Documentation=https://github.com/coreos/registry
+
+[Service]
+Environment=PATH=/opt/bin/:/usr/bin/:/usr/sbin:/sbin:$PATH
+
+ExecStartPre=/bin/mkdir -p /data/registry
+ExecStartPre=/bin/mkdir --parents /var/lib/coreos
+ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/lib/coreos/registry-pod.uuid       
+
+ExecStart=/usr/bin/rkt run \
+  --insecure-options=image \
+  --uuid-file-save=/var/lib/coreos/registry-pod.uuid \
+  --volume volume-var-lib-registry,kind=host,source=/data/registry \
+  --mount volume=volume-var-lib-registry,target=/var/lib/registry \
+  --inherit-env \
+  --stage1-from-dir=stage1-fly.aci \
+  /etc/kubernetes/downloads/{{ RKT_ACI_REGISTRY }}.aci \
+  --name=registry 
+
+ExecStop=-/usr/bin/rkt stop --uuid-file=/var/lib/coreos/registry-pod.uuid
+
+Restart=always
+RestartSec=10
+TimeoutSec=infinity
+[Install]
+WantedBy=multi-user.target        
