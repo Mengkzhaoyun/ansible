@@ -4,7 +4,7 @@
 
 Online Vedio<br>
 https://www.bilibili.com/video/av18457856/<br>
-https://www.youtube.com/watch?v=84XvO2UAx9U&index=1&t=26s&list=PLUWlqkQl49xTY0-2JBYyrtqHaUgAToF3I
+https://www.youtube.com/watch?v=84XvO2UAx9U
 
 
 # Prepare

@@ -3,8 +3,8 @@
 <img alt="Schema" src="./imgs/ubuntu-schema.png">
 
 Online Vedio<br>
-https://www.bilibili.com/video/????/<br>
-https://www.youtube.com/watch????
+https://www.bilibili.com/video/av20150387/<br>
+https://www.youtube.com/watch?v=144Ng2D5jxQ
 
 
 # Prepare
