@@ -5,8 +5,8 @@ Documentation=https://github.com/coreos/registry
 [Service]
 Environment=PATH=/opt/bin/:/usr/bin/:/usr/sbin:/sbin:$PATH
 
-ExecStartPre=/bin/mkdir -p /data/registry
-ExecStartPre=/bin/mkdir --parents /var/lib/coreos
+ExecStartPre=/usr/bin/mkdir -p /data/registry
+ExecStartPre=/usr/bin/mkdir --parents /var/lib/coreos
 ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/lib/coreos/registry-pod.uuid       
 
 ExecStart=/usr/bin/rkt run \

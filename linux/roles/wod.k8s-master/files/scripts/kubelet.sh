@@ -51,10 +51,10 @@ if [[ "${KUBELET_IMAGE%%/*}" == "quay.io" ]]; then
 	RKT_RUN_ARGS="${RKT_RUN_ARGS} --trust-keys-from-https"
 fi
 
-/bin/mkdir --parents /etc/kubernetes
-/bin/mkdir --parents /var/lib/docker
-/bin/mkdir --parents /var/lib/kubelet
-/bin/mkdir --parents /run/kubelet
+/usr/bin/mkdir --parents /etc/kubernetes
+/usr/bin/mkdir --parents /var/lib/docker
+/usr/bin/mkdir --parents /var/lib/kubelet
+/usr/bin/mkdir --parents /run/kubelet
 
 RKT="${RKT:-/usr/bin/rkt}"
 RKT_STAGE1_ARG="${RKT_STAGE1_ARG:---stage1-from-dir=stage1-fly.aci}"
