@@ -16,7 +16,7 @@ Environment="RKT_RUN_ARGS=--uuid-file-save=/var/lib/coreos/flannel.uuid"
 EnvironmentFile=-/run/flannel/options.env
 
 ExecStartPre=/sbin/modprobe ip_tables
-ExecStartPre=/bin/mkdir --parents /var/lib/coreos /run/flannel
+ExecStartPre=/usr/bin/mkdir --parents /var/lib/coreos /run/flannel
 ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/lib/coreos/flannel.uuid
 ExecStart=/etc/kubernetes/scripts/flanneld.sh $FLANNEL_OPTS
 ExecStop=-/usr/bin/rkt stop --uuid-file=/var/lib/coreos/flannel.uuid

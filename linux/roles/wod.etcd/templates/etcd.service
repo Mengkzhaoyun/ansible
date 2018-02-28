@@ -10,7 +10,7 @@ LimitNOFILE=40000
 
 Environment=PATH=/bin:/opt/bin:/usr/bin:/usr/sbin:/sbin:$PATH
 
-ExecStartPre=/bin/mkdir --parents /var/lib/coreos
+ExecStartPre=/usr/bin/mkdir --parents /var/lib/coreos
 ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/lib/coreos/etcd-pod.uuid
 
 Environment="ETCD_IMAGE=/etc/kubernetes/downloads/{{ RKT_ACI_ETCD }}.aci"

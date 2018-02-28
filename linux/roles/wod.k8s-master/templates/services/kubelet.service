@@ -16,8 +16,8 @@ Environment="RKT_RUN_ARGS=--volume modprobe,kind=host,source=/sbin/modprobe \
   --volume dns,kind=host,source=/etc/resolv.conf \
   --mount volume=dns,target=/etc/resolv.conf"
 
-ExecStartPre=/bin/mkdir -p /etc/kubernetes/manifests
-ExecStartPre=/bin/mkdir -p /var/log/containers
+ExecStartPre=/usr/bin/mkdir -p /etc/kubernetes/manifests
+ExecStartPre=/usr/bin/mkdir -p /var/log/containers
 ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid
 
 ExecStart=/etc/kubernetes/scripts/kubelet.sh \
