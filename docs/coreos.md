@@ -33,8 +33,8 @@ registry-data-v1.9.0.tgz
 ```
 
 BAIDU DISK<br>
-Link：https://pan.baidu.com/s/1nvUxpw9 <br>
-Pass：db93
+Link：https://pan.baidu.com/s/1c3J0IZm <br>
+Pass：nbk7
 
 
 # Install
