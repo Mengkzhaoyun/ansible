@@ -20,13 +20,16 @@ Modify k8s Cluster Config<br>
 http://172.16.11.235/k8s<br>
 Check the server contians these files：
 ```bash
+# ansible deps
+pypy-5.1.0-linux64.tar.bz2
+
 # ubuntu deps
 libltdl7_2.4.6-0.1_amd64.tgz
 iptables_1.6.0-2ubuntu3_amd64.tgz
 docker-engine_1.13.1-0~ubuntu-xenial_amd64.tgz
 rkt_1.29.0-1_amd64.tgz
 
-# k8s require
+# k8s deps
 etcd-v3.3.1.tgz
 etcdctl-v3.3.1-linux-amd64.tgz
 flannel-v0.9.1.tgz

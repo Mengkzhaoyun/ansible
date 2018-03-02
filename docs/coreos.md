@@ -20,6 +20,10 @@ Modify k8s Cluster Config<br>
 http://172.16.11.235/k8s<br>
 Check the server contians these files：
 ```bash
+# ansible deps
+pypy-5.1.0-linux64.tar.bz2
+
+# k8s deps
 etcd-v3.2.11.tgz
 flannel-v0.9.1.tgz
 hyperkube-v1.9.0.tgz
@@ -29,8 +33,8 @@ registry-data-v1.9.0.tgz
 ```
 
 BAIDU DISK<br>
-Link：https://pan.baidu.com/s/1bqWrH51 <br>
-Password：56lc
+Link：https://pan.baidu.com/s/1nvUxpw9 <br>
+Pass：db93
 
 
 # Install
