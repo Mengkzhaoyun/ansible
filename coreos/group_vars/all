@@ -31,7 +31,7 @@ GAC_IMAGES: ["PAUSE"]
 # http download
 RKT_ACI_REGISTRY: "registry-2.6.2"
 RKT_ACI_ETCD: "etcd-v3.2.11"
-RKT_ACI_FLANNEL: "flannel-v0.9.1"
+RKT_ACI_FLANNEL: "flannel-v0.10.0"
 RKT_ACI_KUBELET: "{{ K8S_IMAGES['KUBELET']['NAME'] }}-{{ K8S_IMAGES['KUBELET']['VERSION'] }}"
 
 # ctl tools

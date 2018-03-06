@@ -25,7 +25,7 @@ pypy-5.1.0-linux64.tar.bz2
 
 # k8s deps
 etcd-v3.2.11.tgz
-flannel-v0.9.1.tgz
+flannel-v0.10.0.tgz
 hyperkube-v1.9.0.tgz
 kubectl-v1.9.0.tgz
 registry-2.6.2.tgz
@@ -33,8 +33,8 @@ registry-data-v1.9.0.tgz
 ```
 
 BAIDU DISK<br>
-Link：https://pan.baidu.com/s/1c3J0IZm <br>
-Pass：nbk7
+Link：https://pan.baidu.com/s/1ofySEUgwNEB_id6krF2hUA <br>
+Pass：ci85
 
 
 # Install
