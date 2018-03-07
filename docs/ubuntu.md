@@ -54,7 +54,7 @@ Store Ansible SSH Key on each Ubuntu Server
 docker run `
 --name ansible `
 -h ansible `
--v c:/git/github.com/ansible/:/etc/ansible `
+-v c:/git/mengkzhaoyun/ansible:/etc/ansible `
 -d hub.c.163.com/mengkzhaoyun/public:ansible-2.3.0-centos7 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 ```
 

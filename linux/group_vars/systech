@@ -15,3 +15,6 @@ K8S_MASTER_DOMAIN: xx.ispacesys.cn
 
 # other options
 HTTP_SERVER: 'http://172.16.11.235/k8s'
+
+# centos options
+YUM_SERVER: 'http://172.16.11.235/centos'
