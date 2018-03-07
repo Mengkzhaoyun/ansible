@@ -3,6 +3,8 @@
 - name: Run install-deps.sh
   environment:
     HTTP_SERVER: '{{ HTTP_SERVER }}'
+    YUM_SERVER: '{{ YUM_SERVER }}'
+    YUM_RKT: '{{ YUM_RKT }}'
   script: install-deps.sh
 
 # register host name in /etc/hosts & ssh keys in root

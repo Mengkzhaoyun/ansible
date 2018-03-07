@@ -4,22 +4,29 @@ set -e
 
 HTTP_SERVER="${HTTP_SERVER:-https://gitlab.ispacesys.cn/source/cig/raw/master/k8s}"
 YUM_SERVER="${YUM_SERVER:-https://gitlab.ispacesys.cn/source/cig/raw/master/centos}"
-DEP_RKT="${DEP_RKT:-rkt_1.29.0-1_amd64}"
+YUM_RKT="${YUM_RKT:-rkt_1.29.0-1_amd64.rpm}"
 
 mkdir -p /etc/kubernetes/downloads
 
 if ! [ -x "$(command -v docker)" ]; then
   cd /etc/yum.repos.d
+  mkdir bak
   mv CentOS-* bak
-  dpkg -i /etc/kubernetes/downloads/$DEP_LIBLTDL7.deb
-  dpkg -i /etc/kubernetes/downloads/$DEP_DOCKER.deb
+  tee /etc/yum.repos.d/localyum.repo <<-'EOF'
+  [localyum]
+  name=localyum
+  baseurl=$YUM_SERVER
+  enable=1
+  gpgcheck=0
+  EOF
+  yum install docker
 fi
 
 if ! [ -x "$(command -v rkt)" ]; then
-  if ! [[ -e /etc/kubernetes/downloads/$DEP_RKT.deb ]]; then
-    curl $HTTP_SERVER/$DEP_RKT.tgz > /etc/kubernetes/downloads/$DEP_RKT.tgz
-    cd /etc/kubernetes/downloads && tar -xzf /etc/kubernetes/downloads/$DEP_RKT.tgz
-    rm -rf /etc/kubernetes/downloads/$DEP_RKT.tgz    
+  if ! [[ -e /etc/kubernetes/downloads/$YUM_RKT.deb ]]; then
+    curl $HTTP_SERVER/$YUM_RKT.tgz > /etc/kubernetes/downloads/$YUM_RKT.tgz
+    cd /etc/kubernetes/downloads && tar -xzf /etc/kubernetes/downloads/$YUM_RKT.tgz
+    rm -rf /etc/kubernetes/downloads/$YUM_RKT.tgz    
   fi
-  dpkg -i /etc/kubernetes/downloads/$DEP_RKT.deb
+  rpm -Uvh /etc/kubernetes/downloads/$YUM_RKT
 fi 

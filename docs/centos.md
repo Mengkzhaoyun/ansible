@@ -58,7 +58,7 @@ rkt-1.29.0-1.x86_64.rpm.tgz
 # k8s require
 etcd-v3.3.1.tgz
 etcdctl-v3.3.1-linux-amd64.tgz
-flannel-v0.9.1.tgz
+flannel-v0.10.0.tgz
 hyperkube-v1.9.3.tgz
 kubectl-v1.9.3.tgz
 registry-2.6.2.tgz
@@ -108,8 +108,8 @@ ssh 172.16.11.248
 rkt list
 UUID            APP             IMAGE NAME                                              STATE   CREATED         STARTED         NETWORKS
 56703a2f        etcd            hub.c.163.com/mengkzhaoyun/k8s:etcd-v3.3.1              running 2 minutes ago   2 minutes ago
-5686972d        flannelopts     hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.9.1           exited  1 minute ago    1 minute ago
-7abe579f        flannel         hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.9.1           running 1 minute ago    1 minute ago
+5686972d        flannelopts     hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0           exited  1 minute ago    1 minute ago
+7abe579f        flannel         hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0           running 1 minute ago    1 minute ago
 c31fd758        registry        hub.c.163.com/mengkzhaoyun/public:registry-2.6.2        running 5 seconds ago   5 seconds ago
 
 # check docker
@@ -138,9 +138,9 @@ ssh 172.16.11.248
 rkt list
 UUID            APP             IMAGE NAME                                              STATE   CREATED         STARTED         NETWORKS
 56703a2f        etcd            hub.c.163.com/mengkzhaoyun/k8s:etcd-v3.3.1              running 8 minutes ago   8 minutes ago
-5686972d        flannelopts     hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.9.1           exited  8 minutes ago   8 minutes ago
+5686972d        flannelopts     hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0           exited  8 minutes ago   8 minutes ago
 6e15243e        k8s             hub.c.163.com/mengkzhaoyun/k8s:hyperkube-v1.9.3         running 21 seconds ago  21 seconds ago
-7abe579f        flannel         hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.9.1           running 8 minutes ago   8 minutes ago
+7abe579f        flannel         hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0           running 8 minutes ago   8 minutes ago
 c31fd758        registry        hub.c.163.com/mengkzhaoyun/public:registry-2.6.2        running 6 minutes ago   6 minutes ago
 
 # check in master node
