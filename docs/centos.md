@@ -95,8 +95,7 @@ ssh 172.16.11.249
 
 # exec commands to install k8s 
 cd linux
-ap 0.bootstrap.yml
-ap 1.install.yml
+ap 1.install-centos.yml -i centos
 ```
 
 ## 3).check rkt & etcd

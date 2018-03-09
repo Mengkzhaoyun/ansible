@@ -10,20 +10,22 @@ mkdir -p /etc/kubernetes/downloads
 
 if ! [ -x "$(command -v docker)" ]; then
   cd /etc/yum.repos.d
-  mkdir bak
-  mv CentOS-* bak
-  tee /etc/yum.repos.d/localyum.repo <<-'EOF'
-  [localyum]
-  name=localyum
-  baseurl=$YUM_SERVER
-  enable=1
-  gpgcheck=0
-  EOF
-  yum install docker
+  if ! [[ -e /etc/yum.repos.d/bak ]]; then
+    mkdir bak
+    mv CentOS-* bak
+  fi
+  tee /etc/yum.repos.d/localyum.repo <<-EOF
+[localyum]
+name=localyum
+baseurl=${YUM_SERVER}
+enable=1
+gpgcheck=0
+EOF
+  yum install -y docker
 fi
 
 if ! [ -x "$(command -v rkt)" ]; then
-  if ! [[ -e /etc/kubernetes/downloads/$YUM_RKT.deb ]]; then
+  if ! [[ -e /etc/kubernetes/downloads/$YUM_RKT ]]; then
     curl $HTTP_SERVER/$YUM_RKT.tgz > /etc/kubernetes/downloads/$YUM_RKT.tgz
     cd /etc/kubernetes/downloads && tar -xzf /etc/kubernetes/downloads/$YUM_RKT.tgz
     rm -rf /etc/kubernetes/downloads/$YUM_RKT.tgz    

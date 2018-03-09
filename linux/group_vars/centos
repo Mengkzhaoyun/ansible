@@ -1,0 +1,20 @@
+---
+# coreos options
+INSTALL_KEYS: ["ansible","admin"]
+
+# k8s option
+K8S_CLUSTER: {
+   "systech17": "worker",
+   "systech18": "master",
+   "systech19": "worker"
+}
+K8S_PORT: 6443
+K8S_ADMIN_PWD: abc2018
+K8S_MASTER_HOST: 172.16.11.248
+K8S_MASTER_DOMAIN: xx.ispacesys.cn
+
+# other options
+HTTP_SERVER: 'http://172.16.11.235/k8s'
+
+# centos options
+YUM_SERVER: 'http://172.16.11.235/centos'
