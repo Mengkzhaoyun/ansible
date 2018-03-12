@@ -29,5 +29,5 @@
   when: need_services_docker | failed  
 
 - name: start docker.service
-  raw: systemctl stop docker && systemctl daemon-reload  && systemctl start docker
+  raw: systemctl daemon-reload && systemctl enable docker && systemctl restart docker
   when: need_services_docker | failed    

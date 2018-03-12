@@ -3,5 +3,7 @@
   - wod.centos-deps
   - wod.timezone
   - wod.downloads
-  - wod.etcd  
-  - wod.registry  
+  - wod.etcd
+  - wod.flannel
+  - wod.docker
+  - wod.registry

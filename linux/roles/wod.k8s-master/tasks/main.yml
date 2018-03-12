@@ -49,17 +49,7 @@
 
 - name: template manifests/kube-controller-manager.yaml
   template: src=manifests/kube-controller-manager.yaml dest=/etc/kubernetes/manifests/kube-controller-manager.yaml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_manifests_controller | failed    
-
-- name: check need manifests/kube-proxy.yaml
-  raw: stat /etc/kubernetes/manifests/kube-proxy.yaml
-  register: need_manifests_proxy
-  ignore_errors: True
-  when: K8S_CLUSTER[inventory_hostname] == "master"
-
-- name: template manifests/kube-proxy.yaml
-  template: src=manifests/kube-proxy.yaml dest=/etc/kubernetes/manifests/kube-proxy.yaml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_manifests_proxy | failed    
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_manifests_controller | failed     
 
 - name: check need manifests/kube-scheduler.yaml
   raw: stat /etc/kubernetes/manifests/kube-scheduler.yaml
