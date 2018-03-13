@@ -5,5 +5,5 @@
   - wod.downloads
   - wod.etcd
   - wod.flannel
-  - wod.docker
+  - wod.centos-docker
   - wod.registry
