@@ -68,7 +68,7 @@ exec ${RKT} ${RKT_GLOBAL_ARGS} \
 	--volume coreos-var-lib-docker,kind=host,source=/var/lib/docker,readOnly=false \
 	--volume coreos-var-lib-kubelet,kind=host,source=/var/lib/kubelet,readOnly=false,recursive=true \
 	--volume coreos-var-log,kind=host,source=/var/log,readOnly=false \
-	--volume coreos-os-release,kind=host,source=/usr/lib/os-release,readOnly=true \
+	--volume coreos-os-release,kind=host,source=/etc/os-release,readOnly=true \
 	--volume coreos-run,kind=host,source=/run,readOnly=false \
 	--volume coreos-lib-modules,kind=host,source=/lib/modules,readOnly=true \
 	--mount volume=coreos-etc-kubernetes,target=/etc/kubernetes \

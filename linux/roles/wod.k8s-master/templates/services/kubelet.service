@@ -28,6 +28,8 @@ ExecStart=/etc/kubernetes/scripts/kubelet.sh \
   --hostname-override={{ ADVERTISE_IP }} \
   --cluster-dns={{ DNS_SERVICE_IP }} \
   --cluster-domain=cluster.local \
+  --hairpin-mode promiscuous-bridge \
+  --cgroup-driver=systemd \
   --fail-swap-on=false \
   --pod-infra-container-image={{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES['PAUSE']['NAME'] }}:{{ K8S_IMAGES['PAUSE']['VERSION'] }}
 

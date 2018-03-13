@@ -29,7 +29,7 @@ ExecStart=/usr/bin/dockerd-current \
           $BLOCK_REGISTRY \
           $INSECURE_REGISTRY \
           $DOCKER_OPT_BIP \
-          $DOCKER_OPT_MTU \ 
+          $DOCKER_OPT_MTU \
           $DOCKER_OPT_IPMASQ \
 	  $REGISTRIES
 ExecReload=/bin/kill -s HUP $MAINPID
