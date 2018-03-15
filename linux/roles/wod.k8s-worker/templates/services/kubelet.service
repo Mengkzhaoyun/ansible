@@ -27,7 +27,12 @@ ExecStart=/etc/kubernetes/scripts/kubelet.sh \
   --cluster-domain=cluster.local \
   --kubeconfig=/etc/kubernetes/config/kubelet.yaml \
   --hairpin-mode promiscuous-bridge \
-  --cgroup-driver=systemd \  
+  --network-plugin-dir=/opt/cni/bin \
+  --network-plugin=cni \
+  --cni-conf-dir=/etc/cni/net.d \
+  --cgroup-driver=systemd \
+  --runtime-cgroups=/systemd/system.slice \
+  --kubelet-cgroups=/systemd/system.slice \
   --fail-swap-on=false \
   --pod-infra-container-image={{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES['PAUSE']['NAME'] }}:{{ K8S_IMAGES['PAUSE']['VERSION'] }}
   
