@@ -1,3 +1,9 @@
+- name: Run cni.sh
+  environment:
+    HTTP_SERVER: '{{ HTTP_SERVER }}'
+    K8S_CNI_BIN: '{{ K8S_CNI_BIN }}'
+  script: cni.sh
+
 - name: mkdir -p /etc/kubernetes/addons/kube-system
   raw: mkdir -p /etc/kubernetes/addons/kube-system
 
