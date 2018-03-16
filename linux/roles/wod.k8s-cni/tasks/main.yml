@@ -1,0 +1,16 @@
+- name: mkdir -p /etc/kubernetes/addons/kube-system
+  raw: mkdir -p /etc/kubernetes/addons/kube-system
+
+- name: check need kube-router.yml
+  raw: stat /etc/kubernetes/addons/kube-system/kube-router.yml
+  register: need_addons_rbac_admin
+  ignore_errors: True  
+  when: K8S_CLUSTER[inventory_hostname] == "master"
+
+- name: template kube-router.yml
+  template: src=kube-router.yml dest=/etc/kubernetes/addons/kube-system/kube-router.yml
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_rbac_admin | failed
+
+- name: kubectl create -f kube-router.yml
+  raw: kubectl create -f /etc/kubernetes/addons/kube-system/kube-router.yml
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_rbac_admin | failed
