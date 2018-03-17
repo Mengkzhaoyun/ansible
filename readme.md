@@ -1,4 +1,4 @@
-# Deploy
+# Offline Auto Deploy
 
 ## CentOS
 
@@ -9,7 +9,7 @@ kubernetes: 1.9.4<br>
 kubernetes-network: kube-router:v0.1.0-rc2<br>
 kubernetes-addons: coreos:1.1.0 , dashboard:v1.8.3 , heapster:v1.5.0
 
-[Deploy Kubernetes 1.9.4 in CentOS](./docs/centos.md)
+[Offline Auto Deploy Kubernetes 1.9.4 in CentOS](./docs/centos.md)
 
 <img alt="Schema" src="docs/imgs/centos-schema.png">
 
@@ -19,7 +19,7 @@ https://www.youtube.com/watch?v=xxxx
 
 ## Ubuntu
 
-[Deploy Kubernetes 1.9.3 in Ubuntu](./docs/ubuntu.md)
+[Offline Auto Deploy Kubernetes 1.9.3 in Ubuntu](./docs/ubuntu.md)
 
 <img alt="Schema" src="docs/imgs/ubuntu-schema.png">
 
@@ -29,7 +29,7 @@ https://www.youtube.com/watch?v=144Ng2D5jxQ
 
 ## CoreOS
 
-[Deploy Kubernetes 1.9.0 in CoreOS](./docs/coreos.md)
+[Offline Auto Deploy Kubernetes 1.9.0 in CoreOS](./docs/coreos.md)
 
 <img alt="Schema" src="docs/imgs/coreos-schema.png">
 
