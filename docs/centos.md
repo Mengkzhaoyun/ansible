@@ -1,4 +1,4 @@
-# Deploy
+# Offline Auto Deploy Kubernetes 1.9.4 in CentOS
 
 os: CentOS Linux release 7.4.1708 (Core)<br>
 cotianer: docker 1.13.1 , rkt 1.29.0<br>
@@ -7,9 +7,7 @@ kubernetes: 1.9.4<br>
 kubernetes-network: kube-router:v0.1.0-rc2<br>
 kubernetes-addons: coreos:1.1.0 , dashboard:v1.8.3 , heapster:v1.5.0
 
-[Offline Auto Deploy Kubernetes 1.9.4 in CentOS](./docs/centos.md)
-
-<img alt="Schema" src="docs/imgs/centos-schema.png">
+<img alt="Schema" src="imgs/centos-schema.png">
 
 Online Vedio<br>
 https://www.bilibili.com/video/xxxx<br>
