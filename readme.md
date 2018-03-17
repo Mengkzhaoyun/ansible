@@ -5,9 +5,9 @@
 os: CentOS Linux release 7.4.1708 (Core)<br>
 cotianer: docker 1.13.1 , rkt 1.29.0<br>
 etcd: 3.3.2<br>
-Kubernetes: 1.9.4<br>
-Kubernetes-network: kube-router:v0.1.0-rc2<br>
-Kubernetes-addons: coreos:1.1.0 , dashboard:v1.8.3 , heapster:v1.5.0
+kubernetes: 1.9.4<br>
+kubernetes-network: kube-router:v0.1.0-rc2<br>
+kubernetes-addons: coreos:1.1.0 , dashboard:v1.8.3 , heapster:v1.5.0
 
 [Deploy Kubernetes 1.9.4 on CentOS](./docs/centos.md)
 
