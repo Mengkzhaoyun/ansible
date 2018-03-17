@@ -12,7 +12,6 @@ EnvironmentFile=-/run/containers/registries.conf
 EnvironmentFile=-/etc/sysconfig/docker
 EnvironmentFile=-/etc/sysconfig/docker-storage
 EnvironmentFile=-/etc/sysconfig/docker-network
-EnvironmentFile=-/run/flannel/flannel_docker_opts.env
 Environment=GOTRACEBACK=crash
 Environment=DOCKER_HTTP_HOST_COMPAT=1
 Environment=PATH=/usr/libexec/docker:/usr/bin:/usr/sbin
@@ -28,9 +27,6 @@ ExecStart=/usr/bin/dockerd-current \
           $ADD_REGISTRY \
           $BLOCK_REGISTRY \
           $INSECURE_REGISTRY \
-          $DOCKER_OPT_BIP \
-          $DOCKER_OPT_MTU \
-          $DOCKER_OPT_IPMASQ \
 	  $REGISTRIES
 ExecReload=/bin/kill -s HUP $MAINPID
 LimitNOFILE=1048576

@@ -8,6 +8,7 @@ Environment=PATH=/bin:/opt/bin:/usr/bin:/usr/sbin:/sbin:$PATH
 
 ExecStartPre=/usr/bin/mkdir -p /etc/kubernetes/manifests
 ExecStartPre=/usr/bin/mkdir -p /var/log/containers
+ExecStartPre=/usr/bin/mkdir -p /etc/cni/net.d
 ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid
 
 Environment=KUBELET_IMAGE=/etc/kubernetes/downloads/{{ RKT_ACI_KUBELET }}.aci
@@ -27,9 +28,9 @@ ExecStart=/etc/kubernetes/scripts/kubelet.sh \
   --cluster-domain=cluster.local \
   --kubeconfig=/etc/kubernetes/config/kubelet.yaml \
   --hairpin-mode promiscuous-bridge \
-  --network-plugin-dir=/opt/cni/bin \
   --network-plugin=cni \
   --cni-conf-dir=/etc/cni/net.d \
+  --cni-bin-dir=/opt/cni/bin \
   --cgroup-driver=systemd \
   --runtime-cgroups=/systemd/system.slice \
   --kubelet-cgroups=/systemd/system.slice \

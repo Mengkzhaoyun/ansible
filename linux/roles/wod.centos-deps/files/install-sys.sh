@@ -21,6 +21,7 @@ ENV_OPT="$PATH:/opt/bin"
 if grep -q ${HOSTS_REGISTRY} /etc/hosts ; then  
   echo echo `grep ${HOSTS_REGISTRY} /etc/hosts`;
 else 
+  echo "" >> /etc/hosts; 
   echo "${HOSTS_REGISTRY_IP} ${HOSTS_REGISTRY}" >> /etc/hosts; 
 fi 
 
@@ -50,7 +51,7 @@ for key in ${KEYS[@]}; do
   IFS=" " 
   keyarr=(${key})
   if grep -q ${keyarr[2]} /root/.ssh/authorized_keys ; then 
-    echo echo `grep ${keyarr[2]} /etc/hosts`;
+    echo echo `grep ${keyarr[2]} /root/.ssh/authorized_keys`;
   else 
     echo "${key}" >> /root/.ssh/authorized_keys; 
   fi 

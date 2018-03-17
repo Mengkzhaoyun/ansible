@@ -4,6 +4,5 @@
   - wod.timezone
   - wod.downloads
   - wod.etcd
-  - wod.flannel
   - wod.centos-docker
   - wod.registry

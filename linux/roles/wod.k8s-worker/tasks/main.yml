@@ -28,16 +28,6 @@
   copy: src=scripts/kubelet.sh dest=/etc/kubernetes/scripts/kubelet.sh mode=0755
   when: K8S_CLUSTER[inventory_hostname] == "worker" and need_scripts_kubelet | failed    
 
-- name: check need manifests/kube-proxy.yaml
-  raw: stat /etc/kubernetes/manifests/kube-proxy.yaml
-  register: need_manifests_proxy
-  ignore_errors: True
-  when: K8S_CLUSTER[inventory_hostname] == "worker"
-
-- name: template manifests/kube-proxy.yaml
-  template: src=manifests/kube-proxy.yaml dest=/etc/kubernetes/manifests/kube-proxy.yaml
-  when: K8S_CLUSTER[inventory_hostname] == "worker" and need_manifests_proxy | failed    
-
 - name: check need services/kubelet.service
   raw: stat /etc/kubernetes/services/kubelet.service
   register: need_services_kubelet

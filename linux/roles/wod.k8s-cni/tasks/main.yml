@@ -6,6 +6,7 @@
 
 - name: mkdir -p /etc/kubernetes/addons/kube-system
   raw: mkdir -p /etc/kubernetes/addons/kube-system
+  when: K8S_CLUSTER[inventory_hostname] == "master"  
 
 - name: check need kube-router.yml
   raw: stat /etc/kubernetes/addons/kube-system/kube-router.yml
