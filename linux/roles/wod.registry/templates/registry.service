@@ -3,10 +3,14 @@ Description=registry (Docker Hub)
 Documentation=https://github.com/coreos/registry
 
 [Service]
+Restart=always
+RestartSec=10
+# TimeoutSec=infinity
+
 Environment=PATH=/opt/bin/:/usr/bin/:/usr/sbin:/sbin:$PATH
 
-ExecStartPre=/bin/mkdir -p /data/registry
-ExecStartPre=/bin/mkdir --parents /var/lib/coreos
+ExecStartPre=/usr/bin/mkdir -p /data/registry
+ExecStartPre=/usr/bin/mkdir --parents /var/lib/coreos
 ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/lib/coreos/registry-pod.uuid       
 
 ExecStart=/usr/bin/rkt run \
@@ -21,8 +25,5 @@ ExecStart=/usr/bin/rkt run \
 
 ExecStop=-/usr/bin/rkt stop --uuid-file=/var/lib/coreos/registry-pod.uuid
 
-Restart=always
-RestartSec=10
-TimeoutSec=infinity
 [Install]
 WantedBy=multi-user.target        

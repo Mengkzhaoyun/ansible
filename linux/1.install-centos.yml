@@ -1,0 +1,8 @@
+- hosts: all
+  roles:
+  - wod.centos-deps
+  - wod.timezone
+  - wod.downloads
+  - wod.etcd
+  - wod.centos-docker
+  - wod.registry

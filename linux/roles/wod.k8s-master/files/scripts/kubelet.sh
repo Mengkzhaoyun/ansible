@@ -51,10 +51,10 @@ if [[ "${KUBELET_IMAGE%%/*}" == "quay.io" ]]; then
 	RKT_RUN_ARGS="${RKT_RUN_ARGS} --trust-keys-from-https"
 fi
 
-/bin/mkdir --parents /etc/kubernetes
-/bin/mkdir --parents /var/lib/docker
-/bin/mkdir --parents /var/lib/kubelet
-/bin/mkdir --parents /run/kubelet
+/usr/bin/mkdir --parents /etc/kubernetes
+/usr/bin/mkdir --parents /var/lib/docker
+/usr/bin/mkdir --parents /var/lib/kubelet
+/usr/bin/mkdir --parents /run/kubelet
 
 RKT="${RKT:-/usr/bin/rkt}"
 RKT_STAGE1_ARG="${RKT_STAGE1_ARG:---stage1-from-dir=stage1-fly.aci}"
@@ -68,9 +68,10 @@ exec ${RKT} ${RKT_GLOBAL_ARGS} \
 	--volume coreos-var-lib-docker,kind=host,source=/var/lib/docker,readOnly=false \
 	--volume coreos-var-lib-kubelet,kind=host,source=/var/lib/kubelet,readOnly=false,recursive=true \
 	--volume coreos-var-log,kind=host,source=/var/log,readOnly=false \
-	--volume coreos-os-release,kind=host,source=/usr/lib/os-release,readOnly=true \
+	--volume coreos-os-release,kind=host,source=/etc/os-release,readOnly=true \
 	--volume coreos-run,kind=host,source=/run,readOnly=false \
 	--volume coreos-lib-modules,kind=host,source=/lib/modules,readOnly=true \
+	--volume coreos-etc-cni-net,kind=host,source=/etc/cni/net.d,readOnly=true \
 	--mount volume=coreos-etc-kubernetes,target=/etc/kubernetes \
 	--mount volume=coreos-etc-ssl-certs,target=/etc/ssl/certs \
 	--mount volume=coreos-usr-share-certs,target=/usr/share/ca-certificates \
@@ -80,6 +81,7 @@ exec ${RKT} ${RKT_GLOBAL_ARGS} \
 	--mount volume=coreos-os-release,target=/etc/os-release \
 	--mount volume=coreos-run,target=/run \
 	--mount volume=coreos-lib-modules,target=/lib/modules \
+	--mount volume=coreos-etc-cni-net,target=/etc/cni/net.d \
 	--hosts-entry host \
 	${RKT_STAGE1_ARG} \
 	${KUBELET_IMAGE} \

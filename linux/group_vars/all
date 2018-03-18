@@ -18,7 +18,7 @@ REGISTRY_SOURCE_LOCAL: "{{ HOSTS_REGISTRY }}:5000/k8s/"
 K8S_IMAGES: {
     "KUBELET":{
         "NAME":"hyperkube",
-        "VERSION":"v1.9.3"
+        "VERSION":"v1.9.4"
     },
     "PAUSE":{
         "NAME":"pause",
@@ -28,30 +28,34 @@ K8S_IMAGES: {
 
 # rkt images
 RKT_ACI_REGISTRY: "registry-2.6.2"
-RKT_ACI_ETCD: "etcd-v3.3.1"
-RKT_ACI_FLANNEL: "flannel-v0.9.1"
+RKT_ACI_ETCD: "etcd-v3.3.2"
+RKT_ACI_FLANNEL: "flannel-v0.10.0"
 RKT_ACI_KUBELET: "{{ K8S_IMAGES['KUBELET']['NAME'] }}-{{ K8S_IMAGES['KUBELET']['VERSION'] }}"
 
 # ctl tools
-DEP_KUBECTL: "kubectl-v1.9.3"
-RKT_ACI_REGISTRY_DATA: "registry-data-v1.9.3"
+DEP_KUBECTL: "kubectl-v1.9.4"
+RKT_ACI_REGISTRY_DATA: "registry-data-v1.9.4"
 
 # k8s adv option.
 
-NETWORK_PLUGIN: 
+NETWORK_PLUGIN: cni 
+K8S_CNI_BIN: cni-plugins-amd64-v0.7.0
 ETCD_ENDPOINTS: "http://{{ ansible_default_ipv4['address'] }}:2379"
 POD_NETWORK: 10.2.0.0/16
-SERVICE_IP_RANGE: 10.3.0.0/24
+SERVICE_IP_RANGE: 10.3.0.0/16
 SERVICE_PORT_RANGE: 0-32767
 K8S_SERVICE_IP: 10.3.0.1
 DNS_SERVICE_IP: 10.3.0.10
 ADVERTISE_IP: "{{ ansible_default_ipv4['address'] }}"
 
-FLANNEL_ETCD_PREFIX: /spacesystech.com/network2
+FLANNEL_ETCD_PREFIX: /spacesystech.com/network
 
 # ubuntu
 DEP_LIBLTDL7: libltdl7_2.4.6-0.1_amd64
 DEP_IPTABLE: iptables_1.6.0-2ubuntu3_amd64
 DEP_DOCKER: docker-engine_1.13.1-0~ubuntu-xenial_amd64
 DEP_RKT: rkt_1.29.0-1_amd64
-DEP_ETCDCTL: etcdctl-v3.3.1-linux-amd64
+DEP_ETCDCTL: etcdctl-v3.3.2-linux-amd64
+
+# centos
+YUM_RKT: rkt-1.29.0-1.x86_64.rpm
