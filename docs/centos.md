@@ -148,6 +148,7 @@ ssh 172.16.11.248
 
 # wait  k8s pod started
 rkt list
+
 UUID            APP             IMAGE NAME                                              STATE   CREATED         STARTED         NETWORKS
 56703a2f        etcd            hub.c.163.com/mengkzhaoyun/k8s:etcd-v3.3.2              running 8 minutes ago   8 minutes ago
 6e15243e        k8s             hub.c.163.com/mengkzhaoyun/k8s:hyperkube-v1.9.4         running 21 seconds ago  21 seconds ago
