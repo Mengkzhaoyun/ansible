@@ -7,7 +7,7 @@ cotianer: docker 1.13.1 , rkt 1.29.0<br>
 etcd: 3.3.2<br>
 kubernetes: 1.9.4<br>
 kubernetes-network: kube-router:v0.1.0-rc2<br>
-kubernetes-addons: coreos:1.1.0 , dashboard:v1.8.3 , heapster:v1.5.0
+kubernetes-addons: coredns:1.1.0 , dashboard:v1.8.3 , heapster:v1.5.0
 
 [Offline Auto Deploy Kubernetes 1.9.4 in CentOS](./docs/centos.md)
 
