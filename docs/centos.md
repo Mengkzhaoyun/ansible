@@ -10,8 +10,8 @@ kubernetes-addons: coredns:1.1.0 , dashboard:v1.8.3 , heapster:v1.5.0
 <img alt="Schema" src="imgs/centos-schema.png">
 
 Online Vedio<br>
-https://www.bilibili.com/video/xxxx<br>
-https://www.youtube.com/watch?v=xxxx
+https://www.bilibili.com/video/av20919490/<br>
+https://youtu.be/_vhBCMwQsu8
 
 
 # Prepare
