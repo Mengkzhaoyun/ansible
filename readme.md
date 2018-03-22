@@ -39,7 +39,12 @@ https://www.youtube.com/watch?v=84XvO2UAx9U
 
 # How to Create Install Datas
 
-## Prepair Image From gcr.io,quay.io . etc
+## 1.9.6
+BAIDU DISK
+Link：https://pan.baidu.com/s/1PKQm_JSm-rjSKArlfJ1ZmA
+Pass：ooe8
+
+## Get Images
 
 [images.md](./docs/installs/images_v1.9.6.md)
 ```bash
