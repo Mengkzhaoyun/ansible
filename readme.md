@@ -41,8 +41,8 @@ https://www.youtube.com/watch?v=84XvO2UAx9U
 
 ## 1.9.6
 BAIDU DISK <br>
-Link：https://pan.baidu.com/s/1JPdHS9uz6p36hjV5uVPq_A <br>
-Pass：jfws
+Link：https://pan.baidu.com/s/1zoUMQ6u-FevXld4hFLNvow <br>
+Pass：aoqx
 
 ## Get Images
 
@@ -55,10 +55,10 @@ docker pull registry:2.6.2
 docker pull quay.io/coreos/etcd:v3.3.2
 
 # pause
-docker pull gcr.io/google_containers/pause:3.1
+docker pull k8s.gcr.io/pause:3.1
 
 # hyperkube
-docker pull gcr.io/google_containers/hyperkube:v1.9.6
+docker pull k8s.gcr.io/hyperkube:v1.9.6
 
 # flannel
 docker pull quay.io/coreos/flannel:v0.10.0
@@ -67,13 +67,25 @@ docker pull quay.io/coreos/flannel:v0.10.0
 docker pull cloudnativelabs/kube-router:v0.1.0
 
 # busybox
-docker pull gcr.io/google_containers/busybox:1.27.2
+docker pull k8s.gcr.io/busybox:1.27.2
 
 # coredns
 docker pull coredns/coredns:1.1.0
 
 # dashboard
-docker pull gcr.io/google_containers/kubernetes-dashboard-amd64:v1.8.3
+docker pull k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.3
+
+# heapster
+docker pull k8s.gcr.io/heapster-amd64:v1.5.2
+
+# addon-resizer
+docker pull k8s.gcr.io/addon-resizer:1.8.1
+
+# heapster-influxdb-amd64
+docker pull k8s.gcr.io/heapster-influxdb-amd64:v1.3.3
+
+# heapster-grafana-amd64
+docker pull k8s.gcr.io/heapster-grafana-amd64:v4.4.3
 ```
 
 ## Get ACI Image

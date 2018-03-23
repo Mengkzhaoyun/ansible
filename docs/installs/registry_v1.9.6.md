@@ -31,10 +31,10 @@ docker pull hub.c.163.com/mengkzhaoyun/k8s:kubernetes-dashboard-amd64-v1.8.3 &&\
 docker tag hub.c.163.com/mengkzhaoyun/k8s:kubernetes-dashboard-amd64-v1.8.3 localhost:5000/k8s/kubernetes-dashboard-amd64:v1.8.3 &&\
 docker push localhost:5000/k8s/kubernetes-dashboard-amd64:v1.8.3
 
-# heapster-amd64:v1.5.0
-docker pull hub.c.163.com/mengkzhaoyun/k8s:heapster-amd64-v1.5.0 &&\
-docker tag hub.c.163.com/mengkzhaoyun/k8s:heapster-amd64-v1.5.0 localhost:5000/k8s/heapster-amd64:v1.5.0 &&\
-docker push localhost:5000/k8s/heapster-amd64:v1.5.0
+# heapster-amd64:v1.5.2
+docker pull hub.c.163.com/mengkzhaoyun/k8s:heapster-amd64-v1.5.2 &&\
+docker tag hub.c.163.com/mengkzhaoyun/k8s:heapster-amd64-v1.5.2 localhost:5000/k8s/heapster-amd64:v1.5.2 &&\
+docker push localhost:5000/k8s/heapster-amd64:v1.5.2
 
 # addon-resizer:1.8.1
 docker pull hub.c.163.com/mengkzhaoyun/k8s:addon-resizer-1.8.1 &&\
