@@ -35,7 +35,7 @@ download : https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/
 
 # pypy v5.1.0
 
-# etcd
+# etcdctl
 
 2018.03.17  v3.3.2
 readme : https://github.com/coreos/etcd/releases

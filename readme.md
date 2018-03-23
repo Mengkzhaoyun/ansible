@@ -95,13 +95,13 @@ rkt image export hub.c.163.com/mengkzhaoyun/k8s:hyperkube-v1.9.6 hyperkube-v1.9.
 [ctl.md](./docs/installs/ctl_v1.9.6.md)
 
 ```bash
-# ct v0.4.2
+# ct
 https://github.com/coreos/container-linux-config-transpiler/releases/download/v0.4.2/ct-v0.4.2-x86_64-unknown-linux-gnu
 
 # kubectl
 https://storage.googleapis.com/kubernetes-release/release/v1.9.6/bin/linux/amd64/kubectl
 
-# etcd
+# etcdctl
 https://github.com/coreos/etcd/releases/download/v3.3.2/etcd-v3.3.2-linux-amd64.tar.gz
 ```
 
