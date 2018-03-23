@@ -28,7 +28,7 @@ readme : https://kubernetes.io/docs/tasks/tools/install-kubectl/
 version : https://storage.googleapis.com/kubernetes-release/release/stable.txt
 download : https://storage.googleapis.com/kubernetes-release/release/v1.9.0/bin/linux/amd64/kubectl
 
-2017.09.23
+2017.09.23 v1.7.0
 readme : https://kubernetes.io/docs/tasks/tools/install-kubectl/
 version : https://storage.googleapis.com/kubernetes-release/release/stable.txt
 download : https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl
