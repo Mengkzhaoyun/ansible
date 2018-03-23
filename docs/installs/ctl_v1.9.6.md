@@ -33,8 +33,6 @@ readme : https://kubernetes.io/docs/tasks/tools/install-kubectl/
 version : https://storage.googleapis.com/kubernetes-release/release/stable.txt
 download : https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl
 
-# pypy v5.1.0
-
 # etcdctl
 
 2018.03.17  v3.3.2
