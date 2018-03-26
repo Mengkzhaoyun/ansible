@@ -16,6 +16,11 @@ docker pull hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.1.0 &&\
 docker tag hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.1.0 localhost:5000/k8s/kube-router:v0.1.0 &&\
 docker push localhost:5000/k8s/kube-router:v0.1.0
 
+# flannel:v0.10.0
+docker pull hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0 &&\
+docker tag hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0 localhost:5000/k8s/flannel:v0.10.0 &&\
+docker push localhost:5000/k8s/flannel:v0.10.0
+
 # busybox:1.27.2
 docker pull hub.c.163.com/mengkzhaoyun/k8s:busybox-1.27.2 &&\
 docker tag hub.c.163.com/mengkzhaoyun/k8s:busybox-1.27.2 localhost:5000/k8s/busybox:1.27.2 &&\
