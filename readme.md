@@ -41,8 +41,8 @@ https://www.youtube.com/watch?v=84XvO2UAx9U
 
 ## 1.9.6
 BAIDU DISK <br>
-Link：https://pan.baidu.com/s/1zoUMQ6u-FevXld4hFLNvow <br>
-Pass：aoqx
+Link：https://pan.baidu.com/s/1y-JLhtr-jOFQd1-TZYNgug <br>
+Pass：qw95
 
 ## Get Images
 
