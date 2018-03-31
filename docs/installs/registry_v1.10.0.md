@@ -21,6 +21,11 @@ docker pull hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.1.0 &&\
 docker tag hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.1.0 localhost:5000/k8s/kube-router:v0.1.0 &&\
 docker push localhost:5000/k8s/kube-router:v0.1.0
 
+# kube-proxy:v1.10.0
+docker pull hub.c.163.com/mengkzhaoyun/k8s:kube-proxy-v1.10.0 &&\
+docker tag hub.c.163.com/mengkzhaoyun/k8s:kube-proxy-v1.10.0 localhost:5000/k8s/kube-proxy:v1.10.0 &&\
+docker push localhost:5000/k8s/kube-proxy:v1.10.0
+
 # flannel:v0.10.0
 docker pull hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0 &&\
 docker tag hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0 localhost:5000/k8s/flannel:v0.10.0 &&\

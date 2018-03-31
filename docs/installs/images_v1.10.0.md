@@ -32,6 +32,11 @@ docker pull cloudnativelabs/kube-router:v0.1.0 ;`
 docker tag cloudnativelabs/kube-router:v0.1.0 hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.1.0 ;`
 docker push hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.1.0
 
+# kube-proxy
+docker pull k8s.gcr.io/kube-proxy:v1.10.0 ;`
+docker tag k8s.gcr.io/kube-proxy:v1.10.0 hub.c.163.com/mengkzhaoyun/k8s:kube-proxy-v1.10.0 ;`
+docker push hub.c.163.com/mengkzhaoyun/k8s:kube-proxy-v1.10.0
+
 # busybox
 docker pull k8s.gcr.io/busybox:1.27.2 ;`
 docker tag k8s.gcr.io/busybox:1.27.2 hub.c.163.com/mengkzhaoyun/k8s:busybox-1.27.2 ;`
