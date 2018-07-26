@@ -2,7 +2,7 @@
 
 set -e  
 
-HTTP_SERVER="${HTTP_SERVER:-https://gitlab.ispacesys.cn/source/cig/raw/master/k8s}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}"
 RKT_ACI_REGISTRY="${RKT_ACI_REGISTRY:-registry-2.6.2}"
 RKT_ACI_REGISTRY_DATA="${RKT_ACI_REGISTRY_DATA:-registry-data-v1.9.0}"
 
@@ -24,6 +24,6 @@ else
   cd /etc/kubernetes/downloads && tar -xzf /etc/kubernetes/downloads/$RKT_ACI_REGISTRY_DATA.tgz
   rm -rf /etc/kubernetes/downloads/$RKT_ACI_REGISTRY_DATA.tgz
   mkdir -p /data/registry
-  mv -n /etc/kubernetes/downloads/data/docker /data/registry/docker
+  mv -n /etc/kubernetes/downloads/data/docker /data/registry
   rm -rf /etc/kubernetes/downloads/data
 fi

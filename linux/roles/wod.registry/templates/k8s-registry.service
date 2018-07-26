@@ -10,20 +10,20 @@ RestartSec=10
 Environment=PATH=/opt/bin/:/usr/bin/:/usr/sbin:/sbin:$PATH
 
 ExecStartPre=/usr/bin/mkdir -p /data/registry
-ExecStartPre=/usr/bin/mkdir --parents /var/lib/coreos
-ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/lib/coreos/registry-pod.uuid       
+ExecStartPre=/usr/bin/mkdir --parents /etc/kubernetes/downloads
+ExecStartPre=-/usr/bin/rkt rm --uuid-file=/etc/kubernetes/downloads/registry-pod.uuid       
 
 ExecStart=/usr/bin/rkt run \
   --insecure-options=image \
-  --uuid-file-save=/var/lib/coreos/registry-pod.uuid \
+  --uuid-file-save=/etc/kubernetes/downloads/registry-pod.uuid \
   --volume volume-var-lib-registry,kind=host,source=/data/registry \
   --mount volume=volume-var-lib-registry,target=/var/lib/registry \
   --inherit-env \
   --stage1-from-dir=stage1-fly.aci \
   /etc/kubernetes/downloads/{{ RKT_ACI_REGISTRY }}.aci \
-  --name=registry 
+  --name=k8s-registry 
 
-ExecStop=-/usr/bin/rkt stop --uuid-file=/var/lib/coreos/registry-pod.uuid
+ExecStop=-/usr/bin/rkt stop --uuid-file=/etc/kubernetes/downloads/registry-pod.uuid
 
 [Install]
-WantedBy=multi-user.target        
+WantedBy=multi-user.target

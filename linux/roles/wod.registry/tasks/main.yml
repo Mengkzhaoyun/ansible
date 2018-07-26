@@ -18,16 +18,16 @@
   copy: src=prepare.sh dest=/etc/kubernetes/scripts/prepare.sh mode=0755
   when: K8S_CLUSTER[inventory_hostname] == "master" and need_scripts_prepare | failed  
 
-- name: check need registry.service
-  raw: stat /etc/systemd/system/registry.service
+- name: check need k8s-registry.service
+  raw: stat /etc/systemd/system/k8s-registry.service
   register: need_services_registry
   ignore_errors: True  
   when: K8S_CLUSTER[inventory_hostname] == "master"
 
-- name: template registry.service
-  template: src=registry.service dest=/etc/systemd/system/registry.service mode=0644
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_services_registry | failed  
+- name: template k8s-registry.service
+  template: src=k8s-registry.service dest=/etc/systemd/system/k8s-registry.service mode=0644
+  when: K8S_CLUSTER[inventory_hostname] == "master" and need_services_registry | failed
 
-- name: start registry.service
-  raw: systemctl daemon-reload && systemctl enable registry.service && systemctl start registry.service
-  when: need_services_registry | failed     
+- name: start k8s-registry.service
+  raw: systemctl daemon-reload && systemctl enable k8s-registry.service && systemctl start k8s-registry.service
+  when: need_services_registry | failed

@@ -1,24 +1,15 @@
-- name: mkdir /etc/systemd/system/docker.service.d
-  raw: mkdir -p /etc/systemd/system/docker.service.d
+- name: mkdir -p /etc/docker
+  raw: mkdir -p /etc/docker
 
-- name: check need docker.service.d/50-insecure-registry.conf
-  raw: stat /etc/systemd/system/docker.service.d/50-insecure-registry.conf
-  register: need_services_docker_registry
-  ignore_errors: True  
+- name: check need /etc/docker/daemon.json
+  raw: stat /etc/docker/daemon.json
+  register: need_docker_daemon
+  ignore_errors: True
 
-- name: template docker.service.d/50-insecure-registry.conf
-  template: src=50-insecure-registry.conf dest=/etc/systemd/system/docker.service.d/50-insecure-registry.conf mode=0644
-  when: need_services_docker_registry | failed    
-
-- name: check need docker.service
-  raw: stat /etc/systemd/system/docker.service
-  register: need_services_docker
-  ignore_errors: True  
-
-- name: template docker.service
-  template: src=docker.service dest=/etc/systemd/system/docker.service mode=0644
-  when: need_services_docker | failed  
+- name: template /etc/docker/daemon.json
+  template: src=daemon.json dest=/etc/docker/daemon.json mode=0644
+  when: need_docker_daemon | failed
 
 - name: start docker.service
   raw: systemctl daemon-reload && systemctl enable docker && systemctl restart docker
-  when: need_services_docker | failed    
+  when: need_docker_daemon | failed

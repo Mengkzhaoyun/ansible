@@ -2,7 +2,7 @@
 
 set -e  
 
-HTTP_SERVER="${HTTP_SERVER:-https://gitlab.ispacesys.cn/source/cig/raw/master/k8s}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}"
 ACI_ETCD="${ACI_ETCD:-etcd-v3.2.0}" 
 
 mkdir -p /etc/kubernetes/downloads

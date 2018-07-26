@@ -1,0 +1,14 @@
+- hosts: all
+  roles:
+  - { role: wod.deps-centos, when: "ansible_distribution == 'CentOS'" }
+  - { role: wod.deps-ubuntu, when: "ansible_distribution == 'Ubuntu'" }
+  - wod.timezone
+  - wod.downloads
+  - wod.etcd
+  - wod.docker
+  - wod.registry
+  - wod.k8s-ssl
+  - wod.k8s-kubectl
+  - wod.k8s-master
+  - wod.k8s-worker
+  - wod.k8s-cni

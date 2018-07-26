@@ -1,37 +1,10 @@
-- name: Check if bootstrap is needed
+- name: check if bootstrap is needed
   raw: stat $HOME/.bootstrapped
   register: need_bootstrap
   ignore_errors: True
-
-- name: Export $HTTP_SERVER
-  raw: "cd /root && export HTTP_SERVER={{ HTTP_SERVER }}"
-  when: need_bootstrap | failed 
 
 - name: Run bootstrap.sh
   environment:
     HTTP_SERVER: '{{ HTTP_SERVER }}'
   script: bootstrap.sh
-  when: need_bootstrap | failed 
-
-# - name: Check if we need to install pip
-#   shell: "{{ansible_python_interpreter}} -m pip --version"
-#   register: need_pip
-#   ignore_errors: True
-#   changed_when: false
-#   when: need_bootstrap | failed
-
-# - name: Copy get-pip.py
-#   copy: src=get-pip.py dest=~/get-pip.py
-#   when: need_pip | failed
-
-# - name: Install pip
-#   shell: "{{ansible_python_interpreter}} ~/get-pip.py"
-#   when: need_pip | failed
-
-# - name: Remove get-pip.py
-#   file: path=~/get-pip.py state=absent
-#   when: need_pip | failed
-
-# - name: Install pip launcher
-#   copy: src=runner dest=~/bin/pip mode=0755
-#   when: need_pip | failed
+  when: need_bootstrap | failed

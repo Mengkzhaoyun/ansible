@@ -7,15 +7,15 @@
   copy: src=etcd.sh dest=/etc/kubernetes/scripts/etcd.sh mode=0755
   when: need_scripts_etcd | failed
 
-- name: check need etcd.service
-  raw: stat /etc/systemd/system/etcd.service
+- name: check need k8s-etcd.service
+  raw: stat /etc/systemd/system/k8s-etcd.service
   register: need_services_etcd
   ignore_errors: True  
 
-- name: template etcd.service
-  template: src=etcd.service dest=/etc/systemd/system/etcd.service mode=0644
+- name: template k8s-etcd.service
+  template: src=k8s-etcd.service dest=/etc/systemd/system/k8s-etcd.service mode=0644
   when: need_services_etcd | failed  
 
-- name: start etcd.service
-  raw: systemctl daemon-reload && systemctl enable etcd.service && systemctl start etcd.service
+- name: start k8s-etcd.service
+  raw: systemctl daemon-reload && systemctl enable k8s-etcd.service && systemctl start k8s-etcd.service
   when: need_services_etcd | failed   

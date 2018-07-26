@@ -1,5 +1,7 @@
 # Offline Auto Deploy
 
+# 维护中，暂时不要使用Master分支
+
 ## CentOS
 
 os: CentOS Linux release 7.4.1708 (Core)<br>
