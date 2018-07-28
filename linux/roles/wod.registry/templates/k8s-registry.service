@@ -9,21 +9,21 @@ RestartSec=10
 
 Environment=PATH=/opt/bin/:/usr/bin/:/usr/sbin:/sbin:$PATH
 
-ExecStartPre=/usr/bin/mkdir -p /data/registry
+ExecStartPre=/usr/bin/mkdir --parents /etc/kubernetes/data/registry
 ExecStartPre=/usr/bin/mkdir --parents /etc/kubernetes/downloads
-ExecStartPre=-/usr/bin/rkt rm --uuid-file=/etc/kubernetes/downloads/registry-pod.uuid       
+ExecStartPre=-/usr/bin/rkt rm --uuid-file=/etc/kubernetes/data/registry-pod.uuid       
 
 ExecStart=/usr/bin/rkt run \
   --insecure-options=image \
-  --uuid-file-save=/etc/kubernetes/downloads/registry-pod.uuid \
-  --volume volume-var-lib-registry,kind=host,source=/data/registry \
+  --uuid-file-save=/etc/kubernetes/data/registry-pod.uuid \
+  --volume volume-var-lib-registry,kind=host,source=/etc/kubernetes/data/registry \
   --mount volume=volume-var-lib-registry,target=/var/lib/registry \
   --inherit-env \
   --stage1-from-dir=stage1-fly.aci \
   /etc/kubernetes/downloads/{{ RKT_ACI_REGISTRY }}.aci \
   --name=k8s-registry 
 
-ExecStop=-/usr/bin/rkt stop --uuid-file=/etc/kubernetes/downloads/registry-pod.uuid
+ExecStop=-/usr/bin/rkt stop --uuid-file=/etc/kubernetes/data/registry-pod.uuid
 
 [Install]
 WantedBy=multi-user.target

@@ -10,7 +10,8 @@
   environment:
     HOSTS_REGISTRY: '{{ HOSTS_REGISTRY }}'
     HOSTS_REGISTRY_IP: '{{ K8S_MASTER_HOST }}'
-    AUTHORIZED_KEYS: '{% for ssh_host in INSTALL_KEYS %}{{ SSH_KEYS[ssh_host] }}{% if loop.last %}{% else %},{% endif %}{% endfor %}'
+    HOSTS_ETCD: '{% for etcd_host in K8S_CLUSTER_ETCD %}{{ hostvars[etcd_host]['ansible_hostname']=hostvars[etcd_host]['ansible_default_ipv4']['address'] }}{% if loop.last %}{% else %},{% endif %}{% endfor %}'
+    AUTHORIZED_KEYS: '{% for ssh_key in INSTALL_KEYS %}{{ SSH_KEYS[ssh_key] }}{% if loop.last %}{% else %},{% endif %}{% endfor %}'
   script: install-sys.sh  
 
 - name: mkdir /etc/kubernetes/

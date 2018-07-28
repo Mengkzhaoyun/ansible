@@ -1,3 +1,15 @@
+- name: Run prepare.sh
+  environment:
+    HTTP_SERVER: '{{ HTTP_SERVER }}'
+    RKT_ACI_ETCD: '{{ RKT_ACI_ETCD }}'
+    RKT_ACI_ETCD_TOOL: '{{ TOOLS_ETCDCTL }}'
+    REGISTRY_REMOTE: '{{ K8S_CLUSTER_REGISTRY_REMOTE }}'
+    REGISTRY_REMOTE_SPLIT: '{{ K8S_CLUSTER_REGISTRY_REMOTE_SPLIT }}'
+    REGISTRY_ETCD_REPO: '{{ K8S_IMAGES['ETCD']['NAME'] }}'
+    REGISTRY_ETCD_VERSION: '{{ K8S_IMAGES['ETCD']['VERSION'] }}'    
+  script: prepare.sh
+  when: K8S_CLUSTER_REGISTRY == inventory_hostname
+
 - name: check need /etc/kubernetes/scripts/etcd.sh
   raw: stat /etc/kubernetes/scripts/etcd.sh
   register: need_scripts_etcd
@@ -18,4 +30,4 @@
 
 - name: start k8s-etcd.service
   raw: systemctl daemon-reload && systemctl enable k8s-etcd.service && systemctl start k8s-etcd.service
-  when: need_services_etcd | failed   
+  when: need_services_etcd | failed

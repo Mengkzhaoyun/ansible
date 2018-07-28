@@ -4,4 +4,4 @@
     DEP_KUBECTL: '{{ DEP_KUBECTL }}'
     MASTER_SERVER: '{{ K8S_MASTER_HOST }}:{{ K8S_PORT }}'
   script: kubectl.sh
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"

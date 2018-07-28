@@ -8,7 +8,11 @@ if [[ -e $HOME/.bootstrapped ]]; then
   exit 0 
 fi
 
-HTTP_SERVER="${HTTP_SERVER:-https://gitlab.ispacesys.cn/source/cig/raw/master/k8s}" 
+if [ -x "$(command -v python)" ]; then
+  exit 0 
+fi
+
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}" 
 PYPY_VERSION=5.1.0
 
 if [[ -e $HOME/pypy-$PYPY_VERSION-linux64.tar.bz2 ]]; then

@@ -4,8 +4,8 @@ HOST_IP: "{{ ansible_default_ipv4['address'] }}"
 
 # /root/.ssh
 SSH_KEYS: {
-    "ansible":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDCJNFRbNc0SsHa/+mWB71z7SLPH9rQpwEqGbRo7q466a97h3bejNav9wc9AKmepHPfRw7DJfSmWO3lGBya0QkXMYXVvtfcWPvZZDlar5JK/ZsC8HGOpwVLdd1uUfyPu2qM0sjRNA/Ty8PDMkS5dSyZAJNlxUAILRpepkYoT8jhrw== ansible@space.docker",
-    "admin":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCrQGlgFB4TGjJCNk3mJEjgId2Td054T642kLzZ57ztotWzgZsxXlVYb8U9LG0UsQ22luRd04hIU4mplhHh6vKuVtRq34I7ZXJVDj0d9A22xuzpc4Poe7oBDtiBUL3eO+SPkjlN/EGeTyHk4eAxAVvDe59RJ2g89h5oyZFgTaWpAQ== admin@space.docker"
+  "ansible":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDCJNFRbNc0SsHa/+mWB71z7SLPH9rQpwEqGbRo7q466a97h3bejNav9wc9AKmepHPfRw7DJfSmWO3lGBya0QkXMYXVvtfcWPvZZDlar5JK/ZsC8HGOpwVLdd1uUfyPu2qM0sjRNA/Ty8PDMkS5dSyZAJNlxUAILRpepkYoT8jhrw== ansible@space.docker",
+  "admin":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCrQGlgFB4TGjJCNk3mJEjgId2Td054T642kLzZ57ztotWzgZsxXlVYb8U9LG0UsQ22luRd04hIU4mplhHh6vKuVtRq34I7ZXJVDj0d9A22xuzpc4Poe7oBDtiBUL3eO+SPkjlN/EGeTyHk4eAxAVvDe59RJ2g89h5oyZFgTaWpAQ== admin@space.docker"
 }
 
 # /etc/hosts
@@ -16,28 +16,60 @@ NETWORK_ONLINE: "TRUE"
 REGISTRY_SOURCE_LOCAL: "{{ HOSTS_REGISTRY }}:5000/k8s/"
 
 K8S_IMAGES: {
-    "KUBELET":{
-        "NAME":"hyperkube",
-        "VERSION":"v1.9.4"
-    },
-    "PAUSE":{
-        "NAME":"pause",
-        "VERSION":"3.1"
-    }
+  "KUBELET":{
+    "NAME": "hyperkube",
+    "VERSION": "v1.10.6"
+  },
+  "PAUSE":{
+    "NAME": "pause",
+    "VERSION": "3.1"
+  },
+  "REGISTRY"{
+    "NAME": "registry",
+    "VERSION": "2.6.2"
+  },
+  "ETCD"{
+    "NAME": "etcd",
+    "VERSION": "v3.3.9"
+  },
+  "FLANNEL"{
+    "NAME": "flannel",
+    "VERSION": "v0.10.0"
+  },
+  "KUBE-ROUTER"{
+    "NAME": "kube-router",
+    "VERSION": "v0.1.0"
+  },
+  "COREDNS"{
+    "NAME": "coredns",
+    "VERSION": "1.2.0"
+  },
+  "DASHBOARD"{
+    "NAME": "kubernetes-dashboard-amd64",
+    "VERSION": "v1.8.3"
+  },
+  "HEAPSTER"{
+    "NAME": "heapster-amd64",
+    "VERSION": "v1.5.4"
+  },
+  "ADDON-RESIZER"{
+    "NAME": "addon-resizer",
+    "VERSION": "1.8.3"
+  }
 }
 
 # rkt images
-RKT_ACI_REGISTRY: "registry-2.6.2"
-RKT_ACI_ETCD: "etcd-v3.3.2"
-RKT_ACI_FLANNEL: "flannel-v0.10.0"
+RKT_ACI_REGISTRY: "registry-{{ K8S_IMAGES['REGISTRY']['VERSION'] }}"
+RKT_ACI_ETCD: "etcd-{{ K8S_IMAGES['ETCD']['VERSION'] }}"
+RKT_ACI_FLANNEL: "flannel-{{ K8S_IMAGES['FLANNEL']['VERSION'] }}"
 RKT_ACI_KUBELET: "{{ K8S_IMAGES['KUBELET']['NAME'] }}-{{ K8S_IMAGES['KUBELET']['VERSION'] }}"
 
 # ctl tools
-DEP_KUBECTL: "kubectl-v1.9.4"
-RKT_ACI_REGISTRY_DATA: "registry-data-v1.9.4"
+RKT_ACI_REGISTRY_DATA: "registry-data-{{ K8S_IMAGES['KUBELET']['VERSION'] }}"
+TOOLS_KUBECTL: "kubectl-{{ K8S_IMAGES['KUBELET']['VERSION'] }}"
+TOOLS_ETCDCTL: "etcdctl-{{ K8S_IMAGES['ETCD']['VERSION']-linux-amd64"
 
 # k8s adv option.
-
 NETWORK_PLUGIN: cni 
 K8S_CNI_BIN: cni-plugins-amd64-v0.7.0
 ETCD_ENDPOINTS: "http://{{ ansible_default_ipv4['address'] }}:2379"

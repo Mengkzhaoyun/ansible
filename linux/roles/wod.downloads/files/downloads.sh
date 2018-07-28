@@ -27,17 +27,6 @@ if ! [ -x "$(command -v etcdctl)" ]; then
   ln -s /etc/kubernetes/downloads/$DEP_ETCDCTL /usr/bin/etcdctl
 fi
 
-ACI_FLANNEL="${ACI_FLANNEL:-flannel-v0.7.1}"
-
-if [[ -e /etc/kubernetes/downloads/$ACI_FLANNEL.aci ]]; then
-  echo 'flannel aci is already exist!'
-else
-  curl $HTTP_SERVER/$ACI_FLANNEL.tgz > /etc/kubernetes/downloads/$ACI_FLANNEL.tgz
-  cd /etc/kubernetes/downloads && tar -xzf /etc/kubernetes/downloads/$ACI_FLANNEL.tgz
-  rm -rf /etc/kubernetes/downloads/$ACI_FLANNEL.tgz
-  echo 'flannel aci download completed!'
-fi
-
 ACI_KUBELET="${ACI_KUBELET:-hyperkube-v1.7.3}"
 
 if [[ -e /etc/kubernetes/downloads/$ACI_KUBELET.aci ]]; then

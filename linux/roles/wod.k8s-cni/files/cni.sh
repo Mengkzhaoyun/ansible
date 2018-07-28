@@ -2,7 +2,7 @@
 
 set -e  
 
-HTTP_SERVER="${HTTP_SERVER:-https://gitlab.ispacesys.cn/source/cig/raw/master/k8s}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}"
 K8S_CNI_BIN="${K8S_CNI_BIN:-cni-plugins-amd64-v0.7.0}"
 
 mkdir -p /opt/cni/bin

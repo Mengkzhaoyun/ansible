@@ -1,6 +1,0 @@
-- hosts: all
-  roles:
-  - wod.k8s-ssl
-  - wod.k8s-master
-  - wod.k8s-worker
-  - wod.k8s-kubectl

@@ -2,7 +2,7 @@
 
 set -e  
 
-HTTP_SERVER="${HTTP_SERVER:-https://gitlab.ispacesys.cn/source/cig/raw/master/k8s}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}"
 DEP_KUBECTL="${DEP_KUBECTL:-kubectl-v1.9.0}" 
 MASTER_SERVER="${MASTER_SERVER}" 
 CA_CERT=/etc/kubernetes/ssl/ca.pem

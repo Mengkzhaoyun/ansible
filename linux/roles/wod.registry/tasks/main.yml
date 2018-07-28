@@ -1,33 +1,82 @@
 ---
+- name: mkdir -p /etc/docker
+  raw: mkdir -p /etc/docker
+
+- name: check need /etc/docker/daemon.json
+  raw: stat /etc/docker/daemon.json
+  register: need_docker_daemon
+  ignore_errors: True
+
+- name: template /etc/docker/daemon.json
+  template: src=daemon.json dest=/etc/docker/daemon.json mode=0644
+  when: need_docker_daemon | failed
+
+- name: start docker.service
+  raw: systemctl daemon-reload && systemctl enable docker && systemctl restart docker
+  when: need_docker_daemon | failed
+
 # install registry
 - name: Run prepare.sh
   environment:
     HTTP_SERVER: '{{ HTTP_SERVER }}'
     RKT_ACI_REGISTRY: '{{ RKT_ACI_REGISTRY }}'
     RKT_ACI_REGISTRY_DATA: '{{ RKT_ACI_REGISTRY_DATA }}'
+    REGISTRY_REMOTE: '{{ K8S_CLUSTER_REGISTRY_REMOTE }}'
+    REGISTRY_REMOTE_SPLIT: '{{ K8S_CLUSTER_REGISTRY_REMOTE_SPLIT }}'
+    REGISTRY_REGISTRY_REPO: '{{ K8S_IMAGES['REGISTRY']['NAME'] }}'
+    REGISTRY_REGISTRY_VERSION: '{{ K8S_IMAGES['REGISTRY']['VERSION'] }}'    
   script: prepare.sh
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_REGISTRY == inventory_hostname
 
 - name: check need prepare.sh
   raw: stat /etc/kubernetes/scripts/prepare.sh
   register: need_scripts_prepare
   ignore_errors: True  
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_REGISTRY == inventory_hostname
 
 - name: copy prepare.sh
   copy: src=prepare.sh dest=/etc/kubernetes/scripts/prepare.sh mode=0755
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_scripts_prepare | failed  
+  when: K8S_CLUSTER_REGISTRY == inventory_hostname and need_scripts_prepare | failed  
 
 - name: check need k8s-registry.service
   raw: stat /etc/systemd/system/k8s-registry.service
   register: need_services_registry
   ignore_errors: True  
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_REGISTRY == inventory_hostname
 
 - name: template k8s-registry.service
   template: src=k8s-registry.service dest=/etc/systemd/system/k8s-registry.service mode=0644
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_services_registry | failed
+  when: K8S_CLUSTER_REGISTRY == inventory_hostname and need_services_registry | failed
 
 - name: start k8s-registry.service
   raw: systemctl daemon-reload && systemctl enable k8s-registry.service && systemctl start k8s-registry.service
   when: need_services_registry | failed
+
+- name: Run imagecache.sh
+  environment:
+    REGISTRY_LOCAL: '{{ REGISTRY_SOURCE_LOCAL }}'
+    REGISTRY_LOCAL_SPLIT: ':'
+    REGISTRY_REMOTE: '{{ K8S_CLUSTER_REGISTRY_REMOTE }}'
+    REGISTRY_REMOTE_SPLIT: '{{ K8S_CLUSTER_REGISTRY_REMOTE_SPLIT }}'
+    REGISTRY_KUBELET_REPO: '{{ K8S_IMAGES['KUBELET']['NAME'] }}'
+    REGISTRY_KUBELET_VERSION: '{{ K8S_IMAGES['KUBELET']['VERSION'] }}'
+    REGISTRY_PAUSE_REPO: '{{ K8S_IMAGES['PAUSE']['NAME'] }}'
+    REGISTRY_PAUSE_VERSION: '{{ K8S_IMAGES['PAUSE']['VERSION'] }}'
+    REGISTRY_REGISTRY_REPO: '{{ K8S_IMAGES['REGISTRY']['NAME'] }}'
+    REGISTRY_REGISTRY_VERSION: '{{ K8S_IMAGES['REGISTRY']['VERSION'] }}'
+    REGISTRY_ETCD_REPO: '{{ K8S_IMAGES['ETCD']['NAME'] }}'
+    REGISTRY_ETCD_VERSION: '{{ K8S_IMAGES['ETCD']['VERSION'] }}'
+    REGISTRY_FLANNEL_REPO: '{{ K8S_IMAGES['FLANNEL']['NAME'] }}'
+    REGISTRY_FLANNEL_VERSION: '{{ K8S_IMAGES['FLANNEL']['VERSION'] }}'
+    REGISTRY_KUBE_ROUTER_REPO: '{{ K8S_IMAGES['KUBE-ROUTER']['NAME'] }}'
+    REGISTRY_KUBE_ROUTER_VERSION: '{{ K8S_IMAGES['KUBE-ROUTER']['VERSION'] }}'
+    REGISTRY_COREDNS_REPO: '{{ K8S_IMAGES['COREDNS']['NAME'] }}'
+    REGISTRY_COREDNS_VERSION: '{{ K8S_IMAGES['COREDNS']['VERSION'] }}'
+    REGISTRY_DASHBOARD_REPO: '{{ K8S_IMAGES['DASHBOARD']['NAME'] }}'
+    REGISTRY_DASHBOARD_VERSION: '{{ K8S_IMAGES['DASHBOARD']['VERSION'] }}'
+    REGISTRY_HEAPSTER_REPO: '{{ K8S_IMAGES['HEAPSTER']['NAME'] }}'
+    REGISTRY_HEAPSTER_VERSION: '{{ K8S_IMAGES['HEAPSTER']['VERSION'] }}'
+    REGISTRY_ADDON_RESIZER_REPO: '{{ K8S_IMAGES['ADDON-RESIZER']['NAME'] }}'
+    REGISTRY_ADDON_RESIZER_VERSION: '{{ K8S_IMAGES['ADDON-RESIZER']['VERSION'] }}'
+  script: imagecache.sh
+  when: K8S_CLUSTER_REGISTRY == inventory_hostname  

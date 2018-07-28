@@ -23,68 +23,68 @@
 - name: check need master-ssl.sh
   raw: stat /etc/kubernetes/ssl/master-ssl.sh
   register: need_ssl_master_sh
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
   ignore_errors: True  
 
 - name: copy master-ssl.sh
   copy: src=master-ssl.sh dest=/etc/kubernetes/ssl/master-ssl.sh mode=0755
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_ssl_master_sh | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_ssl_master_sh | failed
 
 - name: check need master-apiserver.cnf
   raw: stat /etc/kubernetes/ssl/master-apiserver.cnf
   register: need_ssl_apiserver_cnf
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
   ignore_errors: True  
 
 - name: template master-apiserver.cnf
   template: src=master-apiserver.cnf dest=/etc/kubernetes/ssl/master-apiserver.cnf 
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_ssl_apiserver_cnf | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_ssl_apiserver_cnf | failed
 
 - name: check need master-admin.cnf
   raw: stat /etc/kubernetes/ssl/master-admin.cnf
   register: need_ssl_admin_cnf
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
   ignore_errors: True  
 
 - name: template master-admin.cnf
   template: src=master-admin.cnf dest=/etc/kubernetes/ssl/master-admin.cnf 
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_ssl_admin_cnf | failed  
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_ssl_admin_cnf | failed  
 
 - name: Run master-ssl.sh
   script: master-ssl.sh
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
 
 # worker
 - name: check need worker-ssl.sh
   raw: stat /etc/kubernetes/ssl/worker-ssl.sh
   register: need_ssl_worker_sh
-  when: K8S_CLUSTER[inventory_hostname] == "worker"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "worker"
   ignore_errors: True  
 
 - name: copy worker-ssl.sh
   copy: src=worker-ssl.sh dest=/etc/kubernetes/ssl/worker-ssl.sh mode=0755
-  when: K8S_CLUSTER[inventory_hostname] == "worker" and need_ssl_worker_sh | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "worker" and need_ssl_worker_sh | failed
 
 - name: check need worker-kubelet.cnf
   raw: stat /etc/kubernetes/ssl/worker-kubelet.cnf
   register: need_ssl_kubelet_cnf
-  when: K8S_CLUSTER[inventory_hostname] == "worker"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "worker"
   ignore_errors: True  
 
 - name: template worker-kubelet.cnf
   template: src=worker-kubelet.cnf dest=/etc/kubernetes/ssl/worker-kubelet.cnf 
-  when: K8S_CLUSTER[inventory_hostname] == "worker" and need_ssl_kubelet_cnf | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "worker" and need_ssl_kubelet_cnf | failed
 
 - name: check need worker-kubeproxy.cnf
   raw: stat /etc/kubernetes/ssl/worker-kubeproxy.cnf
   register: need_ssl_kubeproxy_cnf
-  when: K8S_CLUSTER[inventory_hostname] == "worker"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "worker"
   ignore_errors: True  
 
 - name: template worker-kubeproxy.cnf
   template: src=worker-kubeproxy.cnf dest=/etc/kubernetes/ssl/worker-kubeproxy.cnf 
-  when: K8S_CLUSTER[inventory_hostname] == "worker" and need_ssl_kubeproxy_cnf | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "worker" and need_ssl_kubeproxy_cnf | failed
 
 - name: Run worker-ssl.sh
   script: worker-ssl.sh
-  when: K8S_CLUSTER[inventory_hostname] == "worker"  
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "worker"  

@@ -1,11 +1,11 @@
 ---
 - name: template master.yml to /usr/share/oem/coreos-install.yml
   template: src=master.yml dest=/usr/share/oem/coreos-install.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
 
 - name: template worker.yml to /usr/share/oem/coreos-install.yml
   template: src=worker.yml dest=/usr/share/oem/coreos-install.yml
-  when: K8S_CLUSTER[inventory_hostname] == "worker"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "worker"
 
 - name: check need ct
   raw: stat /opt/bin/ct

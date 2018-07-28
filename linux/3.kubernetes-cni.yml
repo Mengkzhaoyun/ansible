@@ -1,3 +1,0 @@
-- hosts: all
-  roles:
-  - wod.k8s-cni

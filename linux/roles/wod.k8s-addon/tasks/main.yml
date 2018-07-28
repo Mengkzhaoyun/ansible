@@ -5,68 +5,68 @@
   raw: stat /etc/kubernetes/addons/kube-system/rbac-admin.yml
   register: need_addons_rbac_admin
   ignore_errors: True  
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
 
 - name: template rbac-admin.yml
   template: src=rbac-admin.yml dest=/etc/kubernetes/addons/kube-system/rbac-admin.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_rbac_admin | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_rbac_admin | failed
 
 - name: kubectl create -f rbac-admin.yml
   raw: kubectl create -f /etc/kubernetes/addons/kube-system/rbac-admin.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_rbac_admin | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_rbac_admin | failed
 
 - name: check need coredns.yml
   raw: stat /etc/kubernetes/addons/kube-system/coredns.yml
   register: need_addons_dns
   ignore_errors: True  
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
 
 - name: template coredns.yml
   template: src=coredns.yml dest=/etc/kubernetes/addons/kube-system/coredns.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_dns | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_dns | failed
 
 - name: kubectl create -f coredns.yml
   raw: kubectl create -f /etc/kubernetes/addons/kube-system/coredns.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_dns | failed  
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_dns | failed  
 
 - name: check need dashboard.yml
   raw: stat /etc/kubernetes/addons/kube-system/dashboard.yml
   register: need_addons_dashboard
   ignore_errors: True  
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
 
 - name: template dashboard.yml
   template: src=dashboard.yml dest=/etc/kubernetes/addons/kube-system/dashboard.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_dashboard | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_dashboard | failed
 
 - name: kubectl create -f dashboard.yml
   raw: kubectl create -f /etc/kubernetes/addons/kube-system/dashboard.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_dashboard | failed  
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_dashboard | failed  
 
 - name: check need heapster.yml
   raw: stat /etc/kubernetes/addons/kube-system/heapster.yml
   register: need_addons_heapster
   ignore_errors: True  
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
 
 - name: template heapster.yml
   template: src=heapster.yml dest=/etc/kubernetes/addons/kube-system/heapster.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_heapster | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_heapster | failed
 
 - name: kubectl create -f heapster.yml
   raw: kubectl create -f /etc/kubernetes/addons/kube-system/heapster.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_heapster | failed  
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_heapster | failed  
 
 - name: check need influxdb-grafana.yml
   raw: stat /etc/kubernetes/addons/kube-system/influxdb-grafana.yml
   register: need_addons_influxdb_grafana
   ignore_errors: True  
-  when: K8S_CLUSTER[inventory_hostname] == "master"
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
 
 - name: template influxdb-grafana.yml
   template: src=influxdb-grafana.yml dest=/etc/kubernetes/addons/kube-system/influxdb-grafana.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_influxdb_grafana | failed
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_influxdb_grafana | failed
 
 - name: kubectl create -f influxdb-grafana.yml
   raw: kubectl create -f /etc/kubernetes/addons/kube-system/influxdb-grafana.yml
-  when: K8S_CLUSTER[inventory_hostname] == "master" and need_addons_influxdb_grafana | failed  
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_influxdb_grafana | failed  

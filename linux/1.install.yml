@@ -4,11 +4,11 @@
   - { role: wod.deps-ubuntu, when: "ansible_distribution == 'Ubuntu'" }
   - wod.timezone
   - wod.downloads
-  - wod.etcd
-  - wod.docker
+  - { role: wod.etcd, when: "inventory_hostname in K8S_CLUSTER_ETCD" }
   - wod.registry
   - wod.k8s-ssl
-  - wod.k8s-kubectl
-  - wod.k8s-master
-  - wod.k8s-worker
+  - { role: wod.k8s-master, when: "K8S_CLUSTER_ROLE[inventory_hostname] == 'master'" }
+  - { role: wod.k8s-worker, when: "K8S_CLUSTER_ROLE[inventory_hostname] == 'worker'" }
+  - { role: wod.k8s-kubectl, when: "K8S_CLUSTER_ROLE[inventory_hostname] == 'master'" }
   - wod.k8s-cni
+  - wod.k8s-addon
