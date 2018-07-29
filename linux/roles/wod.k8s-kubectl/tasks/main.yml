@@ -1,7 +1,6 @@
 - name: Run kubectl.sh
   environment:
     HTTP_SERVER: '{{ HTTP_SERVER }}'
-    DEP_KUBECTL: '{{ DEP_KUBECTL }}'
-    MASTER_SERVER: '{{ K8S_MASTER_HOST }}:{{ K8S_PORT }}'
+    TOOLS_KUBECTL: '{{ TOOLS_KUBECTL }}'
   script: kubectl.sh
   when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"

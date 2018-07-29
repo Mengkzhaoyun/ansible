@@ -1,3 +1,13 @@
+- name: Run prepare.sh
+  environment:
+    HTTP_SERVER: '{{ HTTP_SERVER }}'
+    RKT_ACI_KUBELET: '{{ RKT_ACI_KUBELET }}'
+    REGISTRY_REMOTE: '{{ K8S_CLUSTER_REGISTRY_REMOTE }}'
+    REGISTRY_REMOTE_SPLIT: '{{ K8S_CLUSTER_REGISTRY_REMOTE_SPLIT }}'
+    REGISTRY_KUBELET_REPO: '{{ K8S_IMAGES['KUBELET']['NAME'] }}'
+    REGISTRY_KUBELET_VERSION: '{{ K8S_IMAGES['KUBELET']['VERSION'] }}' 
+  script: prepare.sh
+
 - name: check need config/kubelet.yaml
   raw: stat /etc/kubernetes/config/kubelet.yaml
   register: need_config_kubelet
