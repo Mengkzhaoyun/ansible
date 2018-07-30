@@ -55,7 +55,15 @@ K8S_IMAGES: {
   "ADDON-RESIZER"{
     "NAME": "addon-resizer",
     "VERSION": "1.8.3"
-  }
+  },
+  "KUBECTL"{
+    "NAME": "kubectl",
+    "VERSION": "latest"
+  },
+  "ETCDCTL"{
+    "NAME": "etcdctl",
+    "VERSION": "latest"
+  }  
 }
 
 # rkt images
@@ -66,8 +74,8 @@ RKT_ACI_KUBELET: "{{ K8S_IMAGES['KUBELET']['NAME'] }}-{{ K8S_IMAGES['KUBELET']['
 
 # ctl tools
 RKT_ACI_REGISTRY_DATA: "registry-data-{{ K8S_IMAGES['KUBELET']['VERSION'] }}"
-TOOLS_KUBECTL: "kubectl-{{ K8S_IMAGES['KUBELET']['VERSION'] }}"
-TOOLS_ETCDCTL: "etcdctl-{{ K8S_IMAGES['ETCD']['VERSION']-linux-amd64"
+TOOLS_KUBECTL: "kubectl"
+TOOLS_ETCDCTL: "etcdctl"
 
 # k8s adv option.
 NETWORK_PLUGIN: cni 

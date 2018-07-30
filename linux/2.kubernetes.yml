@@ -1,0 +1,4 @@
+- hosts: all
+  roles:
+  - wod.k8s-cni
+  - wod.k8s-addon
