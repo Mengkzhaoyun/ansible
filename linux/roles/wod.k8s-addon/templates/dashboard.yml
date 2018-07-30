@@ -80,7 +80,7 @@ spec:
       priorityClassName: system-cluster-critical
       containers:
       - name: kubernetes-dashboard
-        image: {{ REGISTRY_SOURCE_LOCAL }}kubernetes-dashboard-amd64:v1.8.3
+        image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["DASHBOARD"]["NAME"] }}:{{ K8S_IMAGES["DASHBOARD"]["VERSION"] }}
         resources:
           limits:
             cpu: 100m

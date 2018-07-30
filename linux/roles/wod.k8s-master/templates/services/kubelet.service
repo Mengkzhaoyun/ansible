@@ -25,7 +25,7 @@ ExecStartPre=-/usr/bin/rkt rm --uuid-file=/etc/kubernetes/data/kubelet-pod.uuid
 
 ExecStart=/etc/kubernetes/scripts/kubelet.sh \
   --kubeconfig=/etc/kubernetes/config/kubelet.yaml \
-  --register-node=true \
+  --register-node=false \
   --allow-privileged=true \
   --pod-manifest-path=/etc/kubernetes/manifests \
   --hostname-override={{ ansible_hostname }} \

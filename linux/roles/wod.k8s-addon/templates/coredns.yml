@@ -94,7 +94,7 @@ spec:
           operator: "Exists"
       containers:
       - name: coredns
-        image: {{ REGISTRY_SOURCE_LOCAL }}coredns:1.1.0
+        image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["COREDNS"]["NAME"] }}:{{ K8S_IMAGES["COREDNS"]["VERSION"] }}
         imagePullPolicy: IfNotPresent
         resources:
           limits:

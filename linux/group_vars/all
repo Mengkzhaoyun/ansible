@@ -24,43 +24,47 @@ K8S_IMAGES: {
     "NAME": "pause",
     "VERSION": "3.1"
   },
-  "REGISTRY"{
+  "REGISTRY":{
     "NAME": "registry",
     "VERSION": "2.6.2"
   },
-  "ETCD"{
+  "ETCD":{
     "NAME": "etcd",
     "VERSION": "v3.3.9"
   },
-  "FLANNEL"{
+  "FLANNEL":{
     "NAME": "flannel",
     "VERSION": "v0.10.0"
   },
-  "KUBE-ROUTER"{
+  "KUBE-ROUTER":{
     "NAME": "kube-router",
-    "VERSION": "v0.1.0"
+    "VERSION": "v0.2.0-beta.9"
   },
-  "COREDNS"{
+  "BUSYBOX":{
+    "NAME": "busybox",
+    "VERSION": "1.27.2"
+  },  
+  "COREDNS":{
     "NAME": "coredns",
     "VERSION": "1.2.0"
   },
-  "DASHBOARD"{
+  "DASHBOARD":{
     "NAME": "kubernetes-dashboard-amd64",
     "VERSION": "v1.8.3"
   },
-  "HEAPSTER"{
+  "HEAPSTER":{
     "NAME": "heapster-amd64",
     "VERSION": "v1.5.4"
   },
-  "ADDON-RESIZER"{
+  "ADDON-RESIZER":{
     "NAME": "addon-resizer",
     "VERSION": "1.8.3"
   },
-  "KUBECTL"{
+  "KUBECTL":{
     "NAME": "kubectl",
     "VERSION": "latest"
   },
-  "ETCDCTL"{
+  "ETCDCTL":{
     "NAME": "etcdctl",
     "VERSION": "latest"
   }  

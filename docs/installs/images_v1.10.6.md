@@ -27,14 +27,14 @@ docker tag quay.io/coreos/flannel:v0.10.0 hub.c.163.com/mengkzhaoyun/k8s:flannel
 docker push hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0
 
 # kube-router
-docker pull cloudnativelabs/kube-router:v0.1.0 ;`
-docker tag cloudnativelabs/kube-router:v0.1.0 hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.1.0 ;`
-docker push hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.1.0
+docker pull cloudnativelabs/kube-router:v0.2.0-beta.9 ;`
+docker tag cloudnativelabs/kube-router:v0.2.0-beta.9 hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.2.0-beta.9 ;`
+docker push hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.2.0-beta.9
 
 # busybox
 docker pull k8s.gcr.io/busybox:1.27.2 ;`
 docker tag k8s.gcr.io/busybox:1.27.2 hub.c.163.com/mengkzhaoyun/k8s:busybox-1.27.2 ;`
-docker push hub.c.163.com/mengkzhaoyun/k8s:busybox-1.27.2 
+docker push hub.c.163.com/mengkzhaoyun/k8s:busybox-1.27.2
 
 # coredns
 docker pull coredns/coredns:1.2.0 ;`

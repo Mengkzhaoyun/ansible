@@ -3,7 +3,7 @@
   - { role: wod.deps-centos, when: "ansible_distribution == 'CentOS'" }
   - { role: wod.deps-ubuntu, when: "ansible_distribution == 'Ubuntu'" }
   - wod.timezone
-  - { role: wod.etcd, when: "inventory_hostname in K8S_CLUSTER_ETCD" }
+  - { role: wod.etcd, when: "K8S_CLUSTER_ETCD_ROLE[inventory_hostname] == 'etcd'" }
   - wod.registry
   - wod.k8s-ssl
   - { role: wod.k8s-master, when: "K8S_CLUSTER_ROLE[inventory_hostname] == 'master'" }

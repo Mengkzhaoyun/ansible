@@ -55,18 +55,4 @@
 
 - name: kubectl create -f heapster.yml
   raw: kubectl create -f /etc/kubernetes/addons/kube-system/heapster.yml
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_heapster | failed  
-
-- name: check need influxdb-grafana.yml
-  raw: stat /etc/kubernetes/addons/kube-system/influxdb-grafana.yml
-  register: need_addons_influxdb_grafana
-  ignore_errors: True  
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
-
-- name: template influxdb-grafana.yml
-  template: src=influxdb-grafana.yml dest=/etc/kubernetes/addons/kube-system/influxdb-grafana.yml
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_influxdb_grafana | failed
-
-- name: kubectl create -f influxdb-grafana.yml
-  raw: kubectl create -f /etc/kubernetes/addons/kube-system/influxdb-grafana.yml
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_influxdb_grafana | failed  
+  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and need_addons_heapster | failed 

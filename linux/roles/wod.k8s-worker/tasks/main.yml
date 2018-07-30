@@ -4,12 +4,12 @@
     RKT_ACI_KUBELET: '{{ RKT_ACI_KUBELET }}'
     REGISTRY_REMOTE: '{{ K8S_CLUSTER_REGISTRY_REMOTE }}'
     REGISTRY_REMOTE_SPLIT: '{{ K8S_CLUSTER_REGISTRY_REMOTE_SPLIT }}'
-    REGISTRY_KUBELET_REPO: '{{ K8S_IMAGES['KUBELET']['NAME'] }}'
-    REGISTRY_KUBELET_VERSION: '{{ K8S_IMAGES['KUBELET']['VERSION'] }}' 
-  script: prepare.sh
+    REGISTRY_KUBELET_REPO: '{{ K8S_IMAGES["KUBELET"]["NAME"] }}'
+    REGISTRY_KUBELET_VERSION: '{{ K8S_IMAGES["KUBELET"]["VERSION"] }}' 
+  script: scripts/prepare.sh
 
 - name: check need config/kubelet.yaml
-  raw: stat /etc/kubernetes/config/kubelet.yaml
+  raw: mkdir -p /etc/kubernetes/config && stat /etc/kubernetes/config/kubelet.yaml
   register: need_config_kubelet
   ignore_errors: True  
 
@@ -35,15 +35,15 @@
   copy: src=scripts/kubelet.sh dest=/etc/kubernetes/scripts/kubelet.sh mode=0755
   when: need_scripts_kubelet | failed
 
-- name: check need services/kubelet.service
-  raw: stat /etc/kubernetes/services/kubelet.service
+- name: check need services/k8s-kubelet.service
+  raw: stat /etc/kubernetes/services/k8s-kubelet.service
   register: need_services_kubelet
   ignore_errors: True
 
-- name: template services/kubelet.service
-  template: src=services/kubelet.service dest=/etc/systemd/system/kubelet.service
+- name: template services/k8s-kubelet.service
+  template: src=services/kubelet.service dest=/etc/systemd/system/k8s-kubelet.service
   when: need_services_kubelet | failed
 
-- name: start services kubelet.service
-  raw: systemctl daemon-reload && systemctl enable kubelet.service && systemctl start kubelet.service
+- name: start services k8s-kubelet.service
+  raw: systemctl daemon-reload && systemctl enable k8s-kubelet.service && systemctl start k8s-kubelet.service
   when: need_services_kubelet | failed
