@@ -3,13 +3,13 @@
     HTTP_SERVER: '{{ HTTP_SERVER }}'
     RKT_ACI_ETCD: '{{ RKT_ACI_ETCD }}'
     TOOLS_ETCDCTL: '{{ TOOLS_ETCDCTL }}'
-    REGISTRY_REMOTE: '{{ K8S_CLUSTER_REGISTRY_REMOTE }}'
-    REGISTRY_REMOTE_SPLIT: '{{ K8S_CLUSTER_REGISTRY_REMOTE_SPLIT }}'
+    REGISTRY_LOCAL: '{{ REGISTRY_SOURCE_LOCAL }}'
+    REGISTRY_LOCAL_SPLIT: ":"
     REGISTRY_ETCD_REPO: '{{ K8S_IMAGES["ETCD"]["NAME"] }}'
     REGISTRY_ETCD_VERSION: '{{ K8S_IMAGES["ETCD"]["VERSION"] }}'    
     REGISTRY_ETCDCTL_REPO: '{{ K8S_IMAGES["ETCDCTL"]["NAME"] }}'
     REGISTRY_ETCDCTL_VERSION: '{{ K8S_IMAGES["ETCDCTL"]["VERSION"] }}'       
-  script: prepare.sh
+  script: prepare.sh  
 
 - name: check need /etc/kubernetes/scripts/etcd.sh
   raw: stat /etc/kubernetes/scripts/etcd.sh

@@ -23,6 +23,7 @@ if ! [ -x "$(command -v kubectl)" ]; then
     rm -rf /etc/kubernetes/downloads/$TOOLS_KUBECTL.tgz 
   fi
   chmod 0744 /etc/kubernetes/downloads/$TOOLS_KUBECTL
+  rm -rf /opt/bin/kubectl
   ln -s /etc/kubernetes/downloads/$TOOLS_KUBECTL /opt/bin/kubectl
   /opt/bin/kubectl config set-cluster kubernetes --server=http://127.0.0.1:8080
   /opt/bin/kubectl config set-context kubernetes --cluster=kubernetes

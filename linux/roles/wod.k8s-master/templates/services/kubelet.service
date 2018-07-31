@@ -25,17 +25,17 @@ ExecStartPre=-/usr/bin/rkt rm --uuid-file=/etc/kubernetes/data/kubelet-pod.uuid
 
 ExecStart=/etc/kubernetes/scripts/kubelet.sh \
   --kubeconfig=/etc/kubernetes/config/kubelet.yaml \
-  --register-node=false \
+  --register-node=true \
   --allow-privileged=true \
   --pod-manifest-path=/etc/kubernetes/manifests \
-  --hostname-override={{ ansible_hostname }} \
+  --hostname-override={{ HOST_IP }} \
   --cluster-dns={{ DNS_SERVICE_IP }} \
   --cluster-domain=cluster.local \
   --hairpin-mode promiscuous-bridge \
   --network-plugin=cni \
   --cni-conf-dir=/etc/cni/net.d \
   --cni-bin-dir=/opt/cni/bin \
-  {% if ansible_distribution != 'Ubuntu' %} 
+  {% if ansible_distribution != 'Ubuntu' %}
   --cgroup-driver=systemd \
   --runtime-cgroups=/systemd/system.slice \
   --kubelet-cgroups=/systemd/system.slice \

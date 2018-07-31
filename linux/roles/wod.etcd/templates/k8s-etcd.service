@@ -25,10 +25,10 @@ Environment="ETCD_IMAGE_ARGS=--name=k8s-etcd"
 ExecStart=/etc/kubernetes/scripts/etcd.sh \
   --name={{ ansible_hostname }} \
   --initial-cluster-token=spacesystech.com \
-  --initial-cluster={% for host in K8S_CLUSTER_ETCD %}{{ host }}=http://{{ hostvars[host]['ansible_hostname'] }}:2380{% if loop.last %}{% else %},{% endif %}{% endfor %} \
+  --initial-cluster={% for host in K8S_CLUSTER_ETCD %}{{ host }}=http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:2380{% if loop.last %}{% else %},{% endif %}{% endfor %} \
   --initial-cluster-state=new \
-  --advertise-client-urls=http://{{ ansible_hostname }}:2379 \
-  --initial-advertise-peer-urls=http://{{ ansible_hostname }}:2380 \
+  --advertise-client-urls=http://{{ HOST_IP }}:2379 \
+  --initial-advertise-peer-urls=http://{{ HOST_IP }}:2380 \
   --listen-client-urls=http://{{ HOST_IP }}:2379,http://127.0.0.1:2379 \
   --listen-peer-urls=http://{{ HOST_IP }}:2380
 

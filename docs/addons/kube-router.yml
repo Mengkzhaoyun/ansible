@@ -49,9 +49,11 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
     spec:
+      serviceAccountName: kube-router
+      serviceAccount: kube-router    
       containers:
       - name: kube-router
-        image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["KUBE-ROUTER"]["NAME"] }}:{{ K8S_IMAGES["KUBE-ROUTER"]["VERSION"] }}
+        image: hub.c.163.com/mengkzhaoyun/k8s:kube-router-v0.2.0-beta.9
         args:
         - --run-router=true
         - --run-firewall=true
@@ -91,7 +93,7 @@ spec:
           readOnly: true                
       initContainers:
       - name: install-cni
-        image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["BUSYBOX"]["NAME"] }}:{{ K8S_IMAGES["BUSYBOX"]["VERSION"] }}
+        image: reg.local:5000/k8s/busybox:1.27.2
         command:
         - /bin/sh
         - -c
@@ -130,4 +132,58 @@ spec:
           path: /etc/kubernetes/config/kubeproxy.yaml
       - name: kubessl
         hostPath:
-          path: /etc/kubernetes/ssl          
+          path: /etc/kubernetes/ssl
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kube-router
+  namespace: kube-system
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: kube-router
+  namespace: kube-system
+rules:
+  - apiGroups:
+    - ""
+    resources:
+      - namespaces
+      - pods
+      - services
+      - nodes
+      - endpoints
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+    - "networking.k8s.io"
+    resources:
+      - networkpolicies
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+    - extensions
+    resources:
+      - networkpolicies
+    verbs:
+      - get
+      - list
+      - watch
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: kube-router
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kube-router
+subjects:
+- kind: ServiceAccount
+  name: kube-router
+  namespace: kube-system          
