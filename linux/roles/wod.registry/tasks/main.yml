@@ -50,7 +50,7 @@
 
 - name: start k8s-registry.service
   raw: systemctl daemon-reload && systemctl enable k8s-registry.service && systemctl start k8s-registry.service
-  when: need_services_registry | failed
+  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname and need_services_registry | failed
 
 - name: Run cache.sh
   environment:
