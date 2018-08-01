@@ -2,7 +2,7 @@
 
 set -e
 
-HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}"
 RKT_ACI_KUBELET="${RKT_ACI_KUBELET:-hyperkube-v1.10.6}"
 REGISTRY_LOCAL="${REGISTRY_LOCAL:-}"
 REGISTRY_LOCAL_SPLIT="${REGISTRY_LOCAL_SPLIT:-}"

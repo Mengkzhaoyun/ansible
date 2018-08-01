@@ -2,7 +2,7 @@
 
 set -e
 
-HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}"
 RKT_ACI_ETCD="${RKT_ACI_ETCD:-etcd-v3.2.0}"
 TOOLS_ETCDCTL="${TOOLS_ETCDCTL:-etcdctl-v3.2.10-linux-amd64}"
 REGISTRY_LOCAL="${REGISTRY_LOCAL:-}"

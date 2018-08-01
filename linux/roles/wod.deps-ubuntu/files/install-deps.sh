@@ -2,7 +2,7 @@
 
 set -e
 
-HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}"
 DEP_LIBLTDL7="${DEP_LIBLTDL7:-libltdl7_2.4.6-0.1_amd64}"
 DEP_IPTABLE="${DEP_IPTABLE:-iptables_1.6.0-2ubuntu3_amd64}"
 DEP_DOCKER="${DEP_DOCKER:-docker-engine_1.13.1-0~ubuntu-xenial_amd64}"

@@ -2,7 +2,7 @@
 
 set -e  
 
-HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}"
 YUM_SERVER="${YUM_SERVER:-https://gitlab.ispacesys.cn/source/cig/raw/master/centos}"
 YUM_RKT="${YUM_RKT:-rkt_1.29.0-1_amd64.rpm}"
 

@@ -12,17 +12,16 @@ if [ -x "$(command -v python)" ]; then
   exit 0 
 fi
 
-HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s/latest}" 
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}" 
 PYPY_VERSION=5.1.0
 
 if [[ -e $HOME/pypy-$PYPY_VERSION-linux64.tar.bz2 ]]; then
   tar -xjf $HOME/pypy-$PYPY_VERSION-linux64.tar.bz2
   rm -rf $HOME/pypy-$PYPY_VERSION-linux64.tar.bz2
 else
-  # wget -O - $HTTP_SERVER/pypy-$PYPY_VERSION-linux64.tar.bz2 |tar -xjf -
-  curl $HTTP_SERVER/pypy-$PYPY_VERSION-linux64.tgz > $HOME/pypy-$PYPY_VERSION-linux64.tgz 
-  tar -xzf $HOME/pypy-$PYPY_VERSION-linux64.tgz
-  rm -rf $HOME/pypy-$PYPY_VERSION-linux64.tgz
+  curl $HTTP_SERVER/pypy-$PYPY_VERSION-linux64.tar.bz2 > $HOME/pypy-$PYPY_VERSION-linux64.tar.bz2 
+  tar -xjf $HOME/pypy-$PYPY_VERSION-linux64.tar.bz2
+  rm -rf $HOME/pypy-$PYPY_VERSION-linux64.tar.bz2
 fi
 
 mv -n pypy-$PYPY_VERSION-linux64 pypy
