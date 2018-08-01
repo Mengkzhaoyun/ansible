@@ -1,0 +1,1 @@
+{ "insecure-registries":["{{ REGISTRY_LOCAL_HOST }}:5000"] }

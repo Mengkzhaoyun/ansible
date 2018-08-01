@@ -3,7 +3,6 @@
     K8S_HOST: '{{ hostvars[item.key]["ansible_default_ipv4"]["address"] }}'
     K8S_ROLE: '{{ item.value }}'
   script: label.sh
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
   with_dict: '{{ K8S_CLUSTER_ROLE }}'
   register: label_node
   until: label_node.rc == 0

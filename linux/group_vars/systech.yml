@@ -3,21 +3,19 @@
 INSTALL_KEYS: ["ansible","admin"]
 
 # registry options
-REGISTRY_LOCAL_HOSTNAME: "systech17"
-REGISTRY_LOCAL_IP: "{{ hostvars['systech17']['ansible_default_ipv4']['address'] }}"
+REGISTRY_LOCAL_HOSTNAME: "systech14"
+REGISTRY_LOCAL_IP: "{{ hostvars['systech14']['ansible_default_ipv4']['address'] }}"
 
 # etcd options
-ETCD_CLUSTER: ["systech17","systech18","systech19"]
+ETCD_CLUSTER: ["systech14","systech15","systech16"]
 ETCD_CLUSTER_ROLE: {
-  "systech17": "etcd",
-  "systech18": "etcd",
-  "systech19": "etcd"
+  "systech14": "etcd",
+  "systech15": "etcd",
+  "systech16": "etcd"
 }
 
 # k8s option
 K8S_CLUSTER_ROLE: {
-   "systech17": "master",
-   "systech18": "worker",
-   "systech19": "worker"
+  "systech14": "master"
 }
-K8S_MASTER_IP: "{{ hostvars['systech17']['ansible_default_ipv4']['address'] }}"
+K8S_MASTER_IP: "{{ hostvars['systech14']['ansible_default_ipv4']['address'] }}"

@@ -1,20 +1,4 @@
 ---
-- name: mkdir -p /etc/docker
-  raw: mkdir -p /etc/docker
-
-- name: check need /etc/docker/daemon.json
-  raw: stat /etc/docker/daemon.json
-  register: need_docker_daemon
-  ignore_errors: True
-
-- name: template /etc/docker/daemon.json
-  template: src=daemon.json dest=/etc/docker/daemon.json mode=0644
-  when: need_docker_daemon | failed
-
-- name: start docker.service
-  raw: systemctl daemon-reload && systemctl enable docker && systemctl restart docker
-  when: need_docker_daemon | failed
-
 # install registry
 - name: Run prepare.sh
   environment:
@@ -26,17 +10,15 @@
     REGISTRY_REGISTRY_REPO: '{{ K8S_IMAGES["REGISTRY"]["NAME"] }}'
     REGISTRY_REGISTRY_VERSION: '{{ K8S_IMAGES["REGISTRY"]["VERSION"] }}'    
   script: prepare.sh
-  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname
 
 - name: check need prepare.sh
   raw: stat /etc/kubernetes/scripts/prepare.sh
   register: need_scripts_prepare
-  ignore_errors: True  
-  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname
+  ignore_errors: True
 
 - name: copy prepare.sh
   copy: src=prepare.sh dest=/etc/kubernetes/scripts/prepare.sh mode=0755
-  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname and need_scripts_prepare | failed  
+  when: need_scripts_prepare | failed  
 
 - name: check need k8s-registry.service
   raw: stat /etc/systemd/system/k8s-registry.service
@@ -46,11 +28,11 @@
 
 - name: template k8s-registry.service
   template: src=k8s-registry.service dest=/etc/systemd/system/k8s-registry.service mode=0644
-  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname and need_services_registry | failed
+  when: need_services_registry | failed
 
 - name: start k8s-registry.service
   raw: systemctl daemon-reload && systemctl enable k8s-registry.service && systemctl start k8s-registry.service
-  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname and need_services_registry | failed
+  when: need_services_registry | failed
 
 - name: Run cache.sh
   environment:
@@ -61,5 +43,4 @@
     ITEM_REPO: '{{ item.value.NAME }}'
     ITEM_VERSION: '{{ item.value.VERSION }}'
   script: cache.sh
-  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname
   with_dict: '{{ K8S_IMAGES }}'

@@ -1,14 +1,29 @@
 - hosts: all
+  gather_facts: False
   roles:
-  - { role: wod.deps-centos, when: "ansible_distribution == 'CentOS'" }
-  - { role: wod.deps-ubuntu, when: "ansible_distribution == 'Ubuntu'" }
-  - wod.timezone
-  - wod.registry  
-  - { role: wod.etcd, when: "ETCD_CLUSTER_ROLE[inventory_hostname] == 'etcd'" }
-  - wod.k8s-ssl
-  - { role: wod.k8s-master, when: "K8S_CLUSTER_ROLE[inventory_hostname] == 'master'" }
-  - { role: wod.k8s-kubectl, when: "K8S_CLUSTER_ROLE[inventory_hostname] == 'master'" }  
-  - { role: wod.k8s-worker, when: "K8S_CLUSTER_ROLE[inventory_hostname] != 'master'" }
-  - wod.k8s-label
-  - wod.k8s-cni
-  - wod.k8s-addon
+    - wod.python-bootstrap
+
+- hosts: all
+  roles:
+  - role: wod.deps-centos
+    when: "ansible_distribution == 'CentOS'"
+  - role: wod.deps-ubuntu
+    when: "ansible_distribution == 'Ubuntu'"
+  - role: wod.timezone
+  - role: wod.insecure-registry
+  - role: wod.registry
+    when: "inventory_hostname == REGISTRY_LOCAL_HOSTNAME"
+  - role: wod.etcd
+    when: "ETCD_CLUSTER_ROLE[inventory_hostname] is defined"
+  - role: wod.k8s-ssl
+  - role: wod.k8s-master
+    when: "K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == 'master'"
+  - role: wod.k8s-kubectl
+    when: "K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == 'master'"
+  - role: wod.k8s-worker
+    when: "K8S_CLUSTER_ROLE[inventory_hostname] is not defined or K8S_CLUSTER_ROLE[inventory_hostname] != 'master'"
+  - role: wod.k8s-label
+    when: "K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == 'master'"  
+  - role: wod.k8s-cni
+  - role: wod.k8s-addon
+    when: "K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == 'master'"
