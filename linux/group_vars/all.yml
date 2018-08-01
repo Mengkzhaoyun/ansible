@@ -3,10 +3,10 @@
 HOST_IP: "{{ ansible_default_ipv4['address'] }}"
 
 # /root/.ssh
-SSH_KEYS: {
-  "ansible":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDCJNFRbNc0SsHa/+mWB71z7SLPH9rQpwEqGbRo7q466a97h3bejNav9wc9AKmepHPfRw7DJfSmWO3lGBya0QkXMYXVvtfcWPvZZDlar5JK/ZsC8HGOpwVLdd1uUfyPu2qM0sjRNA/Ty8PDMkS5dSyZAJNlxUAILRpepkYoT8jhrw== ansible@space.docker",
-  "admin":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCrQGlgFB4TGjJCNk3mJEjgId2Td054T642kLzZ57ztotWzgZsxXlVYb8U9LG0UsQ22luRd04hIU4mplhHh6vKuVtRq34I7ZXJVDj0d9A22xuzpc4Poe7oBDtiBUL3eO+SPkjlN/EGeTyHk4eAxAVvDe59RJ2g89h5oyZFgTaWpAQ== admin@space.docker"
-}
+SSH_KEYS: 
+  ansible: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDCJNFRbNc0SsHa/+mWB71z7SLPH9rQpwEqGbRo7q466a97h3bejNav9wc9AKmepHPfRw7DJfSmWO3lGBya0QkXMYXVvtfcWPvZZDlar5JK/ZsC8HGOpwVLdd1uUfyPu2qM0sjRNA/Ty8PDMkS5dSyZAJNlxUAILRpepkYoT8jhrw== ansible@space.docker",
+  admin: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCrQGlgFB4TGjJCNk3mJEjgId2Td054T642kLzZ57ztotWzgZsxXlVYb8U9LG0UsQ22luRd04hIU4mplhHh6vKuVtRq34I7ZXJVDj0d9A22xuzpc4Poe7oBDtiBUL3eO+SPkjlN/EGeTyHk4eAxAVvDe59RJ2g89h5oyZFgTaWpAQ== admin@space.docker"
+
 
 NETWORK_ONLINE: "TRUE"
 
@@ -96,13 +96,14 @@ K8S_ADMIN_PWD: abc2018
 K8S_MASTER_DOMAIN: xx.ispacesys.cn
 
 # ubuntu
-DEP_LIBLTDL7: libltdl7_2.4.6-0.1_amd64
-DEP_IPTABLE: iptables_1.6.0-2ubuntu3_amd64
-DEP_DOCKER: docker-engine_1.13.1-0~ubuntu-xenial_amd64
-DEP_RKT: rkt_1.29.0-1_amd64
+DEB_LIBLTDL7: libltdl7_2.4.6-0.1_amd64
+DEB_IPTABLE: iptables_1.6.0-2ubuntu3_amd64
+DEB_DOCKER: docker-engine_1.13.1-0~ubuntu-xenial_amd64
+DEB_RKT: rkt_1.29.0-1_amd64
 
 # centos
 YUM_RKT: rkt-1.29.0-1.x86_64.rpm
 
 # other
 HTTP_SERVER: 'http://k8s.spacecig.com/softs/k8s'
+YUM_SERVER: 'http://k8s.spacecig.com/softs/centos'

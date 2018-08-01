@@ -1,15 +1,18 @@
 - hosts: all
   gather_facts: False
   roles:
-    - wod.python-bootstrap
+    - wod.python
 
 - hosts: all
   roles:
+  - role: wod.timezone
   - role: wod.deps-centos
     when: "ansible_distribution == 'CentOS'"
   - role: wod.deps-ubuntu
     when: "ansible_distribution == 'Ubuntu'"
-  - role: wod.timezone
+  # - role: wod.docker
+  # - role: wod.rkt
+  # - role: wod.sys  
   - role: wod.insecure-registry
   - role: wod.registry
     when: "inventory_hostname == REGISTRY_LOCAL_HOSTNAME"

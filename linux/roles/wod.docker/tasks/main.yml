@@ -1,0 +1,8 @@
+---
+# install docker
+- name: Run install-os.sh
+  when: 
+  - "HTTP_SERVER is defined"
+  environment:
+    HTTP_SERVER: '{{ HTTP_SERVER }}'
+  script: install-{{ ansible_distribution }}.sh

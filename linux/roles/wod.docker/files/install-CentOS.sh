@@ -23,12 +23,3 @@ gpgcheck=0
 EOF
   yum install -y docker
 fi
-
-if ! [ -x "$(command -v rkt)" ]; then
-  if ! [[ -e /etc/kubernetes/downloads/$YUM_RKT ]]; then
-    curl $HTTP_SERVER/$YUM_RKT.tgz > /etc/kubernetes/downloads/$YUM_RKT.tgz
-    cd /etc/kubernetes/downloads && tar -xzf /etc/kubernetes/downloads/$YUM_RKT.tgz
-    rm -rf /etc/kubernetes/downloads/$YUM_RKT.tgz    
-  fi
-  rpm -Uvh /etc/kubernetes/downloads/$YUM_RKT
-fi 

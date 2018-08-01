@@ -1,0 +1,6 @@
+---
+# install rkt
+- name: Run install-os.sh
+  environment:
+    HTTP_SERVER: '{{ HTTP_SERVER }}'
+  script: install-{{ ansible_distribution }}.sh  

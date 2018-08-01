@@ -2,18 +2,17 @@
 
 set -e 
   
-cd
- 
-if [[ -e $HOME/.bootstrapped ]]; then
-  exit 0 
-fi
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}" 
+PYPY_VERSION=5.1.0
 
 if [ -x "$(command -v python)" ]; then
   exit 0 
 fi
 
-HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}" 
-PYPY_VERSION=5.1.0
+if [[ -e $HOME/bin/python ]]; then
+  ln -s $HOME/bin/python /usr/bin/python
+  exit 0 
+fi
 
 if [[ -e $HOME/pypy-$PYPY_VERSION-linux64.tar.bz2 ]]; then
   tar -xjf $HOME/pypy-$PYPY_VERSION-linux64.tar.bz2
@@ -45,4 +44,10 @@ EOF
 chmod +x $HOME/bin/python
 $HOME/bin/python --version
 
+rm -rf /usr/bin/python
+
+ln -s $HOME/bin/python /usr/bin/python
+
 touch $HOME/.bootstrapped
+
+

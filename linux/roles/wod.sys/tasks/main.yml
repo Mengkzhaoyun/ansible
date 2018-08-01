@@ -1,0 +1,8 @@
+---
+# install sys
+- name: sys.sh
+  script: sys.sh  
+
+- name: centos.sh
+  when: "ansible_distribution == 'CentOS'"
+  script: centos.sh
