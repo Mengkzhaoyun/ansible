@@ -25,4 +25,4 @@ fi
 
 docker rm $(docker ps -a | awk '{print $1}') -f
 
-rm -rf /etc/kubernetes
+rm -rf /etc/kubernetes /etc/cni/net.d /opt/cni/bin
