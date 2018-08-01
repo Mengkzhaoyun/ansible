@@ -1,0 +1,9 @@
+- hosts: all
+  roles:
+  - { role: wod.deps-centos, when: "ansible_distribution == 'CentOS'" }
+  - { role: wod.deps-ubuntu, when: "ansible_distribution == 'Ubuntu'" }
+  - wod.timezone
+  - wod.k8s-ssl
+  - { role: wod.k8s-worker, when: "K8S_CLUSTER_ROLE[inventory_hostname] != 'master'" }
+  - wod.k8s-label
+  - wod.k8s-cni
