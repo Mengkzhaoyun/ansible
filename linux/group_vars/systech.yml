@@ -2,13 +2,17 @@
 # system options
 INSTALL_KEYS: ["ansible","admin"]
 
+# registry options
+REGISTRY_LOCAL_HOSTNAME: "systech17"
+REGISTRY_LOCAL_IP: "{{ hostvars['systech17']['ansible_default_ipv4']['address'] }}"
+
 # etcd options
 ETCD_CLUSTER: ["systech17","systech18","systech19"]
-
-# registry options
-REGISTRY_LOCAL_HOST: "systech17"
-REGISTRY_REMOTE: "hub.c.163.com/mengkzhaoyun/k8s:"
-REGISTRY_REMOTE_SPLIT: "-"
+ETCD_CLUSTER_ROLE: {
+  "systech17": "etcd",
+  "systech18": "etcd",
+  "systech19": "etcd"
+}
 
 # k8s option
 K8S_CLUSTER_ROLE: {
@@ -16,15 +20,4 @@ K8S_CLUSTER_ROLE: {
    "systech18": "worker",
    "systech19": "worker"
 }
-K8S_PORT: 6443
-K8S_ADMIN_PWD: abc2018
-K8S_MASTER_IP: 172.16.11.248
-K8S_MASTER_DOMAIN: xx.ispacesys.cn
-
-K8S_NETWORK_PLUGIN: "flannel"
-
-# other options
-HTTP_SERVER: 'http://172.16.11.235/k8s'
-
-# centos options
-YUM_SERVER: 'http://172.16.11.235/centos'
+K8S_MASTER_IP: "{{ hostvars['systech17']['ansible_default_ipv4']['address'] }}"
