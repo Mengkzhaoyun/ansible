@@ -6,21 +6,30 @@
 
 - name: mkdir -p /etc/kubernetes/addons/kube-system
   raw: mkdir -p /etc/kubernetes/addons/kube-system
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master"
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == "master"
 
 - name: check need kube-router.yml
   raw: stat /etc/kubernetes/addons/kube-system/kube-router.yml
   register: need_addons_kube_router
   ignore_errors: True  
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and K8S_NETWORK_PLUGIN == "kube-router"  
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == "master"
+  - K8S_NETWORK_PLUGIN == "kube-router"  
 
 - name: template kube-router.yml
   template: src=kube-router.yml dest=/etc/kubernetes/addons/kube-system/kube-router.yml
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and K8S_NETWORK_PLUGIN == "kube-router" and need_addons_kube_router | failed
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == "master"
+  - K8S_NETWORK_PLUGIN == "kube-router" 
+  - need_addons_kube_router | failed
 
 - name: kubectl create -f kube-router.yml
   raw: kubectl create -f /etc/kubernetes/addons/kube-system/kube-router.yml
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and K8S_NETWORK_PLUGIN == "kube-router" and need_addons_kube_router | failed
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == "master"
+  - K8S_NETWORK_PLUGIN == "kube-router" 
+  - need_addons_kube_router | failed
   register: create_result_kube_router
   until: create_result_kube_router.rc == 0
   retries: 5
@@ -34,26 +43,40 @@
   ignore_errors: True
 
 - name: template kube-proxy.yml to master
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and K8S_NETWORK_PLUGIN == "flannel" and need_manifests_kube_proxy | failed   
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == "master"
+  - K8S_NETWORK_PLUGIN == "flannel" 
+  - need_manifests_kube_proxy | failed   
   template: src=kube-proxy-master.yml dest=/etc/kubernetes/manifests/kube-proxy.yaml
 
 - name: template kube-proxy.yml to node
-  when: K8S_CLUSTER_ROLE[inventory_hostname] != "master" and K8S_NETWORK_PLUGIN == "flannel" and need_manifests_kube_proxy | failed   
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is not defined or K8S_CLUSTER_ROLE[inventory_hostname] != "master"
+  - K8S_NETWORK_PLUGIN == "flannel" 
+  - need_manifests_kube_proxy | failed   
   template: src=kube-proxy-worker.yml dest=/etc/kubernetes/manifests/kube-proxy.yaml
 
 - name: check need flannel.yml
   raw: stat /etc/kubernetes/addons/kube-system/flannel.yml
   register: need_addons_flannel
   ignore_errors: True  
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and K8S_NETWORK_PLUGIN == "flannel" 
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == "master"
+  - K8S_NETWORK_PLUGIN == "flannel" 
 
 - name: template flannel.yml
   template: src=flannel.yml dest=/etc/kubernetes/addons/kube-system/flannel.yml
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and K8S_NETWORK_PLUGIN == "flannel" and need_addons_flannel | failed
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == "master"
+  - K8S_NETWORK_PLUGIN == "flannel" 
+  - need_addons_flannel | failed
 
 - name: kubectl create -f flannel.yml
   raw: kubectl create -f /etc/kubernetes/addons/kube-system/flannel.yml
-  when: K8S_CLUSTER_ROLE[inventory_hostname] == "master" and K8S_NETWORK_PLUGIN == "flannel" and need_addons_flannel | failed  
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == "master"
+  - K8S_NETWORK_PLUGIN == "flannel" 
+  - need_addons_flannel | failed  
   register: create_result_flannel
   until: create_result_flannel.rc == 0
   retries: 5
