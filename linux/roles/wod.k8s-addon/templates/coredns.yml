@@ -58,7 +58,7 @@ data:
         errors
         log
         health
-        kubernetes cluster.local {{ SERVICE_IP_RANGE }} {
+        kubernetes cluster.local {{ K8S_SERVICE_IP_RANGE }} {
             pods insecure
         }
         prometheus
@@ -94,7 +94,7 @@ spec:
           operator: "Exists"
       containers:
       - name: coredns
-        image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["COREDNS"]["NAME"] }}:{{ K8S_IMAGES["COREDNS"]["VERSION"] }}
+        image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES["COREDNS"]["NAME"] }}:{{ K8S_IMAGES["COREDNS"]["VERSION"] }}
         imagePullPolicy: IfNotPresent
         resources:
           limits:
@@ -147,7 +147,7 @@ metadata:
 spec:
   selector:
     k8s-app: coredns
-  clusterIP: {{ DNS_SERVICE_IP }}
+  clusterIP: {{ K8S_DNS_SERVICE_IP }}
   ports:
   - name: dns
     port: 53

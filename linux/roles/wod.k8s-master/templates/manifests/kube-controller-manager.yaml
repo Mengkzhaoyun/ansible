@@ -7,14 +7,14 @@ spec:
   hostNetwork: true
   containers:
   - name: kube-controller-manager
-    image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES['KUBELET']['NAME'] }}:{{ K8S_IMAGES['KUBELET']['VERSION'] }}
+    image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES['KUBELET']['NAME'] }}:{{ K8S_IMAGES['KUBELET']['VERSION'] }}
     command:
     - /hyperkube
     - controller-manager
     - --master=http://127.0.0.1:8080
     - --allocate-node-cidrs=true
-    - --service-cluster-ip-range={{ SERVICE_IP_RANGE }}
-    - --cluster-cidr={{ POD_NETWORK }}
+    - --service-cluster-ip-range={{ K8S_SERVICE_IP_RANGE }}
+    - --cluster-cidr={{ K8S_POD_NETWORK }}
     - --cluster-name=kubernetes 
     - --leader-elect=true
     - --service-account-private-key-file=/etc/kubernetes/ssl/apiserver.key

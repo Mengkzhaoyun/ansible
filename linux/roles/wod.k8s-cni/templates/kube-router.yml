@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
       - name: kube-router
-        image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["KUBE-ROUTER"]["NAME"] }}:{{ K8S_IMAGES["KUBE-ROUTER"]["VERSION"] }}
+        image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES["KUBE-ROUTER"]["NAME"] }}:{{ K8S_IMAGES["KUBE-ROUTER"]["VERSION"] }}
         args:
         - --run-router=true
         - --run-firewall=true
@@ -91,7 +91,7 @@ spec:
           readOnly: true                
       initContainers:
       - name: install-cni
-        image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["BUSYBOX"]["NAME"] }}:{{ K8S_IMAGES["BUSYBOX"]["VERSION"] }}
+        image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES["BUSYBOX"]["NAME"] }}:{{ K8S_IMAGES["BUSYBOX"]["VERSION"] }}
         command:
         - /bin/sh
         - -c

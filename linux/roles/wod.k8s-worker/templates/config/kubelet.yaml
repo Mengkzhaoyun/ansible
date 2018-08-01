@@ -4,7 +4,7 @@ kind: Config
 clusters:
 - name: local
   cluster:
-    server: https://{{ K8S_MASTER_HOST }}:{{ K8S_PORT }}
+    server: https://{{ K8S_MASTER_IP }}:{{ K8S_PORT }}
     certificate-authority: /etc/kubernetes/ssl/ca.pem
 users:
 - name: kubelet

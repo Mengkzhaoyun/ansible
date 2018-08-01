@@ -8,12 +8,13 @@ SSH_KEYS: {
   "admin":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCrQGlgFB4TGjJCNk3mJEjgId2Td054T642kLzZ57ztotWzgZsxXlVYb8U9LG0UsQ22luRd04hIU4mplhHh6vKuVtRq34I7ZXJVDj0d9A22xuzpc4Poe7oBDtiBUL3eO+SPkjlN/EGeTyHk4eAxAVvDe59RJ2g89h5oyZFgTaWpAQ== admin@space.docker"
 }
 
-# /etc/hosts
-HOSTS_REGISTRY: reg.local
 NETWORK_ONLINE: "TRUE"
 
-# gac
-REGISTRY_SOURCE_LOCAL: "{{ HOSTS_REGISTRY }}:5000/k8s/"
+# registry
+REGISTRY_LOCAL_HOST: reg.local
+REGISTRY_LOCAL: "{{ REGISTRY_LOCAL_HOST }}:5000/k8s/"
+REGISTRY_REMOTE: "hub.c.163.com/mengkzhaoyun/k8s:"
+REGISTRY_REMOTE_SPLIT: "-"
 
 K8S_IMAGES: {
   "KUBELET":{
@@ -82,24 +83,26 @@ TOOLS_KUBECTL: "kubectl"
 TOOLS_ETCDCTL: "etcdctl"
 
 # k8s adv option.
-NETWORK_PLUGIN: cni 
+K8S_NETWORK_PLUGIN: "flannel"
 K8S_CNI_BIN: cni-plugins-amd64-v0.7.0
-ETCD_ENDPOINTS: "http://{{ ansible_default_ipv4['address'] }}:2379"
-POD_NETWORK: 10.2.0.0/16
-SERVICE_IP_RANGE: 10.3.0.0/16
-SERVICE_PORT_RANGE: 0-32767
+K8S_POD_NETWORK: 10.2.0.0/16
+K8S_SERVICE_IP_RANGE: 10.3.0.0/16
+K8S_SERVICE_PORT_RANGE: 0-32767
 K8S_SERVICE_IP: 10.3.0.1
-DNS_SERVICE_IP: 10.3.0.10
-ADVERTISE_IP: "{{ ansible_default_ipv4['address'] }}"
-
-FLANNEL_ETCD_PREFIX: /spacesystech.com/network
+K8S_DNS_SERVICE_IP: 10.3.0.10
+K8S_ADVERTISE_IP: "{{ ansible_default_ipv4['address'] }}"
+K8S_PORT: 6443
+K8S_ADMIN_PWD: abc2018
+K8S_MASTER_DOMAIN: xx.ispacesys.cn
 
 # ubuntu
 DEP_LIBLTDL7: libltdl7_2.4.6-0.1_amd64
 DEP_IPTABLE: iptables_1.6.0-2ubuntu3_amd64
 DEP_DOCKER: docker-engine_1.13.1-0~ubuntu-xenial_amd64
 DEP_RKT: rkt_1.29.0-1_amd64
-DEP_ETCDCTL: etcdctl-v3.3.2-linux-amd64
 
 # centos
 YUM_RKT: rkt-1.29.0-1.x86_64.rpm
+
+# other
+HTTP_SERVER: 'http://k8s.spacecig.com/softs/k8s'

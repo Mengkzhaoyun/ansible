@@ -13,4 +13,4 @@ DNS.3 = kubernetes.default.svc
 DNS.4 = kubernetes.default.svc.cluster.local
 DNS.5 = {{ K8S_MASTER_DOMAIN }}
 IP.1 = {{ K8S_SERVICE_IP }}
-IP.2 = {{ K8S_MASTER_HOST }}
+IP.2 = {{ K8S_MASTER_IP }}

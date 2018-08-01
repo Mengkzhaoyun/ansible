@@ -1,4 +1,0 @@
-- hosts: coreos
-  tasks:
-  - name: reboot
-    raw: reboot

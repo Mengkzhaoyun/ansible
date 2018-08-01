@@ -7,18 +7,18 @@ spec:
   hostNetwork: true
   containers:
   - name: kube-apiserver
-    image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES['KUBELET']['NAME'] }}:{{ K8S_IMAGES['KUBELET']['VERSION'] }}
+    image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES['KUBELET']['NAME'] }}:{{ K8S_IMAGES['KUBELET']['VERSION'] }}
     command:
     - /hyperkube
     - apiserver
     - --bind-address=0.0.0.0
-    - --etcd-servers={% for host in K8S_CLUSTER_ETCD %}http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:2379{% if loop.last %}{% else %},{% endif %}{% endfor %}
+    - --etcd-servers={% for host in ETCD_CLUSTER %}http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:2379{% if loop.last %}{% else %},{% endif %}{% endfor %}
 
     - --allow-privileged=true
-    - --service-cluster-ip-range={{ SERVICE_IP_RANGE }}
-    - --service-node-port-range={{ SERVICE_PORT_RANGE }}
+    - --service-cluster-ip-range={{ K8S_SERVICE_IP_RANGE }}
+    - --service-node-port-range={{ K8S_SERVICE_PORT_RANGE }}
     - --secure-port={{ K8S_PORT }}
-    - --advertise-address={{ ADVERTISE_IP }}
+    - --advertise-address={{ K8S_ADVERTISE_IP }}
     - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota
     - --authorization-mode=RBAC
     - --tls-cert-file=/etc/kubernetes/ssl/apiserver.pem

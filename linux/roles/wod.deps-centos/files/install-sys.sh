@@ -11,18 +11,18 @@ function require_ev_all() {
 	done
 }
 
-require_ev_all HOSTS_REGISTRY_IP
+require_ev_all REGISTRY_LOCAL_IP
 
-HOSTS_REGISTRY="${HOSTS_REGISTRY:-reg.local}"
-HOSTS_REGISTRY_IP="${HOSTS_REGISTRY_IP}"
+REGISTRY_LOCAL_HOST="${REGISTRY_LOCAL_HOST:-reg.local}"
+REGISTRY_LOCAL_IP="${REGISTRY_LOCAL_IP}"
 AUTHORIZED_KEYS="${AUTHORIZED_KEYS}"
 ENV_OPT="$PATH:/opt/bin"
 
-if grep -q ${HOSTS_REGISTRY} /etc/hosts ; then  
-  echo echo `grep ${HOSTS_REGISTRY} /etc/hosts`;
+if grep -q ${REGISTRY_LOCAL_HOST} /etc/hosts ; then  
+  echo echo `grep ${REGISTRY_LOCAL_HOST} /etc/hosts`;
 else 
   echo "" >> /etc/hosts; 
-  echo "${HOSTS_REGISTRY_IP} ${HOSTS_REGISTRY}" >> /etc/hosts; 
+  echo "${REGISTRY_LOCAL_IP} ${REGISTRY_LOCAL_HOST}" >> /etc/hosts; 
 fi 
 
 if grep -q /opt/bin /etc/environment ; then  

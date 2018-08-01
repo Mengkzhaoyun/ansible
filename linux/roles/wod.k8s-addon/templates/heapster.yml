@@ -88,7 +88,7 @@ spec:
         scheduler.alpha.kubernetes.io/critical-pod: ''
     spec:
       containers:
-        - image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["HEAPSTER"]["NAME"] }}:{{ K8S_IMAGES["HEAPSTER"]["VERSION"] }}
+        - image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES["HEAPSTER"]["NAME"] }}:{{ K8S_IMAGES["HEAPSTER"]["VERSION"] }}
           name: heapster
           livenessProbe:
             httpGet:
@@ -101,13 +101,13 @@ spec:
             - /heapster
             - --source=kubernetes.summary_api:''
             - --sink=influxdb:http://monitoring-influxdb:8086
-        - image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["HEAPSTER"]["NAME"] }}:{{ K8S_IMAGES["HEAPSTER"]["VERSION"] }}
+        - image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES["HEAPSTER"]["NAME"] }}:{{ K8S_IMAGES["HEAPSTER"]["VERSION"] }}
           name: eventer
           command:
             - /eventer
             - --source=kubernetes:''
             - --sink=influxdb:http://monitoring-influxdb:8086
-        - image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["ADDON-RESIZER"]["NAME"] }}:{{ K8S_IMAGES["ADDON-RESIZER"]["VERSION"] }}
+        - image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES["ADDON-RESIZER"]["NAME"] }}:{{ K8S_IMAGES["ADDON-RESIZER"]["VERSION"] }}
           name: heapster-nanny
           resources:
             limits:
@@ -140,7 +140,7 @@ spec:
             - --container=heapster
             - --poll-period=300000
             - --estimator=exponential
-        - image: {{ REGISTRY_SOURCE_LOCAL }}{{ K8S_IMAGES["ADDON-RESIZER"]["NAME"] }}:{{ K8S_IMAGES["ADDON-RESIZER"]["VERSION"] }}
+        - image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES["ADDON-RESIZER"]["NAME"] }}:{{ K8S_IMAGES["ADDON-RESIZER"]["VERSION"] }}
           name: eventer-nanny
           resources:
             limits:

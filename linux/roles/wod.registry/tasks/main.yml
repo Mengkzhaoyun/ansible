@@ -21,32 +21,32 @@
     HTTP_SERVER: '{{ HTTP_SERVER }}'
     RKT_ACI_REGISTRY: '{{ RKT_ACI_REGISTRY }}'
     RKT_ACI_REGISTRY_DATA: '{{ RKT_ACI_REGISTRY_DATA }}'
-    REGISTRY_REMOTE: '{{ K8S_CLUSTER_REGISTRY_REMOTE }}'
-    REGISTRY_REMOTE_SPLIT: '{{ K8S_CLUSTER_REGISTRY_REMOTE_SPLIT }}'
+    REGISTRY_REMOTE: '{{ REGISTRY_REMOTE }}'
+    REGISTRY_REMOTE_SPLIT: '{{ REGISTRY_REMOTE_SPLIT }}'
     REGISTRY_REGISTRY_REPO: '{{ K8S_IMAGES["REGISTRY"]["NAME"] }}'
     REGISTRY_REGISTRY_VERSION: '{{ K8S_IMAGES["REGISTRY"]["VERSION"] }}'    
   script: prepare.sh
-  when: K8S_CLUSTER_REGISTRY == inventory_hostname
+  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname
 
 - name: check need prepare.sh
   raw: stat /etc/kubernetes/scripts/prepare.sh
   register: need_scripts_prepare
   ignore_errors: True  
-  when: K8S_CLUSTER_REGISTRY == inventory_hostname
+  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname
 
 - name: copy prepare.sh
   copy: src=prepare.sh dest=/etc/kubernetes/scripts/prepare.sh mode=0755
-  when: K8S_CLUSTER_REGISTRY == inventory_hostname and need_scripts_prepare | failed  
+  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname and need_scripts_prepare | failed  
 
 - name: check need k8s-registry.service
   raw: stat /etc/systemd/system/k8s-registry.service
   register: need_services_registry
   ignore_errors: True  
-  when: K8S_CLUSTER_REGISTRY == inventory_hostname
+  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname
 
 - name: template k8s-registry.service
   template: src=k8s-registry.service dest=/etc/systemd/system/k8s-registry.service mode=0644
-  when: K8S_CLUSTER_REGISTRY == inventory_hostname and need_services_registry | failed
+  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname and need_services_registry | failed
 
 - name: start k8s-registry.service
   raw: systemctl daemon-reload && systemctl enable k8s-registry.service && systemctl start k8s-registry.service
@@ -54,12 +54,12 @@
 
 - name: Run cache.sh
   environment:
-    REGISTRY_LOCAL: '{{ REGISTRY_SOURCE_LOCAL }}'
+    REGISTRY_LOCAL: '{{ REGISTRY_LOCAL }}'
     REGISTRY_LOCAL_SPLIT: ':'
-    REGISTRY_REMOTE: '{{ K8S_CLUSTER_REGISTRY_REMOTE }}'
-    REGISTRY_REMOTE_SPLIT: '{{ K8S_CLUSTER_REGISTRY_REMOTE_SPLIT }}'
+    REGISTRY_REMOTE: '{{ REGISTRY_REMOTE }}'
+    REGISTRY_REMOTE_SPLIT: '{{ REGISTRY_REMOTE_SPLIT }}'
     ITEM_REPO: '{{ item.value.NAME }}'
     ITEM_VERSION: '{{ item.value.VERSION }}'
   script: cache.sh
-  when: K8S_CLUSTER_REGISTRY == inventory_hostname
+  when: REGISTRY_LOCAL_HOSTNAME == inventory_hostname
   with_dict: '{{ K8S_IMAGES }}'
