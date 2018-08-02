@@ -1,124 +1,95 @@
-# Offline Auto Deploy
+# One Command Auto Deploy
 
-# 维护中，暂时不要使用Master分支
+## What the scripts do ?
 
-## CentOS
+- One Command Deploy a kubernetes cluster<br>
+- One Command Add a node to cluster<br>
 
-os: CentOS Linux release 7.4.1708 (Core)<br>
-cotianer: docker 1.13.1 , rkt 1.29.0<br>
-etcd: 3.3.2<br>
-kubernetes: 1.9.4<br>
-kubernetes-network: kube-router:v0.1.0-rc2<br>
-kubernetes-addons: coredns:1.1.0 , dashboard:v1.8.3 , heapster:v1.5.0
+## Support OS
 
-[Offline Auto Deploy Kubernetes 1.9.4 in CentOS](./docs/centos.md)
+- CentOS Linux release 7.4.1708 (Core)<br>
+- Ubuntu Ubuntu 16.04.3 LTS<br>
+- CoreOS Latest<br>
 
-<img alt="Schema" src="docs/imgs/centos-schema.png">
+## Install Version
 
-Online Vedio<br>
-https://www.bilibili.com/video/av20919490/<br>
-https://youtu.be/_vhBCMwQsu8
+- cotainer engine: docker 1.13.1<br>
+- etcd: v3.3.9<br>
+- kubernetes: v1.10.6<br>
+- kubernetes-network: flannel:v0.10.0<br>
+- kubernetes-addons: coredns:1.2.0 , dashboard:v1.8.3 , heapster:v1.5.4
 
-## Ubuntu
+## Start it ?
 
-[Offline Auto Deploy Kubernetes 1.9.3 in Ubuntu](./docs/ubuntu.md)
-
-<img alt="Schema" src="docs/imgs/ubuntu-schema.png">
-
-Online Vedio<br>
-https://www.bilibili.com/video/av20150387/<br>
-https://www.youtube.com/watch?v=144Ng2D5jxQ
-
-## CoreOS
-
-[Offline Auto Deploy Kubernetes 1.9.0 in CoreOS](./docs/coreos.md)
-
-<img alt="Schema" src="docs/imgs/coreos-schema.png">
-
-Online Vedio<br>
-https://www.bilibili.com/video/av18457856/<br>
-https://www.youtube.com/watch?v=84XvO2UAx9U
-
-# How to Create Install Datas
-
-## 1.9.6
-BAIDU DISK <br>
-Link：https://pan.baidu.com/s/1y-JLhtr-jOFQd1-TZYNgug <br>
-Pass：qw95
-
-## Get Images
-
-[images.md](./docs/installs/images_v1.9.6.md)
-```bash
-# registry
-docker pull registry:2.6.2
-
-# etcd
-docker pull quay.io/coreos/etcd:v3.3.2
-
-# pause
-docker pull k8s.gcr.io/pause:3.1
-
-# hyperkube
-docker pull k8s.gcr.io/hyperkube:v1.9.6
-
-# flannel
-docker pull quay.io/coreos/flannel:v0.10.0
-
-# kube-router
-docker pull cloudnativelabs/kube-router:v0.1.0
-
-# busybox
-docker pull k8s.gcr.io/busybox:1.27.2
-
-# coredns
-docker pull coredns/coredns:1.1.0
-
-# dashboard
-docker pull k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.3
-
-# heapster
-docker pull k8s.gcr.io/heapster-amd64:v1.5.2
-
-# addon-resizer
-docker pull k8s.gcr.io/addon-resizer:1.8.1
-
-# heapster-influxdb-amd64
-docker pull k8s.gcr.io/heapster-influxdb-amd64:v1.3.3
-
-# heapster-grafana-amd64
-docker pull k8s.gcr.io/heapster-grafana-amd64:v4.4.3
+### 1.Setup Hosts
+make sure you had setup ansible ssh key to each node<br>
+/root/.ssh/authorized_keys
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDCJNFRbNc0SsHa/+mWB71z7SLPH9rQpwEqGbRo7q466a97h3bejNav9wc9AKmepHPfRw7DJfSmWO3lGBya0QkXMYXVvtfcWPvZZDlar5JK/ZsC8HGOpwVLdd1uUfyPu2qM0sjRNA/Ty8PDMkS5dSyZAJNlxUAILRpepkYoT8jhrw== ansible@space.docker
 ```
 
-## Get ACI Image
+define the cluster in hosts<br>
+- systech14
+- systech15
+- systech16
+<br>
 
-[aci.md](./docs/installs/aci_v1.9.6.md)
-
-```bash
-rkt image export hub.c.163.com/mengkzhaoyun/public:registry-2.6.2 registry-2.6.2.aci
-
-rkt image export hub.c.163.com/mengkzhaoyun/k8s:etcd-v3.3.2 etcd-v3.3.2.aci
-
-rkt image export hub.c.163.com/mengkzhaoyun/k8s:flannel-v0.10.0 flannel-v0.10.0.aci
-
-rkt image export hub.c.163.com/mengkzhaoyun/k8s:hyperkube-v1.9.6 hyperkube-v1.9.6.aci
+[./hosts](./hosts)
+```ini
+[systech]
+systech14 ansible_ssh_host=172.16.11.244 ansible_ssh_port=22 ansible_ssh_user=root 
+systech15 ansible_ssh_host=172.16.11.245 ansible_ssh_port=22 ansible_ssh_user=root 
+systech16 ansible_ssh_host=172.16.11.246 ansible_ssh_port=22 ansible_ssh_user=root 
+; systech17 ansible_ssh_host=172.16.11.247 ansible_ssh_port=22 ansible_ssh_user=root  
+; systech18 ansible_ssh_host=172.16.11.248 ansible_ssh_port=22 ansible_ssh_user=root 
+; systech19 ansible_ssh_host=172.16.11.249 ansible_ssh_port=22 ansible_ssh_user=root
 ```
 
-## Get CTL
+### 2.Define Master
+define the master in vals<br>
+systech14 is the master<br>
+[./linux/group_vars/systech.yml](./linux/group_vars/systech.yml)
+```yml
+# system options
+SSH_INSTALL_KEYS: 
+  - ansible
+  - admin
 
-[ctl.md](./docs/installs/ctl_v1.9.6.md)
+# registry options
+REGISTRY_LOCAL_HOSTNAME: systech14
+REGISTRY_LOCAL_IP: "{{ hostvars['systech14']['ansible_default_ipv4']['address'] }}"
 
-```bash
-# ct
-https://github.com/coreos/container-linux-config-transpiler/releases/download/v0.4.2/ct-v0.4.2-x86_64-unknown-linux-gnu
+# etcd options
+ETCD_CLUSTER: 
+  - systech14
 
-# kubectl
-https://storage.googleapis.com/kubernetes-release/release/v1.9.6/bin/linux/amd64/kubectl
+ETCD_CLUSTER_ROLE: 
+  systech14: etcd
 
-# etcdctl
-https://github.com/coreos/etcd/releases/download/v3.3.2/etcd-v3.3.2-linux-amd64.tar.gz
+# k8s option
+K8S_CLUSTER_ROLE: 
+  systech14: master
+
+K8S_MASTER_IP: "{{ hostvars['systech14']['ansible_default_ipv4']['address'] }}"
 ```
 
-## Get Registry Data
+### 3.Install
+docker run <br>
+```powershell
+# docker run
+docker run `
+--name ansible `
+-h ansible `
+-v $PWD/hosts:/etc/ansible/hosts `
+-v $PWD/linux/group_vars/systech.yml:/etc/ansible/linux/group_vars/systech.yml `
+-d hub.c.163.com/mengkzhaoyun/cloud/ansible-kubernetes
 
-[registry.md](./docs/installs/registry_v1.9.6.md)
+# docker exec
+docker exec -it ansible bash
+
+# install kubernetes cluster
+ap 1.install.yml
+
+# uninstall kubernetes cluster
+ap 9.uninstall.yml
+```

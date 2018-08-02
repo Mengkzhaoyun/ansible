@@ -1,5 +1,10 @@
 # run docker container
 ```powershell
+# 下载源代码
+mkdir -p c:/go/src/github.com/mengkzhaoyun
+cd c:/go/src/github.com/mengkzhaoyun
+git clone git@github.com:Mengkzhaoyun/ansible.git
+
 # 进入源代码目录
 cd c:/go/src/github.com/mengkzhaoyun/ansible
 
