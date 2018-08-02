@@ -7,8 +7,8 @@
 
 ## Support OS
 
-- CentOS Linux release 7.4.1708 (Core)<br>
-- Ubuntu Ubuntu 16.04.3 LTS<br>
+- CentOS 7.4 (Core)<br>
+- Ubuntu 16.04 LTS<br>
 - CoreOS Latest<br>
 
 ## Install Version
