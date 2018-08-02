@@ -1,4 +1,4 @@
-# One Command Auto Deploy
+# One Command Auto Deploy kubernetes cluster
 
 ## What the scripts do ?
 
