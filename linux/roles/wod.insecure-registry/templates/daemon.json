@@ -1,1 +1,10 @@
-{ "insecure-registries":["{{ REGISTRY_LOCAL_HOST }}:5000"] }
+{
+  "insecure-registries": [
+    {% if REGISTRY_REMOTE_HOST is defined %}
+    "{{ REGISTRY_REMOTE_HOST }}",
+    "{{ REGISTRY_LOCAL_HOST }}:5000"
+    {% else %}
+    "{{ REGISTRY_LOCAL_HOST }}:5000"
+    {% endif %}
+  ]
+}

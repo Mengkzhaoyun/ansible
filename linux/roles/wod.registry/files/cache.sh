@@ -12,7 +12,7 @@ ITEM_VERSION="${ITEM_VERSION:-}"
 mkdir -p /etc/kubernetes/downloads
 mkdir -p /etc/kubernetes/data
 
-if ! [[ -e /etc/kubernetes/data/registry/docker/registry/v2/repositories/k8s/$ITEM_REPO ]]; then
+if ! [[ -e /etc/kubernetes/data/registry/docker/registry/v2/repositories/k8s/$ITEM_REPO/_manifests/tags/$ITEM_VERSION ]]; then
   docker pull $REGISTRY_REMOTE$ITEM_REPO$REGISTRY_REMOTE_SPLIT$ITEM_VERSION
   docker tag $REGISTRY_REMOTE$ITEM_REPO$REGISTRY_REMOTE_SPLIT$ITEM_VERSION $REGISTRY_LOCAL$ITEM_REPO$REGISTRY_LOCAL_SPLIT$ITEM_VERSION
   docker push $REGISTRY_LOCAL$ITEM_REPO$REGISTRY_LOCAL_SPLIT$ITEM_VERSION 
