@@ -1,7 +1,7 @@
 - hosts: all
   gather_facts: False
   roles:
-    - wod.python
+  - wod.python
 
 - hosts: all
   roles:
