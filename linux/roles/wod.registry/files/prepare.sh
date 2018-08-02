@@ -2,7 +2,7 @@
 
 set -e
 
-HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/kubernetes}"
 RKT_ACI_REGISTRY="${RKT_ACI_REGISTRY:-registry-2.6.2}"
 RKT_ACI_REGISTRY_DATA="${RKT_ACI_REGISTRY_DATA:-registry-data-v1.9.0}"
 REGISTRY_REMOTE="${REGISTRY_REMOTE:-}"

@@ -2,7 +2,7 @@
 
 set -e 
   
-HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}" 
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/kubernetes}" 
 PYPY_VERSION=5.1.0
 
 if [ -x "$(command -v python)" ]; then

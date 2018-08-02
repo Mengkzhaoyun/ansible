@@ -2,7 +2,7 @@
 
 set -e
 
-HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/k8s}"
+HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/kubernetes}"
 DEB_RKT="${DEB_RKT:-rkt_1.29.0-1_amd64}"
 
 mkdir -p /etc/kubernetes/downloads

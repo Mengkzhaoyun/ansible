@@ -89,5 +89,4 @@ DEB_RKT: rkt_1.29.0-1_amd64
 YUM_RKT: rkt-1.29.0-1.x86_64.rpm
 
 # other
-HTTP_SERVER: http://k8s.spacecig.com/softs/k8s
-YUM_SERVER: http://k8s.spacecig.com/softs/centos
+HTTP_SERVER: http://k8s.spacecig.com/softs/kubernetes
