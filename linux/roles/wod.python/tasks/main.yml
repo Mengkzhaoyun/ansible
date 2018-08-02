@@ -1,10 +1,4 @@
-- name: check if bootstrap is needed
-  raw: stat $HOME/.bootstrapped
-  register: need_bootstrap
-  ignore_errors: True
-
 - name: Run bootstrap.sh
   environment:
     HTTP_SERVER: '{{ HTTP_SERVER }}'
   script: bootstrap.sh
-  when: need_bootstrap | failed

@@ -6,13 +6,13 @@
 - hosts: all
   roles:
   - role: wod.timezone
-  - role: wod.deps-centos
-    when: "ansible_distribution == 'CentOS'"
-  - role: wod.deps-ubuntu
-    when: "ansible_distribution == 'Ubuntu'"
-  # - role: wod.docker
-  # - role: wod.rkt
-  # - role: wod.sys  
+  # - role: wod.deps-centos
+  #   when: "ansible_distribution == 'CentOS'"
+  # - role: wod.deps-ubuntu
+  #   when: "ansible_distribution == 'Ubuntu'"
+  - role: wod.docker
+  - role: wod.rkt
+  - role: wod.sys  
   - role: wod.insecure-registry
   - role: wod.registry
     when: "inventory_hostname == REGISTRY_LOCAL_HOSTNAME"

@@ -1,7 +1,7 @@
 [systech]
-systech14 ansible_ssh_host=172.16.11.244 ansible_ssh_port=22 ansible_ssh_user=root ansible_python_interpreter="/root/bin/python" 
-systech15 ansible_ssh_host=172.16.11.245 ansible_ssh_port=22 ansible_ssh_user=root ansible_python_interpreter="/root/bin/python"
-systech16 ansible_ssh_host=172.16.11.246 ansible_ssh_port=22 ansible_ssh_user=root ansible_python_interpreter="/root/bin/python"
-; systech17 ansible_ssh_host=172.16.11.247 ansible_ssh_port=22 ansible_ssh_user=root ansible_python_interpreter="/root/bin/python" 
-; systech18 ansible_ssh_host=172.16.11.248 ansible_ssh_port=22 ansible_ssh_user=root ansible_python_interpreter="/root/bin/python"
-; systech19 ansible_ssh_host=172.16.11.249 ansible_ssh_port=22 ansible_ssh_user=root ansible_python_interpreter="/root/bin/python"
+systech14 ansible_ssh_host=172.16.11.244 ansible_ssh_port=22 ansible_ssh_user=root 
+systech15 ansible_ssh_host=172.16.11.245 ansible_ssh_port=22 ansible_ssh_user=root 
+systech16 ansible_ssh_host=172.16.11.246 ansible_ssh_port=22 ansible_ssh_user=root 
+systech17 ansible_ssh_host=172.16.11.247 ansible_ssh_port=22 ansible_ssh_user=root  
+systech18 ansible_ssh_host=172.16.11.248 ansible_ssh_port=22 ansible_ssh_user=root 
+systech19 ansible_ssh_host=172.16.11.249 ansible_ssh_port=22 ansible_ssh_user=root

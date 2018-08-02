@@ -48,3 +48,5 @@ for key in ${KEYS[@]}; do
     echo "${key}" >> /root/.ssh/authorized_keys;
   fi
 done
+
+mkdir -p /etc/kubernetes/scripts /etc/kubernetes/manifests /etc/kubernetes/addon

@@ -1,6 +1,6 @@
 ---
 # install docker
-- name: Run install-os.sh
+- name: install docker
   when: 
   - "HTTP_SERVER is defined"
   environment:
