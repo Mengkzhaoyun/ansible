@@ -93,3 +93,8 @@ ap 1.install.yml
 # uninstall kubernetes cluster
 ap 9.uninstall.yml
 ```
+
+### 4.Open Browser
+https://172.16.11.244:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#<br>
+admin<br>
+abc2018

@@ -11,14 +11,9 @@ REGISTRY_LOCAL_IP: "{{ hostvars['systech14']['ansible_default_ipv4']['address'] 
 # etcd options
 ETCD_CLUSTER: 
   - systech14
-  - systech15
-  - systech16
 
 ETCD_CLUSTER_ROLE: 
   systech14: etcd
-  systech15: etcd
-  systech16: etcd
-
 
 # k8s option
 K8S_CLUSTER_ROLE: 
