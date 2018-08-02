@@ -7,69 +7,52 @@ SSH_KEYS:
   ansible: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDCJNFRbNc0SsHa/+mWB71z7SLPH9rQpwEqGbRo7q466a97h3bejNav9wc9AKmepHPfRw7DJfSmWO3lGBya0QkXMYXVvtfcWPvZZDlar5JK/ZsC8HGOpwVLdd1uUfyPu2qM0sjRNA/Ty8PDMkS5dSyZAJNlxUAILRpepkYoT8jhrw== ansible@space.docker"
   admin: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCrQGlgFB4TGjJCNk3mJEjgId2Td054T642kLzZ57ztotWzgZsxXlVYb8U9LG0UsQ22luRd04hIU4mplhHh6vKuVtRq34I7ZXJVDj0d9A22xuzpc4Poe7oBDtiBUL3eO+SPkjlN/EGeTyHk4eAxAVvDe59RJ2g89h5oyZFgTaWpAQ== admin@space.docker"
 
-
-NETWORK_ONLINE: "TRUE"
-
 # registry
 REGISTRY_LOCAL_HOST: reg.local
 REGISTRY_LOCAL: "{{ REGISTRY_LOCAL_HOST }}:5000/k8s/"
 REGISTRY_REMOTE: "hub.c.163.com/mengkzhaoyun/k8s:"
 REGISTRY_REMOTE_SPLIT: "-"
 
-K8S_IMAGES: {
-  "KUBELET":{
-    "NAME": "hyperkube",
-    "VERSION": "v1.10.6"
-  },
-  "PAUSE":{
-    "NAME": "pause",
-    "VERSION": "3.1"
-  },
-  "REGISTRY":{
-    "NAME": "registry",
-    "VERSION": "2.6.2"
-  },
-  "ETCD":{
-    "NAME": "etcd",
-    "VERSION": "v3.3.9"
-  },
-  "FLANNEL":{
-    "NAME": "flannel",
-    "VERSION": "v0.10.0"
-  },
-  "KUBE-ROUTER":{
-    "NAME": "kube-router",
-    "VERSION": "v0.2.0-beta.9"
-  },
-  "BUSYBOX":{
-    "NAME": "busybox",
-    "VERSION": "1.27.2"
-  },  
-  "COREDNS":{
-    "NAME": "coredns",
-    "VERSION": "1.2.0"
-  },
-  "DASHBOARD":{
-    "NAME": "kubernetes-dashboard-amd64",
-    "VERSION": "v1.8.3"
-  },
-  "HEAPSTER":{
-    "NAME": "heapster-amd64",
-    "VERSION": "v1.5.4"
-  },
-  "ADDON-RESIZER":{
-    "NAME": "addon-resizer",
-    "VERSION": "1.8.3"
-  },
-  "KUBECTL":{
-    "NAME": "kubectl",
-    "VERSION": "latest"
-  },
-  "ETCDCTL":{
-    "NAME": "etcdctl",
-    "VERSION": "latest"
-  }  
-}
+K8S_IMAGES: 
+  KUBELET:
+    NAME: hyperkube
+    VERSION: "v1.10.6"
+  PAUSE: 
+    NAME: pause
+    VERSION: "3.1"
+  REGISTRY:
+    NAME: registry
+    VERSION: "2.6.2"
+  ETCD:
+    NAME: etcd
+    VERSION: "v3.3.9"
+  FLANNEL:
+    NAME: flannel
+    VERSION: v0.10.0
+  KUBE-ROUTER:
+    NAME: kube-router
+    VERSION: "v0.2.0-beta.9"
+  BUSYBOX:
+    NAME: busybox
+    VERSION: "1.27.2"
+  COREDNS:
+    NAME: coredns
+    VERSION: "1.2.0"
+  DASHBOARD:
+    NAME: kubernetes-dashboard-amd64
+    VERSION: "v1.8.3"
+  HEAPSTER:
+    NAME: heapster-amd64
+    VERSION: "v1.5.4"
+  ADDON-RESIZER:
+    NAME: addon-resizer
+    VERSION: "1.8.3"
+  KUBECTL:
+    NAME: kubectl
+    VERSION: "latest"
+  ETCDCTL:
+    NAME: etcdctl
+    VERSION: "latest"
 
 # rkt images
 RKT_ACI_REGISTRY: "registry-{{ K8S_IMAGES['REGISTRY']['VERSION'] }}"
@@ -79,11 +62,11 @@ RKT_ACI_KUBELET: "{{ K8S_IMAGES['KUBELET']['NAME'] }}-{{ K8S_IMAGES['KUBELET']['
 
 # ctl tools
 RKT_ACI_REGISTRY_DATA: "registry-data-{{ K8S_IMAGES['KUBELET']['VERSION'] }}"
-TOOLS_KUBECTL: "kubectl"
-TOOLS_ETCDCTL: "etcdctl"
+TOOLS_KUBECTL: kubectl
+TOOLS_ETCDCTL: etcdctl
 
 # k8s adv option.
-K8S_NETWORK_PLUGIN: "flannel"
+K8S_NETWORK_PLUGIN: flannel
 K8S_CNI_BIN: cni-plugins-amd64-v0.7.0
 K8S_POD_NETWORK: 10.2.0.0/16
 K8S_SERVICE_IP_RANGE: 10.3.0.0/16
@@ -105,5 +88,5 @@ DEB_RKT: rkt_1.29.0-1_amd64
 YUM_RKT: rkt-1.29.0-1.x86_64.rpm
 
 # other
-HTTP_SERVER: 'http://k8s.spacecig.com/softs/k8s'
-YUM_SERVER: 'http://k8s.spacecig.com/softs/centos'
+HTTP_SERVER: http://k8s.spacecig.com/softs/k8s
+YUM_SERVER: http://k8s.spacecig.com/softs/centos
