@@ -3,4 +3,5 @@
 - name: install rkt
   environment:
     HTTP_SERVER: '{{ HTTP_SERVER }}'
+    YUM_RKT: '{{ YUM_RKT }}'
   script: install-{{ ansible_distribution }}.sh  

@@ -4,7 +4,7 @@ set -e
 
 HTTP_SERVER="${HTTP_SERVER:-http://k8s.spacecig.com/softs/kubernetes}"
 YUM_SERVER="$HTTP_SERVER/centos"
-YUM_RKT="${YUM_RKT:-rkt_1.29.0-1_amd64.rpm}"
+YUM_RKT="${YUM_RKT:-rkt-1.29.0-1.x86_64.rpm}"
 
 mkdir -p /etc/kubernetes/downloads
 
