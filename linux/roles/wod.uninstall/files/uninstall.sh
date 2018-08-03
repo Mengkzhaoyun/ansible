@@ -6,22 +6,22 @@ SERVICE=k8s-kubelet
 
 if [ "`systemctl is-active $SERVICE`" == "active" ] ; then  
   systemctl stop $SERVICE
-  rm -rf /etc/systemd/system/$SERVICE.service
 fi
+rm -rf /etc/systemd/system/$SERVICE.service
 
 SERVICE=k8s-etcd
 
 if [ "`systemctl is-active $SERVICE`" == "active" ] ; then  
   systemctl stop $SERVICE
-  rm -rf /etc/systemd/system/$SERVICE.service
 fi
+rm -rf /etc/systemd/system/$SERVICE.service
 
 SERVICE=k8s-registry
 
 if [ "`systemctl is-active $SERVICE`" == "active" ] ; then  
   systemctl stop $SERVICE
-  rm -rf /etc/systemd/system/$SERVICE.service
 fi
+rm -rf /etc/systemd/system/$SERVICE.service
 
 docker rm $(docker ps -a | awk '{print $1}') -f
 

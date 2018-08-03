@@ -23,7 +23,7 @@ Environment="RKT_RUN_ARGS=--uuid-file-save=/etc/kubernetes/data/etcd-pod.uuid"
 Environment="ETCD_IMAGE_ARGS=--name=k8s-etcd"
 
 ExecStart=/etc/kubernetes/scripts/etcd.sh \
-  --name={{ ansible_hostname }} \
+  --name={{ inventory_hostname }} \
   --initial-cluster-token=spacesystech.com \
   --initial-cluster={% for host in ETCD_CLUSTER %}{{ host }}=http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:2380{% if loop.last %}{% else %},{% endif %}{% endfor %} \
   --initial-cluster-state=new \
