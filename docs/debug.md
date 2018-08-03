@@ -1,6 +1,7 @@
 # debug
 ```powershell
-# remove 
+## aliyun
+# docker remove 
 docker rm ansible -f
 
 # docker run
