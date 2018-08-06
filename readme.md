@@ -5,6 +5,8 @@
 - One Command Deploy a kubernetes cluster<br>
 - One Command Add a node to cluster<br>
 
+<img alt="Schema" src="./docs/imgs/ubuntu-schema-v1.10.png">
+
 ### Support OS
 
 - CentOS 7.4 (Core)<br>
