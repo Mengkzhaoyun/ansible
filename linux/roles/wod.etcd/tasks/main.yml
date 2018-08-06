@@ -6,15 +6,15 @@
     REGISTRY_LOCAL: '{{ REGISTRY_LOCAL }}'
     REGISTRY_LOCAL_SPLIT: ":"
     REGISTRY_ETCD_REPO: '{{ K8S_IMAGES["ETCD"]["NAME"] }}'
-    REGISTRY_ETCD_VERSION: '{{ K8S_IMAGES["ETCD"]["VERSION"] }}'    
+    REGISTRY_ETCD_VERSION: '{{ K8S_IMAGES["ETCD"]["VERSION"] }}'
     REGISTRY_ETCDCTL_REPO: '{{ K8S_IMAGES["ETCDCTL"]["NAME"] }}'
-    REGISTRY_ETCDCTL_VERSION: '{{ K8S_IMAGES["ETCDCTL"]["VERSION"] }}'       
-  script: prepare.sh  
+    REGISTRY_ETCDCTL_VERSION: '{{ K8S_IMAGES["ETCDCTL"]["VERSION"] }}'
+  script: prepare.sh
 
 - name: check need /etc/kubernetes/scripts/etcd.sh
   raw: stat /etc/kubernetes/scripts/etcd.sh
   register: need_scripts_etcd
-  ignore_errors: True  
+  ignore_errors: True
 
 - name: copy /etc/kubernetes/scripts/etcd.sh
   copy: src=etcd.sh dest=/etc/kubernetes/scripts/etcd.sh mode=0755
@@ -23,11 +23,11 @@
 - name: check need k8s-etcd.service
   raw: stat /etc/systemd/system/k8s-etcd.service
   register: need_services_etcd
-  ignore_errors: True  
+  ignore_errors: True
 
 - name: template k8s-etcd.service
   template: src=k8s-etcd.service dest=/etc/systemd/system/k8s-etcd.service mode=0644
-  when: need_services_etcd | failed  
+  when: need_services_etcd | failed
 
 - name: start k8s-etcd.service
   raw: systemctl daemon-reload && systemctl enable k8s-etcd.service && systemctl start k8s-etcd.service

@@ -60,9 +60,6 @@ REGISTRY_LOCAL_HOSTNAME: systech14
 REGISTRY_LOCAL_IP: "{{ hostvars['systech14']['ansible_default_ipv4']['address'] }}"
 
 # etcd options
-ETCD_CLUSTER: 
-  - systech14
-
 ETCD_CLUSTER_ROLE: 
   systech14: etcd
 
