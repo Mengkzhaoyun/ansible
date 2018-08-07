@@ -47,6 +47,15 @@
   template: src=ssl/admin.csv dest=/etc/kubernetes/ssl/admin.csv
   when: need_ssl_admin | failed
 
+- name: check need ssl/token.csv
+  raw: stat /etc/kubernetes/ssl/token.csv
+  register: need_ssl_token
+  ignore_errors: True
+
+- name: template ssl/token.csv
+  template: src=ssl/token.csv dest=/etc/kubernetes/ssl/token.csv
+  when: need_ssl_token | failed  
+
 - name: check need manifests/kube-apiserver.yaml
   raw: stat /etc/kubernetes/manifests/kube-apiserver.yaml
   register: need_manifests_apiserver

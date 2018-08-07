@@ -6,6 +6,13 @@ metadata:
   namespace: kube-system
 spec:
   hostNetwork: true
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      operator: "Equal"
+      value: "true"
+      effect: NoSchedule
+    - key: "CriticalAddonsOnly"
+      operator: "Exists"       
   containers:
   - name: kube-proxy
     image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES['KUBELET']['NAME'] }}:{{ K8S_IMAGES['KUBELET']['VERSION'] }}
