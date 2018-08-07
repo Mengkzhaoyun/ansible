@@ -4,8 +4,8 @@
   environment:
     HTTP_SERVER: '{{ HTTP_SERVER }}'
     YUM_RKT: '{{ YUM_RKT }}'
-  script: {{ item }}
-  with_first_found:
-    - files:
+  script: "{{ lookup('first_found', findme)}}"
+  vars:
+    findme:
       - install-{{ ansible_distribution }}.sh  
-      - install.sh
+      - install.sh    
