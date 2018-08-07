@@ -9,8 +9,15 @@ if [ -x "$(command -v python)" ]; then
   exit 0 
 fi
 
+mkdir -p /opt/bin
+ENV_OPT="$PATH:/opt/bin"
+if ! (grep -q /opt/bin /etc/environment) ; then
+  echo "PATH=${ENV_OPT}" >> /etc/environment
+  source /etc/environment;
+fi
+
 if [[ -e $HOME/bin/python ]]; then
-  ln -s $HOME/bin/python /usr/bin/python
+  ln -s $HOME/bin/python /opt/bin/python
   exit 0 
 fi
 
@@ -44,9 +51,9 @@ EOF
 chmod +x $HOME/bin/python
 $HOME/bin/python --version
 
-rm -rf /usr/bin/python
+rm -rf /opt/bin/python
 
-ln -s $HOME/bin/python /usr/bin/python
+ln -s $HOME/bin/python /opt/bin/python
 
 touch $HOME/.bootstrapped
 
