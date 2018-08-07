@@ -4,4 +4,8 @@
   environment:
     HTTP_SERVER: '{{ HTTP_SERVER }}'
     YUM_RKT: '{{ YUM_RKT }}'
-  script: install-{{ ansible_distribution }}.sh  
+  script: {{ item }}
+  with_first_found:
+    - files:
+      - install-{{ ansible_distribution }}.sh  
+      - install.sh
