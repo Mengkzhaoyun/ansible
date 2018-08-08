@@ -12,8 +12,8 @@ spec:
     - /hyperkube
     - apiserver
     - --bind-address=0.0.0.0
-    - --etcd-servers={% for host, role in ETCD_CLUSTER_ROLE.iteritems() %}{{ host }}=http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:2380{% if loop.last %}{% else %},{% endif %}{% endfor %}
-    
+    - --etcd-servers={% for host, role in ETCD_CLUSTER_ROLE.iteritems() %}http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:2379{% if loop.last %}{% else %},{% endif %}{% endfor %}
+
     - --allow-privileged=true
     - --service-cluster-ip-range={{ K8S_SERVICE_IP_RANGE }}
     - --service-node-port-range={{ K8S_SERVICE_PORT_RANGE }}
