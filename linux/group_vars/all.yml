@@ -29,7 +29,7 @@ K8S_IMAGES:
     VERSION: "v3.3.9"
   FLANNEL:
     NAME: flannel
-    VERSION: v0.10.0
+    VERSION: "v0.10.0"
   KUBE-ROUTER:
     NAME: kube-router
     VERSION: "v0.2.0-beta.9"
