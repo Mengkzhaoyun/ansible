@@ -21,10 +21,12 @@ ENV_OPT="$PATH:/opt/bin"
 if ! (grep -q ${REGISTRY_LOCAL_HOST} /etc/hosts) ; then
   echo "" >> /etc/hosts;
   echo "${REGISTRY_LOCAL_IP} ${REGISTRY_LOCAL_HOST}" >> /etc/hosts;
+else
+  sed -i "/${REGISTRY_LOCAL_HOST}/c\\${REGISTRY_LOCAL_IP} ${REGISTRY_LOCAL_HOST}" /etc/hosts
 fi
 
 if ! (grep -q /opt/bin /etc/environment) ; then
-  echo "PATH=${ENV_OPT}" >> /etc/environment
+  sed -i "/PATH=/c\PATH=${ENV_OPT}" /etc/environment
   source /etc/environment;
 fi
 
