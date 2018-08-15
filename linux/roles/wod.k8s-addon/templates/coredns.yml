@@ -106,6 +106,9 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /etc/coredns
+        - mountPath: /etc/localtime
+          name: etc-localtime
+          readOnly: true          
         ports:
         - containerPort: 53
           name: dns
@@ -133,6 +136,9 @@ spec:
             items:
             - key: Corefile
               path: Corefile
+        - name: etc-localtime        
+          hostPath:
+            path: /etc/localtime                 
 ---
 apiVersion: v1
 kind: Service

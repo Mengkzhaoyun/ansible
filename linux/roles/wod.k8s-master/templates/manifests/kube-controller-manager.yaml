@@ -36,6 +36,9 @@ spec:
     - mountPath: /etc/ssl/certs
       name: ssl-certs-host
       readOnly: true
+    - mountPath: /etc/localtime
+      name: etc-localtime
+      readOnly: true       
   volumes:
   - hostPath:
       path: /etc/kubernetes/ssl
@@ -43,3 +46,6 @@ spec:
   - hostPath:
       path: /usr/share/ca-certificates
     name: ssl-certs-host
+  - hostPath:
+      path: /etc/localtime
+    name: etc-localtime      

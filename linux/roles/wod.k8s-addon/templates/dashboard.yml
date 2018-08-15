@@ -98,6 +98,9 @@ spec:
           mountPath: /certs
         - name: tmp-volume
           mountPath: /tmp
+        - mountPath: /etc/localtime
+          name: etc-localtime
+          readOnly: true             
         livenessProbe:
           httpGet:
             scheme: HTTPS
@@ -110,6 +113,9 @@ spec:
         emptyDir: {}
       - name: tmp-volume
         emptyDir: {}
+      - name: etc-localtime        
+        hostPath:
+          path: /etc/localtime   
       serviceAccountName: kubernetes-dashboard
       tolerations:
       - key: "CriticalAddonsOnly"
