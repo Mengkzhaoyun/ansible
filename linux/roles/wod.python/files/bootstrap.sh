@@ -13,10 +13,10 @@ if [[ -e /opt/bin/python ]]; then
   exit 0 
 fi
 
-# if [[ -e /usr/bin/python ]]; then
-#   ln -s /usr/bin/python /opt/bin/python
-#   exit 0 
-# fi
+if [[ -e /usr/bin/python ]]; then
+  ln -s /usr/bin/python /opt/bin/python
+  exit 0 
+fi
 
 if ! (grep -q /opt/bin /etc/environment) ; then
   echo "PATH=${ENV_OPT}" >> /etc/environment
