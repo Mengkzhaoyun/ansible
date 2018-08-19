@@ -51,4 +51,4 @@ for key in ${KEYS[@]}; do
   fi
 done
 
-mkdir -p /etc/kubernetes/scripts /etc/kubernetes/manifests /etc/kubernetes/addon /usr/share/ca-certificates
+mkdir -p /etc/kubernetes/scripts /etc/kubernetes/manifests /usr/share/ca-certificates

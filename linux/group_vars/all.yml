@@ -17,7 +17,7 @@ REGISTRY_REMOTE_SPLIT: "-"
 K8S_IMAGES: 
   KUBELET:
     NAME: hyperkube
-    VERSION: "v1.10.6"
+    VERSION: "v1.11.2"
   PAUSE: 
     NAME: pause
     VERSION: "3.1"
