@@ -8,35 +8,33 @@ spec:
   hostNetwork: true
   containers:
   - name: kube-proxy
-    image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES['KUBELET']['NAME'] }}:{{ K8S_IMAGES['KUBELET']['VERSION'] }}
+    image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES['KUBE-PROXY']['NAME'] }}:{{ K8S_IMAGES['KUBE-PROXY']['VERSION'] }}
     command:
-    - /hyperkube
-    - proxy
-    - --kubeconfig=/etc/kubernetes/config/kubeproxy.yaml
+    - kube-proxy
+    - --config=/etc/kubernetes/config/kubeproxy-conf.yaml
     securityContext:
       privileged: true
     volumeMounts:
     - mountPath: /etc/ssl/certs
-      name: "ssl-certs"
-    - mountPath: /etc/kubernetes/config/kubeproxy.yaml
-      name: "kubeconfig"
-      readOnly: true
+      name: "etc-ssl-certs"
     - mountPath: /etc/kubernetes/ssl
       name: "etc-kube-ssl"
       readOnly: true
-    - mountPath: /var/run/dbus
-      name: dbus
-      readOnly: false
+    - mountPath: /etc/kubernetes/config
+      name: "etc-kubernetes-config"
+      readOnly: true      
+    - mountPath: /lib/modules
+      name: "lib-modules"
   volumes:
-  - name: "ssl-certs"
+  - name: "etc-ssl-certs"
     hostPath:
       path: "/usr/share/ca-certificates"
-  - name: "kubeconfig"
-    hostPath:
-      path: "/etc/kubernetes/config/kubeproxy.yaml"
   - name: "etc-kube-ssl"
     hostPath:
       path: "/etc/kubernetes/ssl"
-  - hostPath:
-      path: /var/run/dbus
-    name: dbus
+  - name: "etc-kubernetes-config"
+    hostPath:
+      path: "/etc/kubernetes/config"
+  - name: "lib-modules"
+    hostPath:
+      path: "/lib/modules"

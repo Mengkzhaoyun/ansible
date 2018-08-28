@@ -56,6 +56,26 @@
   - need_manifests_kube_proxy | failed   
   template: src=kube-proxy-worker.yml dest=/etc/kubernetes/manifests/kube-proxy.yaml
 
+- name: template kube-proxy-conf.yml
+  when: 
+  - K8S_NETWORK_PLUGIN == "flannel" 
+  - need_manifests_kube_proxy | failed   
+  template: src=kube-proxy-conf.yml dest=/etc/kubernetes/config/kube-proxy-conf.yml
+
+- name: template kube-proxy-client.yml to master
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is defined and K8S_CLUSTER_ROLE[inventory_hostname] == "master"
+  - K8S_NETWORK_PLUGIN == "flannel" 
+  - need_manifests_kube_proxy | failed   
+  template: src=kube-proxy-client-master.yml dest=/etc/kubernetes/config/kube-proxy.yaml
+
+- name: template kube-proxy.yml to node
+  when: 
+  - K8S_CLUSTER_ROLE[inventory_hostname] is not defined or K8S_CLUSTER_ROLE[inventory_hostname] != "master"
+  - K8S_NETWORK_PLUGIN == "flannel" 
+  - need_manifests_kube_proxy | failed   
+  template: src=kube-proxy-client-worker.yml dest=/etc/kubernetes/config/kube-proxy.yaml  
+
 - name: check need flannel.yml
   raw: stat /etc/kubernetes/addons/kube-system/flannel.yml
   register: need_addons_flannel

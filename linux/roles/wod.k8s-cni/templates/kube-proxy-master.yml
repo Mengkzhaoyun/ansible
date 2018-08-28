@@ -15,18 +15,33 @@ spec:
       operator: "Exists"       
   containers:
   - name: kube-proxy
-    image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES['KUBELET']['NAME'] }}:{{ K8S_IMAGES['KUBELET']['VERSION'] }}
+    image: {{ REGISTRY_LOCAL }}{{ K8S_IMAGES['KUBE-PROXY']['NAME'] }}:{{ K8S_IMAGES['KUBE-PROXY']['VERSION'] }}
     command:
-    - /hyperkube
-    - proxy
-    - --master=http://127.0.0.1:8080
+    - kube-proxy
+    - --config=/etc/kubernetes/config/kubeproxy-conf.yaml
     securityContext:
       privileged: true
     volumeMounts:
     - mountPath: /etc/ssl/certs
-      name: ssl-certs-host
+      name: "etc-ssl-certs"
+    - mountPath: /etc/kubernetes/ssl
+      name: "etc-kube-ssl"
       readOnly: true
+    - mountPath: /etc/kubernetes/config
+      name: "etc-kubernetes-config"
+      readOnly: true      
+    - mountPath: /lib/modules
+      name: "lib-modules"
   volumes:
-  - hostPath:
-      path: /usr/share/ca-certificates
-    name: ssl-certs-host
+  - name: "etc-ssl-certs"
+    hostPath:
+      path: "/usr/share/ca-certificates"
+  - name: "etc-kube-ssl"
+    hostPath:
+      path: "/etc/kubernetes/ssl"
+  - name: "etc-kubernetes-config"
+    hostPath:
+      path: "/etc/kubernetes/config"
+  - name: "lib-modules"
+    hostPath:
+      path: "/lib/modules"

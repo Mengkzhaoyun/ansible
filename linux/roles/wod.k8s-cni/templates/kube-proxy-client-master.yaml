@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+clusters:
+- name: local
+  cluster:
+    server: http://127.0.0.1:8080
+contexts:
+- name: local
+  context:
+    cluster: local
+    user: ""
+current-context: local
+kind: Config
+preferences: {}
+users: []   
