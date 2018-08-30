@@ -36,7 +36,7 @@
   when: need_scripts_kubelet | failed
 
 - name: check need services/k8s-kubelet.service
-  raw: stat /etc/kubernetes/services/k8s-kubelet.service
+  raw: stat /etc/systemd/system/k8s-kubelet.service
   register: need_services_kubelet
   ignore_errors: True
 

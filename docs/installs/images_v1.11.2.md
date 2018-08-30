@@ -25,4 +25,8 @@ docker push registry.cn-qingdao.aliyuncs.com/wod/kube-scheduler:v1.11.2
 docker pull gcr.io/google-containers/kube-proxy:v1.11.2 ;`
 docker tag gcr.io/google-containers/kube-proxy:v1.11.2 registry.cn-qingdao.aliyuncs.com/wod/kube-proxy:v1.11.2 ;`
 docker push registry.cn-qingdao.aliyuncs.com/wod/kube-proxy:v1.11.2
+
+docker pull registry.cn-qingdao.aliyuncs.com/wod/kube-proxy:v1.11.2 ;`
+docker tag registry.cn-qingdao.aliyuncs.com/wod/kube-proxy:v1.11.2 hub.c.163.com/mengkzhaoyun/k8s:kube-proxy-v1.11.2 ;`
+docker push hub.c.163.com/mengkzhaoyun/k8s:kube-proxy-v1.11.2
 ```
